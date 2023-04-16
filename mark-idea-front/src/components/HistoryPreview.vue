@@ -1,3 +1,4 @@
+<!--Home页面部件-->
 <template>
 <div>
     <div class="history-preview-title">历史版本内容</div>

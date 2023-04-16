@@ -107,9 +107,9 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public ServerResponse<UserVo> register(String username, String password){
-        if (RegisterConstant.NOT_ALLOW_REGISTER == registerStrategy){
-            throw new PromptException("禁止注册");
-        }
+//        if (RegisterConstant.NOT_ALLOW_REGISTER == registerStrategy){
+//            throw new PromptException("禁止注册");
+//        }
         if (StringUtils.isAnyBlank(username, password)){
             throw new IllegalArgumentException();
         }

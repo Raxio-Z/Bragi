@@ -1,3 +1,4 @@
+<!--Home页面组件-->
 <template>
   <div >
   <div ><p class="about">开源私有云笔记，基于Git和MarkDown
