@@ -4,7 +4,7 @@
       <el-row class="tac">
         <el-col :span="12">
           <div>
-            <h1 style="font-size: 1.6rem;">📕Bragi</h1>
+            <h1 style="font-size: 2.0rem;">📕Bragi</h1>
           </div>
 
           <el-menu

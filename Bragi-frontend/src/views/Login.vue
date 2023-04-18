@@ -19,7 +19,7 @@
         <el-col :span="12">
           <div>
             <div class="login-text">
-              Log in
+              登录
             </div>
           </div>
 

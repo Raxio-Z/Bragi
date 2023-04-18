@@ -20,7 +20,7 @@
         <el-col :span="12">
           <div>
             <div class="login-text">
-              Sign Up
+              注册
             </div>
           </div>
 
