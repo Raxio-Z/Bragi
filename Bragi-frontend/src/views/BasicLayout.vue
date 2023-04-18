@@ -60,6 +60,13 @@
               </router-link>
 
             </el-menu-item>
+            <el-menu-item index="5">
+              <div @click="handleLogout()">
+                <i class="el-icon-switch-button"></i>
+                <span slot="title">退出登录</span>
+              </div>
+
+            </el-menu-item>
           </el-menu>
         </el-col>
       </el-row>
@@ -293,6 +300,24 @@ export default {
         }
 
       })
+    },
+    // 注销登录
+    handleLogout() {
+
+      console.log('想要退出登录')
+
+      let url = global.HOST_URL + "/user/logout";
+      axios.post(url, null, this.config);
+      this.$store.commit('setLocalInfo', {});
+
+      this.$notify({
+        type: "success",
+        message: "退出登录成功",
+      });
+
+      setTimeout(() => {
+        this.$router.push('/login');
+      }, 500);
     },
   }
 }
