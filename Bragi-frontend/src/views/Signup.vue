@@ -48,6 +48,10 @@
               <el-button @click="handleRegister" type="primary" round class="signup-btn">注册</el-button>
             </div>
 
+            <div class="box-prompt-text">
+              <span @click="toSignin" class="signup-a">返回登录</span>
+            </div>
+
           </el-form>
         </el-col>
       </el-row>
@@ -105,6 +109,10 @@ export default {
         }
       });
     },
+    toSignin(){
+      this.$router.push({name:'login'});
+    }
+
   },
   mounted() {
     document.title = this.$store.getters.getWebsiteTitle + " - 注册";
