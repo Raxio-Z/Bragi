@@ -61,14 +61,14 @@ const router = new VueRouter({
 
 //设置路由导航守卫，注册全局前置守卫，判断用户是否登录
 router.beforeEach((to, from, next) => {
-    if (to.path === '/login') {
-        var token1 = store.getters.getUsername;
+    if (to.path === '/login' || to.path === '/signup') {
+        var token1 = store.getters.getToken;
 
         console.log('路径守卫1')
         console.log(token1)
 
         //没有token或token过期，跳到登录界面,否则跳到welcome，不允许访问login
-        if (typeof(token1) == "undefined" || token1 === null || token1 === '') {
+        if (!token1 || token1 === null || token1 === '') {
 
             console.log('0')
 
@@ -83,11 +83,14 @@ router.beforeEach((to, from, next) => {
 
         console.log('路径守卫开启了')
 
-        var token = store.getters.getUsername;
-        //没有token或token过期，跳到登录界面
-        if (typeof(token) == "undefined" ||token === null || token === '') {
+        var token = store.getters.getToken;
 
-            console.log('未登录，想要跳到登录')
+        console.log(token)
+
+        //没有token或token过期，跳到登录界面
+        if (!token ||token === null || token === '') {
+
+            console.log('未登录')
 
             next('/login');
         } else {
