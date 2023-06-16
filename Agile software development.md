@@ -25,19 +25,21 @@
 
 2. 由组长峥神创建本周issue
 
-   ![alt](https://gitlab.com/stackoverfloww1/Bragi/-/raw/dev/images/image-20230422184013706.png?inline=false)
+   
+
+   ![alt](https://github.com/Raxio-Z/Bragi/blob/main/images/image-20230422184013706.png?inline=false)
 
    **重点选项：**
 
-   ![image-20230422215841065](https://gitlab.com/stackoverfloww1/Bragi/-/raw/dev/images/image-20230422215841065.png?inline=false)
+   ![image-20230422215841065](https://github.com/Raxio-Z/Bragi/blob/main/images/image-20230422215841065.png?inline=false)
 
    本周我先代峥神创建了，创建好的issue（组员还没有全加进来，所以issue处理人暂时都写峥神）如下：
 
-   ![image-20230422202656494](https://gitlab.com/stackoverfloww1/Bragi/-/raw/dev/images/image-20230422202656494.png?inline=false)
+   ![image-20230422202656494](https://github.com/Raxio-Z/Bragi/blob/main/images/image-20230422202656494.png?inline=false)
 
 3. 按照任务分配，每人进入issue创建对应的issue分支（如果多个人对应一个issue，也只需要创建一个issue分支），以笔记引用 issue 举例：
 
-   ![image-20230422213032901](https://gitlab.com/stackoverfloww1/Bragi/-/raw/dev/images/image-20230422213032901.png?inline=false)
+   ![image-20230422213032901](https://github.com/Raxio-Z/Bragi/blob/main/images/image-20230422213032901.png?inline=false)
 
 4. 切换到所创建的模块分支
 
@@ -67,13 +69,13 @@
 
 7. 在GitLab页面上查看你的提交， 确认无误后点击网页上的按钮创建一个 **merge request .**
 
-   ![image-20230422214226809](https://gitlab.com/stackoverfloww1/Bragi/-/raw/dev/images/image-20230422214226809.png?inline=false)
+   ![image-20230422214226809](https://github.com/Raxio-Z/Bragi/blob/main/images/image-20230422214226809.png?inline=false)
 
 8. 团队中负责上游分支的同学查看提交的代码，并将他们合并到上游分支或主分支.
 
 9. issue完成后的close
 
-   ![image-20230422214508885](https://gitlab.com/stackoverfloww1/Bragi/-/raw/dev/images/image-20230422214508885.png?inline=false)
+   ![image-20230422214508885](https://github.com/Raxio-Z/Bragi/blob/main/images/image-20230422214508885.png?inline=false)
 
 
 
@@ -83,7 +85,7 @@
 
 在`Repository - Contributor statistics`可以看到每个人的commit时间图：
 
-![image-20230422215024863](https://gitlab.com/stackoverfloww1/Bragi/-/raw/dev/images/image-20230422215024863.png?inline=false)
+![image-20230422215024863](https://github.com/Raxio-Z/Bragi/blob/main/images/image-20230422215024863.png?inline=false)
 
 
 
@@ -91,7 +93,7 @@
 
 在`Issues - Milestones`处可以看到每个milestone的燃尽图（根据issue自动生成的，但是需要vip版本，可以试用30天，我的想法是我们别一起开，一个接一个开）
 
-![image-20230422215246171](https://gitlab.com/stackoverfloww1/Bragi/-/raw/dev/images/image-20230422215246171.png?inline=false)
+![image-20230422215246171](https://github.com/Raxio-Z/Bragi/blob/main/images/image-20230422215246171.png?inline=false)
 
 
 
