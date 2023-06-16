@@ -99,4 +99,4 @@
 
 ## Mapping Agile artifacts to GitLab features
 
-![image-20230422221652705](https://gitlab.com/stackoverfloww1/Bragi/-/raw/dev/images/image-20230422221652705.png?inline=false)
+![image-20230422221652705](https://github.com/Raxio-Z/Bragi/blob/main/images/image-20230422221652705.png?inline=false)
