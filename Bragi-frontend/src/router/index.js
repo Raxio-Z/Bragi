@@ -32,11 +32,6 @@ VueRouter.prototype.push = function push(location, onResolve, onReject) {
         component: () => import('../views/Setting.vue')
       },
       {
-        path: 'admin',
-        name: 'admin',
-        component: () => import('../views/Admin.vue')
-      },
-      {
         path: 'article/:author/:id',
         name: 'article',
         props: true,

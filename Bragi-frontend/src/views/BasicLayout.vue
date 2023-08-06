@@ -97,7 +97,6 @@
                   </div>
                 </el-menu>
               </div>
-              <!--              </router-link>-->
 
             </el-submenu>
             <el-menu-item index="3" style="height: 40px;line-height: 40px" @click="mind">
@@ -130,8 +129,6 @@
       </el-row>
 
       <div class="bottom_two" @click="openTrash">
-        <!--        <div class="two_option">-->
-        <!-- <div @click="openTrash" class="trash_div"> -->
         <div class="trash_div">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="none" viewBox="0 0 24 24"
             data-area="page-trash">
@@ -149,25 +146,6 @@
           </svg>
           <span style="font-size: 14px;margin-left: 4px;">垃圾桶</span>
         </div>
-        <!-- <el-divider direction="vertical"></el-divider>
-        <div @click="openTrash" class="trash_div">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="none" viewBox="0 0 24 24"
-               data-area="page-trash">
-            <path fill="#2C2C2C" fill-rule="evenodd" d="M3.2 5.5a.8.8 0 01.8-.8h16a.8.8 0 010 1.6H4a.8.8 0 01-.8-.8z"
-                  clip-rule="evenodd"></path>
-            <path fill="#2C2C2C" fill-rule="evenodd"
-                  d="M7.2 3.5A1.8 1.8 0 019 1.7h6a1.8 1.8 0 011.8 1.8v2.8H7.2V3.5zM9 3.3a.2.2 0 00-.2.2v1.2h6.4V3.5a.2.2 0 00-.2-.2H9z"
-                  clip-rule="evenodd"></path>
-            <path fill="#2C2C2C" fill-rule="evenodd"
-                  d="M4.173 4.7h15.654l-.463 13.893a2.8 2.8 0 01-2.798 2.707H7.435a2.8 2.8 0 01-2.799-2.707L4.173 4.7zm1.654 1.6l.408 12.24a1.2 1.2 0 001.2 1.16h9.13a1.2 1.2 0 001.2-1.16l.408-12.24H5.827z"
-                  clip-rule="evenodd"></path>
-            <path fill="#2C2C2C" fill-rule="evenodd"
-                  d="M10 9.2a.8.8 0 01.8.8v5.5a.8.8 0 01-1.6 0V10a.8.8 0 01.8-.8zm4 0a.8.8 0 01.8.8v5.5a.8.8 0 01-1.6 0V10a.8.8 0 01.8-.8z"
-                  clip-rule="evenodd"></path>
-          </svg>
-          <span style="font-size: 14px;margin-left: 4px;">垃圾桶</span>
-        </div> -->
-        <!--        </div>-->
       </div>
     </el-aside>
 
@@ -220,23 +198,18 @@
 
 
             <div style="display: flex; align-items: center; justify-content: flex-end;">
-              <!--                    <el-tooltip effect="dark" content="恢复" placement="top">-->
               <svg @click="recoverDelNote(item.id)" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="18"
                 height="18" viewBox="0 0 18 18">
                 <path fill="#9C9292"
                   d="M8.736 17.565a6.958 6.958 0 006.973-6.981 6.93 6.93 0 00-6.964-6.956c-.424 0-.855.033-1.279.108L9.492 1.76a.756.756 0 00.182-.481c0-.39-.29-.698-.664-.698a.65.65 0 00-.49.208L5.291 4.068a.718.718 0 00-.215.506c0 .191.066.357.215.506l3.23 3.254a.654.654 0 00.49.191.66.66 0 00.663-.68.667.667 0 00-.19-.465L7.2 5.114a7.928 7.928 0 011.544-.133 5.567 5.567 0 015.594 5.603 5.587 5.587 0 01-5.603 5.611 5.585 5.585 0 01-5.595-5.611c0-.407-.265-.706-.664-.706a.68.68 0 00-.705.706 6.956 6.956 0 006.964 6.98z">
                 </path>
               </svg>
-              <!--                    </el-tooltip>-->
-
-              <!--                    <el-tooltip effect="dark" content="彻底删除" placement="top">-->
               <svg @click="clearDelNote(item.id)" style="cursor: pointer;margin-left: 10px;margin-right: 10px"
                 xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                 <path fill="#9C9292"
                   d="M12.603 17.775c1.153 0 1.909-.722 1.967-1.876l.54-11.389h.92a.627.627 0 000-1.253h-3.56V2.12c0-1.154-.78-1.901-2.034-1.901H7.547c-1.253 0-2.033.747-2.033 1.9v1.138H1.969a.627.627 0 000 1.253h.922l.54 11.397c.049 1.154.804 1.868 1.966 1.868h7.206zM11.15 3.257H6.842V2.195c0-.44.324-.756.797-.756h2.714c.473 0 .797.316.797.756v1.062zm1.311 13.265h-6.93c-.449 0-.781-.332-.806-.797L4.185 4.51h9.596l-.514 11.215c-.017.473-.34.797-.806.797zm-1.137-1.345c.266 0 .465-.224.482-.531l.232-8.177c.008-.298-.2-.54-.473-.54-.257 0-.473.242-.482.532l-.232 8.176c-.008.3.191.54.473.54zm-4.648 0c.274 0 .481-.24.473-.54l-.232-8.176c-.009-.29-.233-.531-.482-.531-.282 0-.481.232-.473.54l.232 8.176c.009.307.208.53.482.53zm2.324 0c.266 0 .49-.24.49-.54V6.47c0-.298-.224-.54-.49-.54s-.49.242-.49.54v8.168c0 .3.224.54.49.54z">
                 </path>
               </svg>
-              <!--                    </el-tooltip>-->
             </div>
 
           </div>
@@ -390,14 +363,11 @@
 import axios from "axios";
 import global from "@/global";
 import Vue from "vue";
-//import content from "@/views/Content";
-// import Editor from "@/components/Editor";
-
 
 export default {
   name: "navbar",
   components: {
-    // Editor
+
   },
 
   provide() {
@@ -561,13 +531,6 @@ export default {
       return ret;
     }
 
-    // curNote: function (){
-    //   return {
-    //     notebookName: null,
-    //     noteTitle: null,
-    //     content: ""
-    //   }
-    // }
   },
   mounted() {
     this.refreshNotebookList()
@@ -597,7 +560,6 @@ export default {
           this.notebookList = res.data;
 
           console.log('this.notebookList', this.notebookList);
-
 
           if (notebookName) {
             this.doSwitchNotebook(notebookName);
@@ -1138,7 +1100,6 @@ export default {
       this.$refs.fileUpload.click();
     },
     handleFileUpload() {
-
       let file = event.target.files[0];
       const upfilename = file.name.lastIndexOf(".");
       let fileExtension = file.name.split('.').pop();
@@ -1266,12 +1227,6 @@ export default {
               noteTitle: noteTitle_temp
             },
           })
-
-          //this.$refs.editor.setContent(noteTitle, res.data, notebookName);
-          // 如果是移动端
-          // if (this.isMobile && !auto) {
-          //   this.showAside = false;
-          // }
         }
       })
 
@@ -1459,8 +1414,6 @@ export default {
       }).catch(() => {
 
       });
-
-
     },
 
     setShowMoreIcon(subitem, value) {

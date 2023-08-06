@@ -40,7 +40,6 @@
 </template>
 <script>
 import '@/assets/vditor.css'
-// import Vditor from 'vditor'
 import axios from 'axios'
 import global from '@/global'
 import util from '@/js/util'

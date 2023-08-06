@@ -207,15 +207,6 @@ export default {
       }
       this.statusMsg = "";
 
-      // this.$refs.Form.validate( 'emailnumber',valid => {
-      //     console.log(this.$refs.Form)
-      //     console.log("valid:",valid);
-      //     if(valid==='')
-      //       emailPass = false;
-      //     else
-      //       emailPass=true;
-      //     console.log("emailPass:",emailPass);
-      // })
       const emailapattern=/^([a-zA-Z\d][\w-]{2,})@(\w{2,})\.([a-z]{2,})(\.[a-z]{2,})?$/;
       if(!emailapattern.test(this.formData.emailnumber)){
           this.$notify({
@@ -225,23 +216,7 @@ export default {
           });
           Pass=false;
       }
-      // const passwordpattern=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=_!])(?!.*\s).{6,}/;
-      // if(!passwordpattern.test(this.formData.password)){
-      //     this.$notify({
-      //         type: "warning",
-      //         message: "请输入正确的密码",
-      //         duration: 1000,
-      //     });
-      //     Pass=false;
-      // }
-      // if(!this.pwdSame){
-      //     this.$notify({
-      //         type: "warning",
-      //         message: "两次输入密码不同",
-      //         duration: 1000,
-      //     });
-      //     Pass=false;
-      // }
+
       if (Pass) {
         this.codeLoading = true;
         this.statusMsg = "验证码发送中...";
@@ -363,12 +338,6 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.markideaname {
-  min-width: 200px;
-  margin: 10px;
-  font-size: 40px;
 }
 
 .signup-text {

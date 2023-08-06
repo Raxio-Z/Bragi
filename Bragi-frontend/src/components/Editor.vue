@@ -1,16 +1,6 @@
 <!--Home页面部件-->
 <template>
   <div>
-    <!-- <div v-show="notebookName && title && title.length > 0" class="title">
-            <span v-if="!showEditTitle" class="noselect">✏️ </span>
-      <span v-if="!showEditTitle">{{ title }}</span>
-      <span v-if="contentModfied"
-            style="color:lightgrey;font-size:14px;padding-left:5px;font-weight:lighter">- 已编辑</span>
-
-      <el-input @blur="setTitleEditable(false)" v-model="newTitle" v-if="showEditTitle"
-                @keyup.enter.native="renameTitle"/>
-
-    </div> -->
 
     <div v-show="notebookName && title && title.length > 0" id="vditor" class="vditor"></div>
 
@@ -247,14 +237,6 @@ export default {
         "upload",
         "undo",
         "redo",
-        //  {
-        //   name: "enter",
-        //   tip: "换行",
-        //   icon: '<svg version="1.1" id="layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve"><style type="text/css">.st0{fill:#2C2C2C;}</style><path class="st0" d="M0.7,0.6c0-0.3,0.2-0.5,0.5-0.5c0,0,0,0,0,0h14.1c0.3,0,0.5,0.2,0.5,0.5c0,0,0,0,0,0v0.1c0,0.3-0.2,0.5-0.5,0.5l0,0H1.2C0.9,1.1,0.7,0.9,0.7,0.6C0.7,0.7,0.7,0.6,0.7,0.6z M0.7,4.6c0-0.3,0.2-0.5,0.5-0.5h14.1c0.3,0,0.5,0.2,0.5,0.5v0v0.1c0,0.3-0.2,0.5-0.5,0.5l0,0H1.2C0.9,5.1,0.7,4.9,0.7,4.6C0.7,4.7,0.7,4.6,0.7,4.6z M0.7,8.6c0-0.3,0.2-0.5,0.5-0.5c0,0,0,0,0,0h12c0.3,0,0.5,0.2,0.5,0.5v0v0.1c0,0.3-0.2,0.5-0.5,0.5h0h-12C0.9,9.2,0.7,8.9,0.7,8.6L0.7,8.6C0.7,8.7,0.7,8.6,0.7,8.6z M0.7,12.6c0-0.3,0.2-0.5,0.5-0.5c0,0,0,0,0,0h5.5c0.3,0,0.5,0.2,0.5,0.5l0,0v0.1c0,0.3-0.2,0.5-0.5,0.5h0H1.2C0.9,13.2,0.7,13,0.7,12.6L0.7,12.6C0.7,12.7,0.7,12.6,0.7,12.6z"/><path class="st0" d="M15.2,8.1c-0.3,0-0.5,0.2-0.5,0.5v0v3.1c0,0.3-0.2,0.5-0.5,0.5h0h-2.8v-2l-2.8,2.1c-0.2,0.2-0.2,0.5-0.1,0.7c0,0,0.1,0.1,0.1,0.1l2.8,2.1v-2h3.8c0.3,0,0.5-0.2,0.5-0.5v0V8.6c0-0.3-0.2-0.5-0.5-0.5h0C15.3,8.1,15.2,8.1,15.2,8.1z"/></svg>',
-        //   click: () => {
-        //     this.vditor.insertValue('\n<br/>\n');
-        //   }
-        // },
         "|",
         "edit-mode",
         "outline",
@@ -377,18 +359,6 @@ export default {
           this.handleJump(noteName,notebookName);
         }
       })
-
-
-      // this.$router.push({
-      //   name: 'content',
-      //   params: {
-      //     notebookName: notebookName,
-      //     noteTitle: noteName
-      //   },
-      // })
-
-      // this.handleJump(noteName,notebookName);
-      // alert('success')
     },
     jumptoLink(data){
       console.log("data",data)

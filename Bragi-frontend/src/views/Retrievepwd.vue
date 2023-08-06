@@ -198,15 +198,6 @@ export default {
             }
             this.statusMsg = "";
 
-            // this.$refs.Form.validate( 'emailnumber',valid => {
-            //     console.log(this.$refs.Form)
-            //     console.log("valid:",valid);
-            //     if(valid==='')
-            //       emailPass = false;
-            //     else
-            //       emailPass=true;
-            //     console.log("emailPass:",emailPass);
-            // })
             const emailapattern = /^([a-zA-Z\d][\w-]{2,})@(\w{2,})\.([a-z]{2,})(\.[a-z]{2,})?$/;
             if (!emailapattern.test(this.formData.emailnumber)) {
                 this.$notify({
@@ -216,15 +207,7 @@ export default {
                 });
                 Pass = false;
             }
-            // const passwordpattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=_!])(?!.*\s).{6,}/;
-            // if (!passwordpattern.test(this.formData.password)) {
-            //     this.$notify({
-            //         type: "warning",
-            //         message: "请输入正确的密码",
-            //         duration: 1000,
-            //     });
-            //     Pass = false;
-            // }
+
             if (Pass) {
                 this.codeLoading = true;
                 this.statusMsg = "验证码发送中...";
@@ -275,62 +258,7 @@ export default {
                     });
             }
         },
-        // let phonePass;
-        // let timeRid;
-        // if(timeRid){
-        //     return false;
-        // }
-        // console.log("disdis:",this.phoneDis)
-        // this.statusMsg="";
-        // phonePass=this.phoneDis;
-        // if(!phonePass){
-        //     this.codeLoading=true;
-        //     this.statusMsg="验证码发送中..."
-        //     let url=global.HOST_URL+"/user/phonesignup";
-        //     let params={phoneNo:this.formData.phonenumber};
-        //     axios.post(url,params,this.config).then(res=>{
-        //         res=res.data;
-        //         if(res.code===0){
-        //             this.$message({
-        //                 showClose:true,
-        //                 message:"发送成功，验证码有效期5分钟",
-        //                 type:"success"
-        //             })
-        //             let count=60;
-        //             this.formData.code=""
-        //             this.codeLoading=false
-        //             this.isDisable=true;
-        //             this.statusMsg=`验证码已发送,${count--}秒后重新发送`;
-        //             timeRid=window.setInterval(function (){
-        //                 this.statusMsg=`验证码已发送,${count--}秒后重新发送`;
-        //                 if(count<=0){
-        //                     window.clearInterval(timeRid);
-        //                     this.is=false;
-        //                     this.statusMsg=""
-        //                 }
-        //             },1000);
-        //         }else{
-        //             this.$message({
-        //                 showClose:true,
-        //                 message:res.data,
-        //                 type:"warning"
-        //             });
-        //             this.isDisable=false;
-        //             this.statusMsg="";
-        //             this.codeLoading=false;
-        //
-        //         }
-        //     }).catch(err=>{
-        //         console.log(err)
-        //         this.isDisable=false
-        //         this.statusMsg=""
-        //         this.codeLoading=false
-        //         console.log(err.data)
-        //     })
-        //
-        //
-        // }
-        // }
+
     },
     mounted() {
         console.log("进入这个页面了")
@@ -381,12 +309,6 @@ export default {
     margin: 0 auto;
 }
 
-.box-img {
-    margin: 40px auto 20px;
-    width: 80px;
-    height: 80px;
-}
-
 .box-img img {
     width: 100%;
     height: 100%;
@@ -403,12 +325,6 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.markideaname {
-    min-width: 200px;
-    margin: 10px;
-    font-size: 40px;
 }
 
 .find-password-text {
