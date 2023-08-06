@@ -22,13 +22,13 @@ export default {
   name: 'Mindmap',
   data() {
     return {
-      root:Object,
+      root: Object,
     };
   },
-  props:{
-    mindValue:{
-      type:String,
-      require:true,
+  props: {
+    mindValue: {
+      type: String,
+      require: true,
     }
   },
   watch: {
@@ -38,18 +38,12 @@ export default {
     update() {
       const {root} = transformer.transform(this.mindValue);
 
-      console.log("root",root)
-      this.root=root
+      console.log("root", root)
+      this.root = root
 
       this.mm.setData(root);
       this.mm.fit();
     },
-    // setMindContent(value){
-    //   const {root} = transformer.transform(value);
-    //   this.mm.setData(root);
-    //   this.mm.fit();
-    // }
-
 
     exportToSvg() {
       let contentHtml = document.getElementById("svg_id").innerHTML
@@ -124,7 +118,7 @@ ${contentHtml}
 </body>
 </html>`
 
-      let content = front+contentHtml+end
+      let content = front + contentHtml + end
 
       const blob = new Blob([content])		// fileStream 是文件流，一般从后台获取
       FileSaver.saveAs(blob, 'Mindmap.html')					// fileName 保存文件的名称，需要带后缀

@@ -22,21 +22,8 @@
             <i class="el-icon-plus" @click="addNoteTag"></i>
           </el-tooltip>
 
-<!--                    <el-popover placement="bottom" width="200" trigger="click">-->
-<!--                      <el-tooltip class="item" effect="dark" content="添加笔记标签" placement="bottom">-->
-<!--                        <i class="el-icon-plus" slot="reference"></i>-->
-<!--                      </el-tooltip>-->
-
-<!--                      <p class="header-more-item" @click="addNoteTag">添加笔记tag</p>-->
-<!--                    </el-popover>-->
-
-<!--          <el-tooltip class="item" effect="dark" content="更多" placement="bottom">-->
-<!--              <i class="iconfont icon-gengduo"></i>-->
-<!--          </el-tooltip>-->
-
           <el-tooltip class="item" effect="dark" content="思维导图" placement="bottom">
 
-            <!--            <el-dropdown trigger="click" @command="handleCommand">-->
             <i @click="handleShowMindMap">
               <svg t="1683895875499" style="width: 20px;height: 30px" viewBox="0 0 1024 1024" version="1.1"
                 xmlns="http://www.w3.org/2000/svg" p-id="1810">
@@ -51,11 +38,6 @@
                   fill="#333333" p-id="1813"></path>
               </svg>
             </i>
-            <!--              <el-dropdown-menu slot="dropdown">-->
-            <!--                <el-dropdown-item icon="el-icon-plus" command="a">预览</el-dropdown-item>-->
-            <!--                <el-dropdown-item icon="el-icon-circle-plus" command="b">导出</el-dropdown-item>-->
-            <!--              </el-dropdown-menu>-->
-            <!--            </el-dropdown>-->
 
           </el-tooltip>
 
@@ -130,8 +112,6 @@ import HistoryPreview from '@/components/HistoryPreview.vue'
 import global from "@/global";
 import axios from "axios";
 import Mindmap from "@/components/Mindmap.vue";
-// import global from '@/global'
-// import util from '@/js/util'
 
 export default {
   name: 'Home',
@@ -140,17 +120,6 @@ export default {
     Editor,
     HistoryPreview
   },
-  // props: {
-  //   noteTitle: {
-  //     required: true,
-  //   },
-  //   content:{
-  //     required: true,
-  //   },
-  //   notebookName:{
-  //     required: true,
-  //   }
-  // },
   data() {
     return {
       pageTitle: 'Bragi',
@@ -197,8 +166,6 @@ export default {
 
       showMindMap: false,
       mindMapValue: ''
-
-
     }
   },
 
@@ -578,137 +545,9 @@ export default {
   font-weight: 500;
 }
 
-.notebook {
-  /* margin: 15px; */
-  color: rgb(41, 38, 38);
-  font-size: 18px;
-  margin-top: 1px;
-  margin-left: 10px;
-  margin-right: 10px;
-  padding: 10px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  /* background-color: rgb(247, 244, 242); */
-
-  /* border-bottom:1px solid rgb(240, 237, 237); */
-}
-
-.createNotebook {
-  text-align: center;
-  border: 1px solid rgb(240, 237, 237);
-  border-radius: 7px;
-  margin-top: 5px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: rgb(247, 245, 240);
-
-
-}
-
-.createNote {
-  text-align: left;
-  padding: 5px;
-
-  font-weight: lighter;
-  font-size: 16px;
-  background-color: rgb(247, 245, 240);
-  border: 1px solid rgb(240, 237, 237);
-
-
-}
-
-.notebookInfo {
-  margin-top: 5px;
-  /* background-color: rgb(255, 253, 246); */
-  padding: 10px;
-  font-size: 26px;
-  /* font-weight: bold; */
-}
-
-.notebooklist {
-  /* height:200px; */
-  background-color: rgb(248, 248, 248);
-
-  /* border: 1px solid rgb(240, 237, 237); */
-
-}
-
-.chosenNotebook {
-  background-color: rgb(252, 251, 251);
-  border-left: 3px solid rgb(199, 199, 199);
-}
-
-.note {
-  padding: 10px;
-
-}
-
-.notetitle {
-  /* font-weight: bold; */
-  margin-bottom: 5px;
-}
-
-.header {
-  /* margin-top: 10px; */
-  /* padding-top: 10px; */
-  color: rgb(24, 21, 17);
-  /* line-height: 52px; */
-  font-size: 25px;
-  display: table-cell;
-  vertical-align: bottom;
-  /* border-top-left-radius:5px;
-    border-top-right-radius:5px; */
-  /* border: 1px solid rgb(240, 237, 237); */
-
-
-  /* background-color: rgb(252, 250, 250); */
-
-}
-
 .editor {
   /* border: 1px solid rgb(240, 237, 237); */
   padding-top: 15px;
-}
-
-.noteList {
-  /* border: 1px solid rgb(240, 237, 237); */
-  background-color: rgb(251, 250, 250);
-
-}
-
-.rightMenu {
-  min-width: 100px;
-}
-
-.delnote {
-  /* margin: 5px 15px 5px 15px; */
-  padding: 6px 16px 6px 20px;
-  color: gray;
-  font-size: 15px;
-  background-color: rgb(251, 250, 250);
-
-  /* border-bottom:1px solid rgb(240, 237, 237); */
-  /* border-top:1px solid rgb(240, 237, 237); */
-
-}
-
-.lightGreyBackground {
-  background-color: lightgray;
-}
-
-.markidea-dropdown-item {
-  min-width: 45px;
-  text-align: center;
-}
-
-.chosenNote {
-  background-color: white;
-  /* border-left: 3px solid rgb(199, 199, 199); */
-}
-
-.notePreview {
-  font-size: 14px;
-  color: rgb(87, 87, 87);
 }
 
 .history-icon {

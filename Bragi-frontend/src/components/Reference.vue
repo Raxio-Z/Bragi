@@ -93,44 +93,8 @@ export default {
 
     })
 
-
-    // this.$refs.seeksRelationGraph.setJsonData(__graph_json_data, (graphInstance) => {
-    //   // 这些写上当图谱初始化完成后需要执行的代码
-    // });
-
-    // axios.post(global.HOST_URL + "/getAllRef", this.config).then(res => {
-    //   res = res.data;
-    //   if (res.code === 0) {
-    //     let graph_json = res.data
-    //     this.$refs.seeksRelationGraph.setJsonData(graph_json, (graphInstance) => {
-    //       // 这些写上当图谱初始化完成后需要执行的代码
-    //     });
-    //   }
-    // })
-
-    //this.showSeeksGraph();
   },
   methods: {
-    showSeeksGraph() {
-      const __graph_json_data = {
-        rootId: 'a',
-        nodes: [
-          { id: 'a', text: 'A', borderColor: 'yellow' },
-          { id: 'b', text: 'B', color: '#43a2f1', fontColor: 'yellow' },
-          { id: 'c', text: 'C', nodeShape: 1, width: 80, height: 60 },
-          { id: 'e', text: 'E', nodeShape: 0, width: 150, height: 150 }
-        ],
-        lines: [
-          { from: 'a', to: 'b', text: '关系1', color: '#43a2f1' },
-          { from: 'a', to: 'c', text: '关系2' },
-          { from: 'a', to: 'e', text: '关系3' },
-          { from: 'b', to: 'e', text: '', color: '#67C23A' }
-        ]
-      };
-      // this.$refs.seeksRelationGraph.setJsonData(__graph_json_data, (graphInstance) => {
-      //   // 这些写上当图谱初始化完成后需要执行的代码
-      // });
-    },
     onNodeClick(nodeObject, $event) {
       console.log('onNodeClick:', nodeObject);
 

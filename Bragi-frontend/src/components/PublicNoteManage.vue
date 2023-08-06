@@ -1,8 +1,6 @@
 <!--Setting 页面部件-->
 <template>
 <div>
-  <!-- <input @change="handleFileUpload($event)" style="display : none" ref="fileUpload" type="file" /> -->
-
     <div>
         <el-button @click="handleDelArticles">删除</el-button>
     </div>
@@ -38,7 +36,6 @@
           <template slot-scope="scope">
 
     <a :href = '"/#/article/" + config.headers.username + "/" + scope.row.articleId ' style="padding-right: 10px" target="_blank">预览</a>
-    <!-- <el-button type="text" size="medium" @click="handleDeleteFile(scope.row.fileName)">删除</el-button> -->
     </template>
     </el-table-column>
   </el-table>
