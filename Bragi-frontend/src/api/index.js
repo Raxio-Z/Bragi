@@ -3,21 +3,20 @@
  * TODO: 添加import声明。
  */
 
-import request from "d:/emigrated data/wechat/wechat files/wxid_qr78gythwnxh32/filestorage/file/2023-04/request";
-
+import requests from "./require";
 /**
  *
  * 管理员操作
  */
 
 export const reqAdminGetWebsiteConfig = () =>
-  request({ url: "/admin/websiteConfig", method: "get" });
+    requests({ url: "/admin/websiteConfig", method: "get" });
 
 export const reqAdminPostWebsiteConfig = (params) =>
-  request({ url: "/admin/updateWebsiteConfig", method: "post", data: params });
+    requests({ url: "/admin/updateWebsiteConfig", method: "post", data: params });
 
 export const reqAdminGetUserList = () =>
-  request({ url: "/admin/listUser", method: "get" });
+    requests({ url: "/admin/listUser", method: "get" });
 
 /**
  *
@@ -25,37 +24,41 @@ export const reqAdminGetUserList = () =>
  */
 
 export const reqArticleGetArticleList = (params) =>
-  request({ url: "/article", method: "get", data: params });
+    requests({ url: "/article", method: "get", data: params });
 
 export const reqArticleGetText = (authorid, articleid, params) =>
-  request({
+    requests({
     url: "/article/" + authorid + "/" + articleid,
     method: "get",
     data: params,
   });
 
 export const reqArticlePostArticle = (params) =>
-  request({ url: "/article", method: "post", data: params });
+    requests({ url: "/article", method: "post", data: params });
 
 export const reqArticlePostBatchDel = (params) =>
-  request({ url: "/article/batchDel", method: "post", data: params });
+    requests({ url: "/article/batchDel", method: "post", data: params });
 
 export const reqArticleGetArticleListByAuthor = (author, params) =>
-  request({ url: "/article/" + author, method: "get", data: params });
+    requests({ url: "/article/" + author, method: "get", data: params });
 
 /**
  *
  * 已删除笔记操作
  */
 
-export const reqDelnoteGetDelnotes = () =>
-  request({ url: "/delnote", method: "get" });
+export const reqDelnoteGetDelnotes = (config) =>
+    requests({ url: "/delnote", method: "get",...config });
 
-export const reqDelnoteDeletePurgeDelnotes = () =>
-  request({ url: "/delnote", method: "delete" });
+export const reqDelnoteDeletePurgeDelnotes = (config) =>
+    requests({ url: "/delnote", method: "delete", ...config});
 
-export const reqDelnoteDeleteWithdrawDelnote = (delnoteid, params) =>
-  request({ url: "/delnote/" + delnoteid, method: "delete", data: params });
+export const reqDelnoteDeleteWithdrawDelnote = (delnoteid,config) =>
+    requests({ url: "/delnote/" + delnoteid, method: "delete", ...config});
+
+export const reqDelnoteRecover = (delnoteid,config) =>
+    requests({ url: "/delnote/" + delnoteid + "?recover=true", method: "delete", ...config});
+
 
 /**
  *
@@ -63,114 +66,147 @@ export const reqDelnoteDeleteWithdrawDelnote = (delnoteid, params) =>
  */
 
 export const reqFilePostUpload = (params) =>
-  request({ url: "/file", method: "post", data: params });
+    requests({ url: "/file", method: "post", data: params });
 
 export const reqFilePostVditor = (params) =>
-  request({ url: "/file/vditor", method: "post", data: params });
+    requests({ url: "/file/vditor", method: "post", data: params });
 
 export const reqFileGetUploadedFiles = (params) =>
-  request({ url: "/file", method: "get", data: params });
+    requests({ url: "/file", method: "get", data: params });
 
 /**
  *
  * 历史操作
  */
 
-export const reqHistoryPostQuery = (params) =>
-  request({
+export const reqHistoryPostQuery = (params, config) =>
+    requests({
     url: "/history/queryHistoryContent",
     method: "post",
     data: params,
+    ...config
   });
+
+export const reqHistoryRecover = (notebookname, notetitle,params,config) =>
+    requests({ url: "/note/" + notebookname + "/" + notetitle, method: "post",data: params,...config });
 
 /**
  *
  * 笔记和笔记本操作
  */
 
-export const reqNotePostSave = (notebookname, notetitle) =>
-  request({ url: "/note/" + notebookname + "/" + notetitle, method: "post" });
+export const reqNotePostSave = (notebookname, notetitle,params,config) =>
+    requests({ url: "/note/" + notebookname + "/" + notetitle, method: "post",data: params,...config });
+
+export const reqNotePutNotebook = (notebookname, params, config) =>
+    requests({ url: "/note/" + notebookname, method: "put", data: params , ...config});
+
+export const reqRenameNotebook = (notebookname, params, config) =>
+    requests({ url: "/note/" + notebookname, method: "put",data:params,...config });
+
+export const reqRenameNote = (notebookname,notename, params, config) =>
+    requests({ url: "/note/" + notebookname+"/"+notename, method: "put",data:params,...config });
+
+export const reqNoteMove = (targetNotebookName,notename, params, config) =>
+    requests({ url: "/note/" + targetNotebookName+"/"+notename, method: "put",data:params,...config });
+
+export const reqNoteUpload = (params, config) =>
+    requests({ url: "/note/upload", method: "post",data:params,...config });
+
+export const reqNoteCopy = (targetNotebookName,notename, params, config) =>
+    requests({ url: "/note/" + targetNotebookName+"/"+notename, method: "put",data:params,...config });
 
 export const reqNoteGetSearch = (params) =>
-  request({ url: "/note/search", method: "get", data: params });
+    requests({ url: "/note/search", method: "get", data: params });
 
-export const reqNoteGetNotebookList = () =>
-  request({ url: "/note", method: "get" });
+export const reqNoteGetNotebookList = (config) =>
+    requests({ url: "/note", method: "get",...config });
 
 export const reqNoteGetNoteList = (notebookname) =>
-  request({ url: "/note/" + notebookname, method: "get" });
+    requests({ url: "/note/" + notebookname, method: "get" });
 
-export const reqNoteGetNoteText = (notebookname, notetitle) =>
-  request({ url: "/note/" + notebookname + "/" + notetitle, method: "get" });
+export const reqNoteGetNoteText = (notebookname, notetitle, config) =>
+    requests({ url: "/note/" + notebookname + "/" + notetitle, method: "get" ,...config});
 
-export const reqNoteGetNoteHistory = (notebookname, notetitle) =>
-  request({
+export const reqNoteGetNoteHistory = (notebookname, notetitle, config) =>
+    requests({
     url: "/note/" + notebookname + "/" + notetitle + "/history",
     method: "get",
-  });
+    ...config
+    });
 
-export const reqNotePutNotebook = (notebookname, params) =>
-  request({ url: "/note/" + notebookname, method: "put", data: params });
+
 
 export const reqNotePutNoteCopyOrMove = (
   targetnotebook,
   targetnotetitle,
   params
 ) =>
-  request({
+    requests({
     url: "/note/" + targetnotebook + "/" + targetnotetitle,
     method: "put",
     data: params,
   });
 
 export const reqNoteDeleteNotebook = (notebookname) =>
-  request({ url: "/note/" + notebookname, method: "delete" });
+    requests({ url: "/note/" + notebookname, method: "delete" });
 
-export const reqNoteDeleteNote = (notebookname, notetitle, params) =>
-  request({
+export const reqNoteDeleteNote = (notebookname, notetitle, config) =>
+    requests({
     url: "/note/" + notebookname + "/" + notetitle,
     method: "delete",
-    data: params,
+        ...config
   });
 
+export const reqNoteAddTag = (params, config) =>
+    requests({ url: "/note/tag", method: "post", data: params, ...config});
+
+export const reqNoteGetTag = (notebookName,title, config) =>
+    requests({ url: "/note/tag" + "?notebookName=" + notebookName + "&noteName=" + title, method: "get", ...config});
+
+export const reqNoteDelTag = (notebookName,title,tagToDelete, config) =>
+    requests({ url: "/note/tag" + "?notebookName=" + notebookName + "&noteName=" + title+ "&tagName=" +tagToDelete, method: "delete", ...config});
+
+
+
 export const reqUserPostLogin = (params) =>
-  request({ url: "/user/login", method: "post", data: params });
+    requests({ url: "/user/login", method: "post", data: params });
 
 export const reqUserPostValidate = (params) =>
-  request({ url: "/user/validate", method: "post", data: params });
+    requests({ url: "/user/validate", method: "post", data: params });
 
 export const reqUserPostRegister = (params) =>
-  request({ url: "/user/register", method: "post", data: params });
+    requests({ url: "/user/register", method: "post", data: params });
 
 export const reqUserPostChangePassword = (params) =>
-  request({ url: "/user/changePass", method: "post", data: params });
+    requests({ url: "/user/changePass", method: "post", data: params });
 
-export const reqUserPostLogout = () =>
-  request({ url: "/user/logout", method: "post" });
+export const reqUserPostLogout = (params, config) =>
+    requests({ url: "/user/logout", data:params, method: "post",...config });
 
 export const reqUserPutRemoteUrl = (params) =>
-  request({ url: "/user/remote", method: "put", data: params });
+    requests({ url: "/user/remote", method: "put", data: params });
 
 export const reqUserGetRemoteUrl = () =>
-  request({ url: "/user/remote", method: "get" });
+    requests({ url: "/user/remote", method: "get" });
 
 export const reqUserPostGenerateSshkey = () =>
-  request({ url: "/user/sshkey", method: "post" });
+    requests({ url: "/user/sshkey", method: "post" });
 
 export const reqUserDeleteStopToPush = () =>
-  request({ url: "/user/push", method: "delete" });
+    requests({ url: "/user/push", method: "delete" });
 
 export const reqUserGetPushStatus = () =>
-  request({ url: "/user/push", method: "get" });
+    requests({ url: "/user/push", method: "get" });
 
 export const reqUserPostStartToPush = () =>
-  request({ url: "/user/push", method: "post" });
+    requests({ url: "/user/push", method: "post" });
 
 export const reqUserPostPullFromRemote = () =>
-  request({ url: "/user/pull", method: "post" });
+    requests({ url: "/user/pull", method: "post" });
 
 export const reqUserGetEditorConfig = () =>
-  request({ url: "/user/editorConfig", method: "get" });
+    requests({ url: "/user/editorConfig", method: "get" });
 
 export const reqUserPostEditorConfig = (params) =>
-  request({ url: "/user/updateEditorConfig", method: "post", data: params });
+    requests({ url: "/user/updateEditorConfig", method: "post", data: params });
