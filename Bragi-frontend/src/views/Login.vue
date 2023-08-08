@@ -53,6 +53,7 @@
 <script>
 import axios from "axios";
 import global from "../global";
+import {reqUserPostLogin} from "@/api";
 
 export default {
   name: "login",
@@ -93,8 +94,8 @@ export default {
         password: this.formData.password,
         flag: flag
       };
-
-      axios.post(global.HOST_URL + "/user/login", user).then((res) => {
+      reqUserPostLogin(user).then((res) => {
+      // axios.post(global.HOST_URL + "/user/login", user).then((res) => {
         res = res.data;
         if (res.code === 0) {
           console.log(res.data);

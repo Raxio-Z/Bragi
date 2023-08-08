@@ -14,7 +14,8 @@
 // 如果您没有在main.js文件中使用Vue.use(RelationGraph); 就需要使用下面这一行代码来引入relation-graph
 import RelationGraph from 'relation-graph';
 import global from "@/global";
-import axios from "axios";
+// import axios from "axios";
+import {reqNoteRefGraph, reqNoteRefJump} from "@/api";
 export default {
 
   name: 'Demo',
@@ -44,8 +45,8 @@ export default {
     };
   },
   mounted() {
-
-    axios.get(global.HOST_URL+"/note/refgraph",this.config).then(res=>{
+    reqNoteRefGraph(this.config).then(res=>{
+    // axios.get(global.HOST_URL+"/note/refgraph",this.config).then(res=>{
       res = res.data
       if(res.code === 0)
         console.log("res",res)
@@ -101,7 +102,8 @@ export default {
       var value = nodeObject.id
       // console.log(value[1])
       let url = global.HOST_URL + "/note/path/" + value
-      axios.get(url, this.config).then(res => {
+      reqNoteRefJump(value,this.config).then(res => {
+      // axios.get(url, this.config).then(res => {
         res = res.data
         if (res.code == 0) {
           // console.log(res)

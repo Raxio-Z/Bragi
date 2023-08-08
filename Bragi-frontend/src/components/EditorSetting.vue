@@ -104,8 +104,9 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import global from '../global'
+import {reqFilePostUpload, reqUserGetEditorConfig, reqUserPostEditorConfig} from "@/api";
 
 export default {
   data() {
@@ -151,7 +152,8 @@ export default {
       // if(this.config) {
       //   return ;
       // }
-      axios.post(global.HOST_URL + "/user/updateEditorConfig", this.editorConfig, this.config).then(res => {
+      reqUserPostEditorConfig(this.editorConfig,this.config).then(res => {
+      // axios.post(global.HOST_URL + "/user/updateEditorConfig", this.editorConfig, this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
           this.editorConfig = res.data;
@@ -172,7 +174,8 @@ export default {
       })
     },
     loadEditorConfig() {
-      axios.get(global.HOST_URL + "/user/editorConfig", this.config).then(res => {
+      reqUserGetEditorConfig(this.config).then(res => {
+      // axios.get(global.HOST_URL + "/user/editorConfig", this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
           this.editorConfig = res.data;
@@ -201,7 +204,8 @@ export default {
       };
       //添加请求头
       let url = global.HOST_URL + "/file";
-      axios.post(url, param, config).then(res => {
+      reqFilePostUpload(param,config).then(res => {
+      // axios.post(url, param, config).then(res => {
         res = res.data;
         if (res.code !== 0) {
           return;

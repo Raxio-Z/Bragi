@@ -55,8 +55,9 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+// import axios from "axios";
 import global from "../global";
+import {reqUserEmailSignUp, reqUserPostRegister} from "@/api";
 
 export default {
   name: "signup",
@@ -177,7 +178,8 @@ export default {
           code: this.formData.code,
         };
         let url = global.HOST_URL + "/user/register";
-        axios.post(url, user).then((res) => {
+        reqUserPostRegister(user).then((res) => {
+        // axios.post(url, user).then((res) => {
           res = res.data;
           if (res.code === 0) {
             this.$notify({
@@ -223,9 +225,10 @@ export default {
         let url = global.HOST_URL + "/user/emailsignup";
         let params = { emailNo: this.formData.emailnumber };
         console.log(params);
-        axios
-          .post(url, params)
-          .then((res) => {
+        reqUserEmailSignUp(params).then((res) => {
+        // axios
+        //   .post(url, params)
+        //   .then((res) => {
             res = res.data;
             if (res.code === 0) {
               this.$message({
