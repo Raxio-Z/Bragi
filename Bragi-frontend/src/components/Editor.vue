@@ -53,7 +53,8 @@
 
       <div style="height: 350px;overflow-y: scroll;">
         <div v-for="item of delRefList_show" :key="item.articleId" class="trash_content">
-          <div class="trash_item" style="display: flex; align-items: center; height: 30px" @click="delRef_swift(item.noteId)">
+          <div class="trash_item" style="display: flex; align-items: center; height: 30px"
+               @click="delRef_swift(item.noteId)">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="none" viewBox="0 0 24 24">
               <path fill="#2C2C2C" fill-rule="evenodd"
                     d="M18 3.2a2.8 2.8 0 012.795 2.63L20.8 6v12a2.8 2.8 0 01-2.63 2.795L18 20.8H6a2.8 2.8 0 01-2.795-2.63L3.2 18V6a2.8 2.8 0 012.63-2.795L6 3.2h12zm0 1.6H6a1.2 1.2 0 00-1.194 1.078L4.8 6v12a1.2 1.2 0 001.078 1.194L6 19.2h12a1.2 1.2 0 001.194-1.077L19.2 18V6a1.2 1.2 0 00-1.077-1.194L18 4.8z"
@@ -63,12 +64,17 @@
                     clip-rule="evenodd"></path>
             </svg>
 
-            <span style="font-weight: bold;margin-left: 10px;flex-grow: 1;color: rgb(76,76,76)">{{ item.notebookName }}/{{ item.title
+            <span style="font-weight: bold;margin-left: 10px;flex-grow: 1;color: rgb(76,76,76)">{{
+                item.notebookName
+              }}/{{
+                item.title
               }}</span>
 
             <div style="display: flex; align-items: center; justify-content: flex-end;">
-              <svg viewBox="0 0 16 16" class="enter" style="width: 14px; height: 14px; display: block; fill: rgba(55, 53, 47, 0.45); flex-shrink: 0; backface-visibility: hidden; opacity: 1;">
-                <path d="M5.38965 14.1667C5.81812 14.1667 6.10156 13.8767 6.10156 13.468C6.10156 13.2571 6.01587 13.0989 5.89062 12.967L4.18994 11.3125L3.02979 10.3369L4.55908 10.4028H12.7922C14.4402 10.4028 15.1389 9.65796 15.1389 8.04297V4.13403C15.1389 2.48608 14.4402 1.78735 12.7922 1.78735H9.13379C8.70532 1.78735 8.4021 2.11035 8.4021 2.50586C8.4021 2.90137 8.69873 3.22437 9.13379 3.22437H12.7593C13.4316 3.22437 13.7151 3.50781 13.7151 4.17358V7.99683C13.7151 8.67578 13.425 8.95923 12.7593 8.95923H4.55908L3.02979 9.03174L4.18994 8.04956L5.89062 6.39502C6.01587 6.26978 6.10156 6.11157 6.10156 5.89404C6.10156 5.48535 5.81812 5.19531 5.38965 5.19531C5.21167 5.19531 5.01392 5.27441 4.8689 5.41943L1.08521 9.1438C0.933594 9.28882 0.854492 9.48657 0.854492 9.68433C0.854492 9.87549 0.933594 10.0732 1.08521 10.2183L4.8689 13.9492C5.01392 14.0876 5.21167 14.1667 5.38965 14.1667Z"></path>
+              <svg viewBox="0 0 16 16" class="enter"
+                   style="width: 14px; height: 14px; display: block; fill: rgba(55, 53, 47, 0.45); flex-shrink: 0; backface-visibility: hidden; opacity: 1;">
+                <path
+                    d="M5.38965 14.1667C5.81812 14.1667 6.10156 13.8767 6.10156 13.468C6.10156 13.2571 6.01587 13.0989 5.89062 12.967L4.18994 11.3125L3.02979 10.3369L4.55908 10.4028H12.7922C14.4402 10.4028 15.1389 9.65796 15.1389 8.04297V4.13403C15.1389 2.48608 14.4402 1.78735 12.7922 1.78735H9.13379C8.70532 1.78735 8.4021 2.11035 8.4021 2.50586C8.4021 2.90137 8.69873 3.22437 9.13379 3.22437H12.7593C13.4316 3.22437 13.7151 3.50781 13.7151 4.17358V7.99683C13.7151 8.67578 13.425 8.95923 12.7593 8.95923H4.55908L3.02979 9.03174L4.18994 8.04956L5.89062 6.39502C6.01587 6.26978 6.10156 6.11157 6.10156 5.89404C6.10156 5.48535 5.81812 5.19531 5.38965 5.19531C5.21167 5.19531 5.01392 5.27441 4.8689 5.41943L1.08521 9.1438C0.933594 9.28882 0.854492 9.48657 0.854492 9.68433C0.854492 9.87549 0.933594 10.0732 1.08521 10.2183L4.8689 13.9492C5.01392 14.0876 5.21167 14.1667 5.38965 14.1667Z"></path>
               </svg>
               <!--                    </el-tooltip>-->
             </div>
@@ -87,7 +93,16 @@
 <script>
 import Vditor from 'vditor'
 import global from '@/global'
-import axios from 'axios'
+// import axios from 'axios'
+import {
+  reqArticlePostArticle,
+  reqNoteGetNotebookList,
+  reqNoteGetNoteText,
+  reqNoteRefDel,
+  reqNoteRefGet,
+  reqNoteRefInsert,
+  reqNoteRefJump
+} from "@/api";
 // import Lute from "vditor";
 
 
@@ -115,10 +130,10 @@ export default {
 
       deljumpVisible: false,
       deljump_search_input: '',
-      deljumpList_show_temp:[],
-      deljump_List:[],
+      deljumpList_show_temp: [],
+      deljump_List: [],
 
-      last_one:"",
+      last_one: "",
 
       newTitle: null,
       vditor: null,
@@ -217,7 +232,7 @@ export default {
           tipPosition: "n",
           tip: '删除笔记跳转',
           click: () => {
-            this.deljumpVisible=true;
+            this.deljumpVisible = true;
             this.get_allReference()
           }
         },
@@ -286,8 +301,7 @@ export default {
       return ret;
     },
     delRefList_show: function () {
-      if (this.deljump_search_input === "")
-      {
+      if (this.deljump_search_input === "") {
         return this.deljumpList_show_temp
       }
       let ret = [];
@@ -349,25 +363,27 @@ export default {
 
       // console.log(value[1])
       let url = global.HOST_URL + "/note/path/" + value[1]
-      axios.get(url, this.config).then(res => {
+      reqNoteRefJump(value[1], this.config).then(res => {
+        // axios.get(url, this.config).then(res => {
         res = res.data
         if (res.code == 0) {
           // console.log(res)
-          let strList =  res.data.split('/')
+          let strList = res.data.split('/')
           let notebookName = strList[1]
           let noteName = strList[2]
-          this.handleJump(noteName,notebookName);
+          this.handleJump(noteName, notebookName);
         }
       })
     },
-    jumptoLink(data){
-      console.log("data",data)
+    jumptoLink(data) {
+      console.log("data", data)
       let value = data.getAttribute('value')
       window.open(value, '_blank');
     },
 
     get_allNote() {
-      axios.get(global.HOST_URL + "/note", this.config).then(res => {
+      reqNoteGetNotebookList(this.config).then(res => {
+        // axios.get(global.HOST_URL + "/note", this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
           this.notebookList = res.data;
@@ -375,13 +391,14 @@ export default {
         }
       })
     },
-    get_allReference(){
+    get_allReference() {
       let req = {
         notebookName: this.notebookName,
         noteTitle: this.title
       }
       console.log(req)
-      axios.post(global.HOST_URL + "/note/getnoteref", req, this.config).then(res => {
+      reqNoteRefGet(req, this.config).then(res => {
+        // axios.post(global.HOST_URL + "/note/getnoteref", req, this.config).then(res => {
         res = res.data;
 
         if (res.code === 0) {
@@ -417,16 +434,16 @@ export default {
         refNoteId: noteId
       }
 
-      axios.put(global.HOST_URL + "/note/refinsert",req,this.config).then(res=>{
+      reqNoteRefInsert(req, this.config).then(res => {
+      // axios.put(global.HOST_URL + "/note/refinsert", req, this.config).then(res => {
         res = res.data
-        if(res.code===0) {
+        if (res.code === 0) {
           this.$notify({
             type: "success",
             message: "引用插入成功",
             duration: 10000
           })
-        }
-        else{
+        } else {
           this.$notify({
             type: "fail",
             message: "引用插入失败",
@@ -438,15 +455,13 @@ export default {
       this.searchVisible = false
       this.child_saveContent(this.vditor.getValue());
     },
-    compute_temp_del(value){
+    compute_temp_del(value) {
       //console.log('this.notebookList',value)
-      this.deljumpList_show_temp=[]
-      for(var i=0;i<value.length;i++)
-      {
-        for(var j=0;j<value[i].noteList.length;j++)
-        {
+      this.deljumpList_show_temp = []
+      for (var i = 0; i < value.length; i++) {
+        for (var j = 0; j < value[i].noteList.length; j++) {
           //console.log('j',value[0].noteList[j])
-          if(!(value[i].noteList[j].title===this.$route.params.noteTitle &&  value[i].noteList[j].notebookName===this.$route.params.notebookName))
+          if (!(value[i].noteList[j].title === this.$route.params.noteTitle && value[i].noteList[j].notebookName === this.$route.params.notebookName))
             this.deljumpList_show_temp.push(value[i].noteList[j])
         }
       }
@@ -454,7 +469,7 @@ export default {
       //console.log('this.searchNoteList_show_temp',this.searchNoteList_show_temp)
     },
 
-    delRef_swift(noteId){
+    delRef_swift(noteId) {
 
       let req = {
         notebookName: this.notebookName,
@@ -462,13 +477,15 @@ export default {
         delRefNoteId: noteId
       }
       console.log(req)
-      axios.post(global.HOST_URL + "/note/delnoteref", req, this.config).then(res => {
+      reqNoteRefDel(req, this.config).then(res => {
+      // axios.post(global.HOST_URL + "/note/delnoteref", req, this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
-          this.deljumpVisible=false
+          this.deljumpVisible = false
           //this.child_saveContent(this.vditor.getValue());
           let url = global.HOST_URL + "/note/" + this.notebookName + "/" + this.title;
-          axios.get(url, this.config).then(res => {
+          reqNoteGetNoteText(this.notebookName, this.title, this.config).then(res => {
+          // axios.get(url, this.config).then(res => {
             res = res.data;
             if (res.code === 0) {
               this.$notify({
@@ -516,9 +533,9 @@ export default {
                     // console.log('leave renderLink')
                     console.log(node.TokensStr())
 
-                    console.log("this.refPath.substring(0,1)",this.refPath.substring(0,1))
+                    console.log("this.refPath.substring(0,1)", this.refPath.substring(0, 1))
 
-                    if(this.refPath.substring(0,2)==="&&")
+                    if (this.refPath.substring(0, 2) === "&&")
                       return [`<a style='color: magenta;font-weight: bold;text-decoration: none;cursor: pointer;' href="${this.refPath}" value="${this.refPath}" onclick="jumptoRef(this)">${node.Text()}</a>`, 2]
                     else
                       return [`<a style='color: dodgerblue;cursor: pointer' href="${this.refPath}" value="${this.refPath}" onclick="jumptoLink(this)">${node.Text()}</a>`, 2]
@@ -675,7 +692,8 @@ export default {
         notebookName: this.notebookName,
         noteTitle: this.title
       }
-      axios.post(global.HOST_URL + "/article", req, this.config).then(res => {
+      reqArticlePostArticle(req, this.config).then(res => {
+      // axios.post(global.HOST_URL + "/article", req, this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
           res = res.data;
@@ -705,13 +723,13 @@ export default {
         return;
       }
 
-      console.log("this.vditor.getValue()",this.vditor.getValue())
+      console.log("this.vditor.getValue()", this.vditor.getValue())
       //this.vditor.setValue(this.vditor.getValue());
       let content = this.vditor.getValue();
       this.contentModfied = false;
       this.originContent = content;
 
-      console.log("content",content)
+      console.log("content", content)
 
       this.$emit('saveContent', content, this.title, this.notebookName);
 

@@ -40,10 +40,11 @@
 </template>
 <script>
 import '@/assets/vditor.css'
-import axios from 'axios'
+// import axios from 'axios'
 import global from '@/global'
 import util from '@/js/util'
 import VditorPreview from 'vditor/dist/method.min'
+import {reqArticleGetCurText, reqArticleGetText} from "@/api";
 
 export default {
   name: 'Article',
@@ -77,7 +78,8 @@ export default {
     },
     loadArticles(pageIndex, pageSize) {
       let url = global.HOST_URL + '/article/' + this.author + '?pageIndex=' + (pageIndex - 1) + '&pageSize=' + pageSize;
-      axios.get(url).then(res => {
+      reqArticleGetText(this.author, pageIndex, pageSize).then(res => {
+      // axios.get(url).then(res => {
         res = res.data;
         if (res.code === 0) {
           res = res.data;
@@ -98,8 +100,8 @@ export default {
     },
     loadCurArticle(articleId) {
       var element = document.getElementById("article");
-
-      axios.get(global.HOST_URL + "/article/" + this.author + "/" + articleId).then(res => {
+      reqArticleGetCurText(this.author,articleId).then(res => {
+      // axios.get(global.HOST_URL + "/article/" + this.author + "/" + articleId).then(res => {
         res = res.data;
         if (res.code === 0 && res.data.content) {
           this.title = res.data.noteTitle;

@@ -372,7 +372,7 @@ import {
   reqNoteGetNotebookList, reqNoteGetNoteText, reqNoteMove,
   reqNotePostSave,
   reqNotePutNotebook, reqNoteUpload, reqRenameNote, reqRenameNotebook, reqUserPostLogout
-} from "../api"
+} from "@/api"
 
 export default {
   name: "navbar",

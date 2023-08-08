@@ -23,21 +23,26 @@ export const reqAdminGetUserList = () =>
  * 文章操作
  */
 
-export const reqArticleGetArticleList = (params) =>
-    requests({ url: "/article", method: "get", data: params });
+export const reqArticleGetArticleList = (config) =>
+    requests({ url: "/article", method: "get",...config });
 
-export const reqArticleGetText = (authorid, articleid, params) =>
+export const reqArticleGetText = (author, pageIndex, pageSize) =>
     requests({
-    url: "/article/" + authorid + "/" + articleid,
-    method: "get",
-    data: params,
+    url: '/article/' + author + '?pageIndex=' + (pageIndex - 1) + '&pageSize=' + pageSize,
+    method: "get"
   });
 
-export const reqArticlePostArticle = (params) =>
-    requests({ url: "/article", method: "post", data: params });
+export const reqArticleGetCurText = (author, articleId) =>
+    requests({
+        url: "/article/" + author + "/" + articleId,
+        method: "get"
+    });
 
-export const reqArticlePostBatchDel = (params) =>
-    requests({ url: "/article/batchDel", method: "post", data: params });
+export const reqArticlePostArticle = (params,config) =>
+    requests({ url: "/article", method: "post", data: params,...config});
+
+export const reqArticlePostBatchDel = (params,config) =>
+    requests({ url: "/article/batchDel", method: "post", data: params,...config });
 
 export const reqArticleGetArticleListByAuthor = (author, params) =>
     requests({ url: "/article/" + author, method: "get", data: params });
@@ -65,14 +70,20 @@ export const reqDelnoteRecover = (delnoteid,config) =>
  * 文件上传操作
  */
 
-export const reqFilePostUpload = (params) =>
-    requests({ url: "/file", method: "post", data: params });
+export const reqFilePostUpload = (params,config) =>
+    requests({ url: "/file", method: "post", data: params,...config });
 
 export const reqFilePostVditor = (params) =>
     requests({ url: "/file/vditor", method: "post", data: params });
 
 export const reqFileGetUploadedFiles = (params) =>
     requests({ url: "/file", method: "get", data: params });
+
+export const reqFileLoad = (pageIndex,pageSize,config) =>
+    requests({ url: '/file?pageIndex=' + pageIndex + '&pageSize=' + pageSize, method: "get", ...config});
+
+export const reqFileDelBatch = (params, config) =>
+    requests({ url: "/file/delete/batch", method: "post", data: params ,...config});
 
 /**
  *
@@ -168,27 +179,52 @@ export const reqNoteDelTag = (notebookName,title,tagToDelete, config) =>
     requests({ url: "/note/tag" + "?notebookName=" + notebookName + "&noteName=" + title+ "&tagName=" +tagToDelete, method: "delete", ...config});
 
 
+export const reqNoteRefJump = (value, config) =>
+    requests({ url: "/note/path/" + value, method: "get",...config});
+
+export const reqNoteRefGet = (params, config) =>
+    requests({ url: "/note/getnoteref", method: "post", data: params,...config});
+
+export const reqNoteRefInsert = (params, config) =>
+    requests({ url: "/note/refinsert", method: "put", data: params,...config});
+
+export const reqNoteRefDel = (params, config) =>
+    requests({ url: "/note/delnoteref", method: "post", data: params,...config});
+
+export const reqNoteRefGraph = (config) =>
+    requests({ url: "/note/refgraph", method: "get", ...config});
+
+
 
 export const reqUserPostLogin = (params) =>
-    requests({ url: "/user/login", method: "post", data: params });
+    requests({ url: "/user/login", method: "post", data: params});
 
-export const reqUserPostValidate = (params) =>
-    requests({ url: "/user/validate", method: "post", data: params });
+export const reqUserRetrieve = (params) =>
+    requests({ url: "/user/login", method: "post", data: params});
+
+export const reqUserRetrievePwd = (params) =>
+    requests({ url: "/user/login", method: "post", data: params});
+
+export const reqUserPostValidate = (params, config) =>
+    requests({ url: "/user/validate", method: "post", data: params, ...config});
 
 export const reqUserPostRegister = (params) =>
     requests({ url: "/user/register", method: "post", data: params });
 
-export const reqUserPostChangePassword = (params) =>
-    requests({ url: "/user/changePass", method: "post", data: params });
+export const reqUserPostChangePassword = (params,config) =>
+    requests({ url: "/user/changePass", method: "post", data: params, ...config});
 
 export const reqUserPostLogout = (params, config) =>
     requests({ url: "/user/logout", data:params, method: "post",...config });
 
+export const reqUserEmailSignUp = (params) =>
+    requests({ url: "/user/emailsignup", data:params, method: "post" });
+
 export const reqUserPutRemoteUrl = (params) =>
     requests({ url: "/user/remote", method: "put", data: params });
 
-export const reqUserGetRemoteUrl = () =>
-    requests({ url: "/user/remote", method: "get" });
+export const reqUserGetRemoteUrl = (config) =>
+    requests({ url: "/user/remote", method: "get",...config});
 
 export const reqUserPostGenerateSshkey = () =>
     requests({ url: "/user/sshkey", method: "post" });
@@ -205,8 +241,8 @@ export const reqUserPostStartToPush = () =>
 export const reqUserPostPullFromRemote = () =>
     requests({ url: "/user/pull", method: "post" });
 
-export const reqUserGetEditorConfig = () =>
-    requests({ url: "/user/editorConfig", method: "get" });
+export const reqUserGetEditorConfig = (config) =>
+    requests({ url: "/user/editorConfig", method: "get",...config });
 
-export const reqUserPostEditorConfig = (params) =>
-    requests({ url: "/user/updateEditorConfig", method: "post", data: params });
+export const reqUserPostEditorConfig = (params,config) =>
+    requests({ url: "/user/updateEditorConfig", method: "post", data: params,...config});

@@ -110,7 +110,7 @@
 import Editor from '@/components/Editor.vue'
 import HistoryPreview from '@/components/HistoryPreview.vue'
 import global from "@/global";
-import axios from "axios";
+// import axios from "axios";
 import Mindmap from "@/components/Mindmap.vue";
 import {
   reqHistoryPostQuery,

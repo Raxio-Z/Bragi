@@ -56,8 +56,9 @@
     </div>
 </template>
 <script>
-import axios from "axios";
+// import axios from "axios";
 import global from "../global";
+import {reqUserRetrieve, reqUserRetrievePwd} from "@/api";
 
 export default {
     name: "retrievepwd",
@@ -168,7 +169,8 @@ export default {
                     code: this.formData.code,
                 };
                 let url = global.HOST_URL + "/user/confirm_retrieve";
-                axios.post(url, user).then((res) => {
+                reqUserRetrieve(user).then((res) => {
+                // axios.post(url, user).then((res) => {
                     res = res.data;
                     if (res.code === 0) {
                         this.$notify({
@@ -214,9 +216,10 @@ export default {
                 let url = global.HOST_URL + "/user/retrievepwd";
                 let params = { emailNo: this.formData.emailnumber };
                 console.log(params);
-                axios
-                    .post(url, params)
-                    .then((res) => {
+                reqUserRetrievePwd(params).then((res) => {
+                // axios
+                //     .post(url, params)
+                //     .then((res) => {
                         res = res.data;
                         if (res.code === 0) {
                             this.$message({
