@@ -400,53 +400,7 @@ public class NoteServiceImpl implements INoteService {
     }
 
 
-    @Override
-    public ServerResponse deleteNoteRef(String notebookName,String noteTitle, Integer delRefNoteId)
-    {
-        Integer noteId = noteRepository.findByUsernameAndNotebookNameAndNoteTitle(getUsername(),notebookName,noteTitle).getId();
 
-        NoteDo noteDo = noteRepository.findById(delRefNoteId).get();
-
-        String relativeFileName = getRelativeFileName(notebookName,noteTitle);
-        String filePath = getOrCreateUserNotebookDir()+"/"+relativeFileName;
-        String stringToRemove  = "["+noteDo.getNoteTitle()+"](&&"+delRefNoteId+")";
-        boolean removed = false;
-
-        try {
-
-            // Read the content of the Markdown file
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            StringBuilder content = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // Remove the desired string from the content only once
-                if (!removed && line.contains(stringToRemove)) {
-                    String updatedLine = line.replaceFirst(Pattern.quote(stringToRemove), "");
-                    content.append(updatedLine).append("\n");
-                    removed = true; // Mark as removed to skip additional occurrences
-                } else {
-                    content.append(line).append("\n");
-                }
-            }
-            reader.close();
-
-            // Write the updated content back to the Markdown file
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-            writer.write(content.toString());
-            writer.close();
-
-            System.out.println("String removed successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-//        noteRefRepository.deleteSingleRecord(getUsername(),noteId,delRefNoteId);
-        NoteRefDo noteRefDo = noteRefRepository.findTopByUsernameAndNoteIdAndRefNoteId(getUsername(),noteId,delRefNoteId);
-        noteRefRepository.delete(noteRefDo);
-        GitUtil.addAndCommit(getOrCreateUserGit(), relativeFileName);
-        invalidateCache(buildUserNoteKey(notebookName, noteTitle));
-        return ServerResponse.buildSuccessResponse();
-    }
 
 
     @Override
@@ -595,38 +549,6 @@ public class NoteServiceImpl implements INoteService {
     }
 
     @Override
-    public ServerResponse<List<NotebookVo>> getNoteRef(Integer noteId)
-    {
-        List<NoteRefDo> noteRefDos = noteRefRepository.findAllByUsernameAndNoteId(getUsername(),noteId);
-        List<NotebookVo> notebookVos = new ArrayList<>();
-
-        Map<String, List<NoteVo>> noteBookRefMap = new HashMap<>();
-        for(NoteRefDo noteRef : noteRefDos)
-        {
-            NoteDo noteDo = noteRepository.findById(noteRef.getRefNoteId()).get();
-            if(!noteBookRefMap.containsKey(noteDo.getNotebookName()))
-                noteBookRefMap.put(noteDo.getNotebookName(),new ArrayList<>());
-            noteBookRefMap.get(noteDo.getNotebookName()).add(new NoteVo().setNoteId(noteDo.getId()).setNotebookName(noteDo.getNotebookName()).setTitle(noteDo.getNoteTitle()));
-        }
-
-        for (Map.Entry<String, List<NoteVo>> entry : noteBookRefMap.entrySet()) {
-            String key = entry.getKey();
-            List<NoteVo> value = entry.getValue();
-            notebookVos.add(new NotebookVo().setNotebookName(key).setNoteList(value));
-        }
-        return ServerResponse.buildSuccessResponse(notebookVos);
-    }
-
-
-
-    @Override
-    public ServerResponse createNoteRef(Integer noteId, Integer noteRefId)
-    {
-        noteRefRepository.save(new NoteRefDo().setUsername(getUsername()).setNoteId(noteId).setRefNoteId(noteRefId));
-        return ServerResponse.buildSuccessResponse();
-    }
-
-    @Override
     public ServerResponse moveNote(String srcNotebook, String srcTitle, String targetNotebook, String targetTitle) {
         // src != target
         if (srcNotebook.equalsIgnoreCase(targetNotebook) && srcTitle.equalsIgnoreCase(targetTitle)) {
@@ -688,7 +610,7 @@ public class NoteServiceImpl implements INoteService {
         return null;
     }
 
-    private File getOrCreateUserNotebookDir() {
+    public File getOrCreateUserNotebookDir() {
         File dir = new File(notesDir, getUsername());
         if (dir.exists()) {
             return dir;
@@ -697,11 +619,11 @@ public class NoteServiceImpl implements INoteService {
         return dir;
     }
 
-    private String getUsername() {
+    public String getUsername() {
         return ThreadLocalUtil.getUsername();
     }
 
-    private File getUserNotebookDir() {
+    public File getUserNotebookDir() {
         File dir = new File(notesDir, ThreadLocalUtil.getUsername());
         if (dir.exists()) {
             return dir;
@@ -720,11 +642,11 @@ public class NoteServiceImpl implements INoteService {
                 || filename.endsWith(".Md");
     }
 
-    private UserNoteKey buildUserNoteKey(String notebookName, String noteTitle) {
+    public UserNoteKey buildUserNoteKey(String notebookName, String noteTitle) {
         return buildUserNoteKey(notebookName, noteTitle, getUsername());
     }
 
-    private UserNoteKey buildUserNoteKey(String notebookName, String noteTitle, String username) {
+    public UserNoteKey buildUserNoteKey(String notebookName, String noteTitle, String username) {
         return new UserNoteKey().setNotebookName(notebookName).setNoteTitle(noteTitle).setUsername(username);
     }
 
@@ -740,7 +662,7 @@ public class NoteServiceImpl implements INoteService {
         return count;
     }
 
-    void invalidateCache(UserNoteKey key) {
+    public void invalidateCache(UserNoteKey key) {
         userNotePreviewCache.invalidate(key);
         userNoteCache.invalidate(key);
     }
@@ -750,34 +672,7 @@ public class NoteServiceImpl implements INoteService {
     }
 
 
-    @Override
-    public RefGraphVo getRefGraph()
-    {
-        RefGraphVo refGraphVo = new RefGraphVo();
 
-        List<NoteRefDo> noteRefDos = noteRefRepository.findAllByUsername(getUsername());
-        List<NoteDo> noteDos = noteRepository.findAllByUsername(getUsername());
-
-        List<RefGraphVo.Node> nodes = new ArrayList<>();
-        List<RefGraphVo.Line> lines = new ArrayList<>();
-
-        Set<String> ns = new HashSet<>();
-
-        for(NoteRefDo noteRefDo : noteRefDos) {
-            lines.add(new RefGraphVo.Line().setFrom(noteRefDo.getNoteId().toString()).setTo(noteRefDo.getRefNoteId().toString()));
-            ns.add(noteRefDo.getNoteId().toString());
-            ns.add(noteRefDo.getRefNoteId().toString());
-        }
-        for(NoteDo noteDo : noteDos) {
-            if(ns.contains(noteDo.getId().toString()))
-                nodes.add(new RefGraphVo.Node().setId(noteDo.getId().toString()).setText(noteDo.getNoteTitle()));
-        }
-
-
-        refGraphVo.setNodes(nodes);
-        refGraphVo.setLines(lines);
-        return refGraphVo;
-    }
 
 
 //    public void updateNotesNotebookName(String srcNotebook, String targetNotebook)
@@ -785,85 +680,7 @@ public class NoteServiceImpl implements INoteService {
 //        noteRepository.updateNotebookName(getUsername(),srcNotebook,targetNotebook);
 //    }
 
-    public ServerResponse addNoteTag(String notebookName, String noteName, String tagName) {
-        try {
-            Integer noteId = noteRepository.findByUsernameAndNotebookNameAndNoteTitle(getUsername(), notebookName, noteName).getId();
-            if (!noteTagRepository.findByNoteIdAndTagName(noteId, tagName).isEmpty()) {
-                return ServerResponse.buildErrorResponse("笔记" + noteName + "已经存在标签" + tagName);
-            }
-            noteTagRepository.save(new NoteTagDo().setNoteId(noteId).setTagName(tagName));
-        } catch (Exception e) {
-            return ServerResponse.buildErrorResponse(e.getMessage());
-        }
-        return ServerResponse.buildSuccessResponse();
+    public NotePreviewInfo getContentPreview(String notebookName, String noteName) {
+        return userNotePreviewCache.get(buildUserNoteKey(notebookName, noteName));
     }
-
-    public ServerResponse deleteNoteTag(String notebookName, String noteName, String tagName) {
-        try {
-            Integer noteId = noteRepository.findByUsernameAndNotebookNameAndNoteTitle(getUsername(), notebookName, noteName).getId();
-            List<NoteTagDo> tagsToDelete = noteTagRepository.findByNoteIdAndTagName(noteId, tagName);
-            if (tagsToDelete.isEmpty()){
-                throw new RuntimeException("笔记" + noteName + "不存在标签" + tagName);
-            }
-            for (NoteTagDo tag : tagsToDelete) {
-                noteTagRepository.deleteById(tag.getId());
-            }
-        } catch (Exception e) {
-            return ServerResponse.buildErrorResponse(e.getMessage());
-        }
-        return ServerResponse.buildSuccessResponse();
-    }
-
-    public ServerResponse<List<NoteTagDo>> getTagsByNote(String notebookName, String noteName) {
-        try {
-            Integer noteId = noteRepository.findByUsernameAndNotebookNameAndNoteTitle(getUsername(), notebookName, noteName).getId();
-            List<NoteTagDo> tags = noteTagRepository.findAllByNoteId(noteId);
-            return ServerResponse.buildSuccessResponse(tags);
-        } catch (Exception e) {
-            return ServerResponse.buildErrorResponse(e.getMessage());
-        }
-    }
-
-    public ServerResponse<List<NoteVo>> searchNoteByTag(String tagName) {
-        try {
-            List<NoteTagDo> noteTags = noteTagRepository.findAllByTagName(tagName);
-            List<NoteVo> notes = noteTags.stream().map(NoteTagDo::getNoteId).filter(noteId -> {
-                // 这一步filter确保noteId都是可被当前用户访问的有效项
-                Optional<NoteDo> noteDoOptional = noteRepository.findById(noteId);
-                return noteDoOptional.filter(noteDo -> (Objects.equals(getUsername(), noteDo.getUsername()))).isPresent();
-            }).map(noteId -> {
-                Optional<NoteDo> noteDoOptional = noteRepository.findById(noteId);
-                if (!noteDoOptional.isPresent())
-                    throw new RuntimeException("被索引的笔记" + noteId.toString() + "不存在");
-                NoteDo noteDo = noteDoOptional.get();
-                String notebookName = noteDo.getNotebookName();
-                String noteName = noteDo.getNoteTitle();
-                File noteFile = new File(new File(getOrCreateUserNotebookDir(), notebookName), noteName);
-
-                NoteVo noteVo = new NoteVo().setNotebookName(noteDo.getNotebookName())
-                        .setTitle(noteDo.getNoteTitle())
-                        .setLastModifiedTime(DateTimeUtil.dateToStr(new Date(noteFile.lastModified())))
-                        .setTags(getTagsByNote(notebookName, noteName).getData().stream().map(NoteTagDo::getTagName).collect(Collectors.toList()));
-                NotePreviewInfo previewInfo = userNotePreviewCache.get(buildUserNoteKey(notebookName, noteName));
-                if (previewInfo != null) {
-                    noteVo.setArticleId(previewInfo.getArticleId())
-                            .setPreviewContent(previewInfo.getPreviewContent());
-                }
-                return noteVo;
-            }).collect(Collectors.toList());
-
-            return ServerResponse.buildSuccessResponse(notes);
-        } catch (Exception e) {
-            return ServerResponse.buildErrorResponse(e.getMessage());
-        }
-    }
-
-    public ServerResponse<List<String>> getTags() {
-        try {
-            return ServerResponse.buildSuccessResponse(noteTagRepository.selectDistinctTagsByUsername(getUsername()));
-        } catch (Exception e) {
-            return ServerResponse.buildErrorResponse(e.getMessage());
-        }
-    }
-
 }

@@ -2,8 +2,11 @@ package ink.markidea.note.service;
 
 
 import ink.markidea.note.entity.NoteTagDo;
+import ink.markidea.note.entity.dto.NotePreviewInfo;
+import ink.markidea.note.entity.dto.UserNoteKey;
 import ink.markidea.note.entity.resp.ServerResponse;
 import ink.markidea.note.entity.vo.*;
+import org.eclipse.jgit.api.Git;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -31,9 +34,6 @@ public interface INoteService {
     ServerResponse createNotebook(String notebookName);
 
     ServerResponse createNote(String noteTitle, String notebookName, String content, List<String> noteTags);
-
-
-    ServerResponse createNoteRef(Integer noteId, Integer noteRefId);
     /**
      * save changes of note.
      * If the note don't exist, it will be created.
@@ -53,9 +53,6 @@ public interface INoteService {
      * delete note
      */
     ServerResponse deleteNote(String notebookName, String noteTitle);
-
-
-    ServerResponse deleteNoteRef(String notebooName,String noteTitle, Integer delRefNoteId);
     /**
      * get the content of note
      */
@@ -132,23 +129,23 @@ public interface INoteService {
      */
     ServerResponse copyNote(String srcNotebook, String targetNotebook, String title);
 
-    ServerResponse<List<NotebookVo>> getNoteRef(Integer noteId);
-
     /**
      * 获取用户文件夹目录
      */
     File getOrInitUserNotebookDir();
 
-    RefGraphVo getRefGraph();
-
 //    void updateNotesNotebookName(String srcNotebook, String targetNotebook);
-    ServerResponse addNoteTag(String notebookName, String noteName, String tagName);
+    String getUsername();
 
-    ServerResponse deleteNoteTag(String notebookName, String noteName, String tagName);
+    File getOrCreateUserNotebookDir();
 
-    ServerResponse<List<NoteTagDo>> getTagsByNote(String notebookName, String noteName);
+    NotePreviewInfo getContentPreview(String notebookName, String noteName);
 
-    ServerResponse<List<NoteVo>> searchNoteByTag(String tagName);
+    public Git getOrCreateUserGit();
 
-    ServerResponse<List<String>> getTags();
+    public UserNoteKey buildUserNoteKey(String notebookName, String noteTitle);
+
+    public UserNoteKey buildUserNoteKey(String notebookName, String noteTitle, String username);
+
+    public void invalidateCache(UserNoteKey key);
 }
