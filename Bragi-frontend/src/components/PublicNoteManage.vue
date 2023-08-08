@@ -56,7 +56,8 @@
 
 <script>
 import global from '@/global'
-import axios from 'axios'
+// import axios from 'axios'
+import {reqArticleGetArticleList, reqArticlePostBatchDel} from "@/api";
 
 
   export default {
@@ -84,7 +85,8 @@ import axios from 'axios'
                 articleList: this.selectedArticles
             }
             console.log(req)
-            axios.post(global.HOST_URL + "/article/batchDel", req, this.config).then(res => {
+            reqArticlePostBatchDel(req,this.config).then(res => {
+            // axios.post(global.HOST_URL + "/article/batchDel", req, this.config).then(res => {
                 res = res.data;
                 console.log(res)
                 if(res.code !== 0) {
@@ -104,13 +106,20 @@ import axios from 'axios'
 
       },
       listUserArticls(pageIdx, pageSize) {
-          axios.get(global.HOST_URL + '/article', {
-              headers: this.config.headers,
-              params:{
-                  page : pageIdx - 1,
-                  size : pageSize
-              }
+          reqArticleGetArticleList({
+            headers: this.config.headers,
+            params:{
+              page : pageIdx - 1,
+              size : pageSize
+            }
           }).then(res => {
+          // axios.get(global.HOST_URL + '/article', {
+          //     headers: this.config.headers,
+          //     params:{
+          //         page : pageIdx - 1,
+          //         size : pageSize
+          //     }
+          // }).then(res => {
               res = res.data;
               if(res.code !== 0) {
                   return ;

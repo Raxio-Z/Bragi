@@ -29,10 +29,11 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import global from '../global'
 import PublicNoteManage from '@/components/PublicNoteManage'
 import EditorSetting from '@/components/EditorSetting'
+import {reqUserGetRemoteUrl, reqUserPostChangePassword, reqUserPostValidate} from "@/api";
 
 export default {
   name: "admin",
@@ -75,61 +76,6 @@ export default {
     };
   },
   methods: {
-    handleStartPush() {
-      let url = global.HOST_URL + "/user/push";
-      axios.post(url, null, this.config).then(res => {
-            res = res.data;
-            if (res.code === 0) {
-              this.$notify({
-                type: 'success',
-                message: '开始备份至远程仓库',
-                duration: 1000
-              });
-            }
-          }
-      )
-    },
-    handleStopPush() {
-      let url = global.HOST_URL + "/user/push";
-      axios.delete(url, this.config).then(res => {
-            res = res.data;
-            if (res.code === 0) {
-              this.$notify({
-                type: 'success',
-                message: '停止备份',
-                duration: 1000
-              });
-            }
-          }
-      )
-    },
-    handleSetRemoteRepo() {
-      let param = {
-        remoteRepoUrl: this.remoteRepoUrl
-      }
-      let url = global.HOST_URL + "/user/remote";
-      axios.put(url, param, this.config).then(res => {
-        res = res.data;
-        if (res.code === 0) {
-          this.$notify({
-            type: 'success',
-            message: '设置远程仓库成功'
-          });
-        }
-      })
-    },
-    handleGenSshKey() {
-      this.genSshKey = false;
-      let url = global.HOST_URL + "/user/sshkey";
-      axios.post(url, null, this.config).then(res => {
-        res = res.data;
-        if (res.code !== 0) {
-          return;
-        }
-        this.sshkey = res.data;
-        this.genSshKey = true;
-      })
-    },
     notifyLoadEditorConfig() {
       console.log("fdsfsdfsdfsf")
       this.$refs.editorSetting.loadEditorConfig();
@@ -153,8 +99,9 @@ export default {
                 duration: 1000,
             });
         }else{
-          axios.post(url, request, this.config).then(
-            res => {
+          reqUserPostChangePassword(request, this.config).then(res => {
+          // axios.post(url, request, this.config).then(
+          //   res => {
               res = res.data;
               if (res.code === 0) {
                 this.$notify({
@@ -188,8 +135,9 @@ export default {
     }
     let url = global.HOST_URL + "/user/validate";
     // console.log(this.config)
-    axios.post(url, null, this.config).then(
-        res => {
+    reqUserPostValidate(null,this.config).then(res => {
+    // axios.post(url, null, this.config).then(
+    //     res => {
           res = res.data;
           if (res.code === 0) {
             return;
@@ -208,8 +156,9 @@ export default {
     )
     // TODO user info
     let getRemoteRepoUrl = global.HOST_URL + "/user/remote";
-    axios.get(getRemoteRepoUrl, this.config).then(
-        res => {
+    reqUserGetRemoteUrl().then( res => {
+    // axios.get(getRemoteRepoUrl, this.config).then(
+    //     res => {
           res = res.data;
           if (res.code === 0) {
             this.remoteRepoUrl = res.data;

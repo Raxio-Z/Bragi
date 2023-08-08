@@ -60,7 +60,8 @@
 
 <script>
 import global from '@/global'
-import axios from 'axios'
+// import axios from 'axios'
+import {reqFileDelBatch, reqFileLoad, reqFilePostUpload} from "@/api";
 
 
   export default {
@@ -107,7 +108,8 @@ import axios from 'axios'
       loadUserFiles(pageIndex, pageSize){
           
           let url = global.HOST_URL + '/file?pageIndex=' + pageIndex + '&pageSize=' + pageSize;
-          axios.get(url, this.config).then(res => {
+          reqFileLoad(pageIndex, pageSize, this.config).then(res => {
+          // axios.get(url, this.config).then(res => {
               res = res.data;
             if(res.code == 0){
                 this.tableData = res.data.fileDetailList;
@@ -140,7 +142,8 @@ import axios from 'axios'
           if(request.fileNames.length == 0){
               return ;
           }
-          axios.post(url, request, this.config).then(res => {
+          reqFileDelBatch(request, this.config).then(res => {
+          // axios.post(url, request, this.config).then(res => {
               res = res.data;
               if(res.code !== 0){
                   return ;
@@ -165,7 +168,8 @@ import axios from 'axios'
         console.log(param)
         //添加请求头
         let url = global.HOST_URL + "/file";
-        axios.post(url, param, config).then(res => {
+        reqFilePostUpload(param,config).then(res => {
+        // axios.post(url, param, config).then(res => {
           res = res.data;
           if(res.code !== 0){
             return ;

@@ -4,20 +4,20 @@
       <el-row class="tac">
         <el-col :span="24">
           <div style="width: 100%;margin-left: 20px;cursor: pointer;display: flex;align-items: center;" @click="goHome">
-            <img src="../assets/logo.png" style="width: 40px;height: 40px" />
+            <img src="../assets/logo.png" style="width: 40px;height: 40px"/>
             <h1 style="font-size: 1.8rem;margin-left: 10px">Bragi</h1>
           </div>
 
           <div class="search-icon" @click="openSearch">
             <svg viewBox="0 0 14 14" class="sidebarSearch"
-              style="margin-left: 15px; width: 14px; height: 100%; display: block; fill: rgba(55, 53, 47, 0.45); flex-shrink: 0; backface-visibility: hidden;">
+                 style="margin-left: 15px; width: 14px; height: 100%; display: block; fill: rgba(55, 53, 47, 0.45); flex-shrink: 0; backface-visibility: hidden;">
               <path
-                d="M5.92239093,0.540000021 C2.94055203,0.540000021 0.5,2.98052217 0.5,5.96238099 C0.5,8.9442199 2.94055203,11.384762 5.92239093,11.384762 C7.02329179,11.384762 8.05258749,11.0564678 8.91032559,10.4866744 L12.1460745,13.6802311 C12.5695899,14.1037465 13.2589477,14.1037465 13.6823635,13.6802311 C14.1058788,13.2567158 14.1058788,12.5730353 13.6823635,12.1495199 L10.4410368,8.95033558 C11.0107904,8.09259747 11.3447619,7.06329182 11.3447619,5.96238099 C11.3447619,2.98052217 8.90420992,0.540000021 5.92239093,0.540000021 Z M5.92239093,2.70895241 C7.7320027,2.70895241 9.17580956,4.15272939 9.17580956,5.96238099 C9.17580956,7.77201268 7.7320027,9.21581954 5.92239093,9.21581954 C4.11275925,9.21581954 2.66895239,7.77201268 2.66895239,5.96238099 C2.66895239,4.15272939 4.11275925,2.70895241 5.92239093,2.70895241 Z">
+                  d="M5.92239093,0.540000021 C2.94055203,0.540000021 0.5,2.98052217 0.5,5.96238099 C0.5,8.9442199 2.94055203,11.384762 5.92239093,11.384762 C7.02329179,11.384762 8.05258749,11.0564678 8.91032559,10.4866744 L12.1460745,13.6802311 C12.5695899,14.1037465 13.2589477,14.1037465 13.6823635,13.6802311 C14.1058788,13.2567158 14.1058788,12.5730353 13.6823635,12.1495199 L10.4410368,8.95033558 C11.0107904,8.09259747 11.3447619,7.06329182 11.3447619,5.96238099 C11.3447619,2.98052217 8.90420992,0.540000021 5.92239093,0.540000021 Z M5.92239093,2.70895241 C7.7320027,2.70895241 9.17580956,4.15272939 9.17580956,5.96238099 C9.17580956,7.77201268 7.7320027,9.21581954 5.92239093,9.21581954 C4.11275925,9.21581954 2.66895239,7.77201268 2.66895239,5.96238099 C2.66895239,4.15272939 4.11275925,2.70895241 5.92239093,2.70895241 Z">
               </path>
             </svg>
 
             <div
-              style="flex: 1 1 auto; white-space: nowrap; min-width: 0px; overflow: hidden; text-overflow: ellipsis;margin-left: 10px;color: rgb(48,49,51)">
+                style="flex: 1 1 auto; white-space: nowrap; min-width: 0px; overflow: hidden; text-overflow: ellipsis;margin-left: 10px;color: rgb(48,49,51)">
               Search
             </div>
 
@@ -25,14 +25,14 @@
 
           <el-menu default-active="2" ref="menu" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
             <el-submenu index="1" class="submenu-area" @mouseover.native="setShowAddIcon(filespcaceShowAddIcon, true)"
-              @mouseout.native="setShowAddIcon(filespcaceShowAddIcon, false)">
+                        @mouseout.native="setShowAddIcon(filespcaceShowAddIcon, false)">
               <template slot="title">
                 <!-- <i class="el-icon-location"></i> -->
                 <i class="iconfont icon-wenjianjia file-space-icon"></i>
                 <span>文件空间</span>
                 <!-- 右侧的加号按钮 -->
                 <i v-show="filespcaceShowAddIcon.showAddIcon" @click.stop="addNewNotebook"
-                  class="iconfont icon-jiajianzujianjiahao add_icon"></i>
+                   class="iconfont icon-jiajianzujianjiahao add_icon"></i>
               </template>
               <!--              <router-link-->
               <!--                  :to="{name:'content'}"-->
@@ -41,16 +41,16 @@
                 <el-menu ref="notebook_menu">
                   <!-- 显示所有的笔记本 -->
                   <div v-for="(item, index) of this.notebookList" :key="item.notebookName"
-                    v-contextmenu:notebookRightMenu>
+                       v-contextmenu:notebookRightMenu>
                     <el-submenu :index="'1-' + item.notebookName" class="notebook-submenu"
-                      @mouseover.stop.native="setShowAddIcon(item, true)"
-                      @mouseout.stop.native="setShowAddIcon(item, false)">
+                                @mouseover.stop.native="setShowAddIcon(item, true)"
+                                @mouseout.stop.native="setShowAddIcon(item, false)">
                       <template slot="title">
                         <!-- 重命名状态或新创建状态下为输入框，否则直接显示笔记本的名字 -->
                         <div class="set-right-margin" v-if="toRenameNotebookName && toRenameNotebookName.length > 0 && toRenameNotebookName === item.notebookName
                           || item.notebookName.length === 0">
                           <el-input ref="notebook_input" size="mini" @blur="handleNotebookInputBlur" @click.native.stop
-                            @keyup.enter.native="handleNotebookInputEnter" v-model="notebookInputModelValue" />
+                                    @keyup.enter.native="handleNotebookInputEnter" v-model="notebookInputModelValue"/>
                         </div>
                         <div class="set-right-margin" v-else>
                           <!-- <i class="el-icon-document"></i> -->
@@ -58,35 +58,36 @@
                           {{ item.notebookName }}
                           <!-- 删除图标 -->
                           <i class="el-icon-delete notebook-delete-icon"
-                            @click.stop="notebookDeleteIconClick(item.notebookName)" v-show="item.showAddIcon"></i>
+                             @click.stop="notebookDeleteIconClick(item.notebookName)" v-show="item.showAddIcon"></i>
                           <!-- 笔记本右侧的加号按钮 -->
                           <i v-show="item.showAddIcon" @click.stop="addNewNote(index)"
-                            class="iconfont icon-jiajianzujianjiahao add_icon"></i>
+                             class="iconfont icon-jiajianzujianjiahao add_icon"></i>
                         </div>
                       </template>
                       <!-- 显示笔记本中所有的笔记 -->
                       <div v-for="subitem in item.noteList" :key="subitem.title" style="background: rgb(245,245,245);">
                         <el-menu-item :index="'1-' + item.notebookName + '-' + subitem.title"
-                          @click="selectNote(subitem.title, item.notebookName)"
-                          @contextmenu.stop.native="setNoteRightMenu(item.notebookName, subitem.title)"
-                          v-contextmenu:noteRightMenu class="notebook_item"
-                          :class="{ active: curNote.noteTitle === subitem.title && curNote.notebookName === subitem.notebookName }"
-                          @mouseover.native.stop="setShowMoreIcon(subitem, true)"
-                          @mouseout.native.stop="setShowMoreIcon(subitem, false)">
+                                      @click="selectNote(subitem.title, item.notebookName)"
+                                      @contextmenu.stop.native="setNoteRightMenu(item.notebookName, subitem.title)"
+                                      v-contextmenu:noteRightMenu class="notebook_item"
+                                      :class="{ active: curNote.noteTitle === subitem.title && curNote.notebookName === subitem.notebookName }"
+                                      @mouseover.native.stop="setShowMoreIcon(subitem, true)"
+                                      @mouseout.native.stop="setShowMoreIcon(subitem, false)">
                           <div class="menuitem-content" style="display: flex; align-items: center; width: 100%;">
                             <!-- 重命名状态或新创建状态下为输入框，否则直接显示笔记的名字 -->
                             <div v-if="toRenameNoteName && toRenameNoteName.length > 0 && toRenameNoteName === subitem.title && noteRightMenuValues.notebookName === item.notebookName
                               || subitem.title.length === 0">
                               <el-input ref="note_input" size="mini" @blur="handleNoteInputBlur(index)"
-                                @keyup.enter.native="handleNoteInputEnter(index)" v-model="noteInputModelValue" />
+                                        @keyup.enter.native="handleNoteInputEnter(index)"
+                                        v-model="noteInputModelValue"/>
                             </div>
                             <div v-else>
                               <i class="iconfont icon-bijijilu note-icon"></i>
                               {{ subitem.title }}
                               <!-- 删除图标 -->
                               <i class="el-icon-delete note_delete_icon"
-                                @click="NoteDeleteIconClick(item.notebookName, subitem.title)"
-                                v-show="subitem.showMoreIcon"></i>
+                                 @click="NoteDeleteIconClick(item.notebookName, subitem.title)"
+                                 v-show="subitem.showMoreIcon"></i>
                               <!-- 更多图标 -->
                               <i class="el-icon-more more_button" v-show="subitem.showMoreIcon"></i>
                             </div>
@@ -131,18 +132,18 @@
       <div class="bottom_two" @click="openTrash">
         <div class="trash_div">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="none" viewBox="0 0 24 24"
-            data-area="page-trash">
+               data-area="page-trash">
             <path fill="#2C2C2C" fill-rule="evenodd" d="M3.2 5.5a.8.8 0 01.8-.8h16a.8.8 0 010 1.6H4a.8.8 0 01-.8-.8z"
-              clip-rule="evenodd"></path>
+                  clip-rule="evenodd"></path>
             <path fill="#2C2C2C" fill-rule="evenodd"
-              d="M7.2 3.5A1.8 1.8 0 019 1.7h6a1.8 1.8 0 011.8 1.8v2.8H7.2V3.5zM9 3.3a.2.2 0 00-.2.2v1.2h6.4V3.5a.2.2 0 00-.2-.2H9z"
-              clip-rule="evenodd"></path>
+                  d="M7.2 3.5A1.8 1.8 0 019 1.7h6a1.8 1.8 0 011.8 1.8v2.8H7.2V3.5zM9 3.3a.2.2 0 00-.2.2v1.2h6.4V3.5a.2.2 0 00-.2-.2H9z"
+                  clip-rule="evenodd"></path>
             <path fill="#2C2C2C" fill-rule="evenodd"
-              d="M4.173 4.7h15.654l-.463 13.893a2.8 2.8 0 01-2.798 2.707H7.435a2.8 2.8 0 01-2.799-2.707L4.173 4.7zm1.654 1.6l.408 12.24a1.2 1.2 0 001.2 1.16h9.13a1.2 1.2 0 001.2-1.16l.408-12.24H5.827z"
-              clip-rule="evenodd"></path>
+                  d="M4.173 4.7h15.654l-.463 13.893a2.8 2.8 0 01-2.798 2.707H7.435a2.8 2.8 0 01-2.799-2.707L4.173 4.7zm1.654 1.6l.408 12.24a1.2 1.2 0 001.2 1.16h9.13a1.2 1.2 0 001.2-1.16l.408-12.24H5.827z"
+                  clip-rule="evenodd"></path>
             <path fill="#2C2C2C" fill-rule="evenodd"
-              d="M10 9.2a.8.8 0 01.8.8v5.5a.8.8 0 01-1.6 0V10a.8.8 0 01.8-.8zm4 0a.8.8 0 01.8.8v5.5a.8.8 0 01-1.6 0V10a.8.8 0 01.8-.8z"
-              clip-rule="evenodd"></path>
+                  d="M10 9.2a.8.8 0 01.8.8v5.5a.8.8 0 01-1.6 0V10a.8.8 0 01.8-.8zm4 0a.8.8 0 01.8.8v5.5a.8.8 0 01-1.6 0V10a.8.8 0 01.8-.8z"
+                  clip-rule="evenodd"></path>
           </svg>
           <span style="font-size: 14px;margin-left: 4px;">垃圾桶</span>
         </div>
@@ -162,9 +163,9 @@
         <el-input v-model="trash_search_input" prefix-icon="el-icon-search" placeholder="搜索被删除的页面"></el-input>
         <el-tooltip class="item" effect="dark" content="清空垃圾桶" placement="right">
           <svg @click="clearAllDelNotes" style="alignment: right;width: 20px;height: auto;margin-left: 10px"
-            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+               xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
             <path fill="#9C9292"
-              d="M12.603 17.775c1.153 0 1.909-.722 1.967-1.876l.54-11.389h.92a.627.627 0 000-1.253h-3.56V2.12c0-1.154-.78-1.901-2.034-1.901H7.547c-1.253 0-2.033.747-2.033 1.9v1.138H1.969a.627.627 0 000 1.253h.922l.54 11.397c.049 1.154.804 1.868 1.966 1.868h7.206zM11.15 3.257H6.842V2.195c0-.44.324-.756.797-.756h2.714c.473 0 .797.316.797.756v1.062zm1.311 13.265h-6.93c-.449 0-.781-.332-.806-.797L4.185 4.51h9.596l-.514 11.215c-.017.473-.34.797-.806.797zm-1.137-1.345c.266 0 .465-.224.482-.531l.232-8.177c.008-.298-.2-.54-.473-.54-.257 0-.473.242-.482.532l-.232 8.176c-.008.3.191.54.473.54zm-4.648 0c.274 0 .481-.24.473-.54l-.232-8.176c-.009-.29-.233-.531-.482-.531-.282 0-.481.232-.473.54l.232 8.176c.009.307.208.53.482.53zm2.324 0c.266 0 .49-.24.49-.54V6.47c0-.298-.224-.54-.49-.54s-.49.242-.49.54v8.168c0 .3.224.54.49.54z">
+                  d="M12.603 17.775c1.153 0 1.909-.722 1.967-1.876l.54-11.389h.92a.627.627 0 000-1.253h-3.56V2.12c0-1.154-.78-1.901-2.034-1.901H7.547c-1.253 0-2.033.747-2.033 1.9v1.138H1.969a.627.627 0 000 1.253h.922l.54 11.397c.049 1.154.804 1.868 1.966 1.868h7.206zM11.15 3.257H6.842V2.195c0-.44.324-.756.797-.756h2.714c.473 0 .797.316.797.756v1.062zm1.311 13.265h-6.93c-.449 0-.781-.332-.806-.797L4.185 4.51h9.596l-.514 11.215c-.017.473-.34.797-.806.797zm-1.137-1.345c.266 0 .465-.224.482-.531l.232-8.177c.008-.298-.2-.54-.473-.54-.257 0-.473.242-.482.532l-.232 8.176c-.008.3.191.54.473.54zm-4.648 0c.274 0 .481-.24.473-.54l-.232-8.176c-.009-.29-.233-.531-.482-.531-.282 0-.481.232-.473.54l.232 8.176c.009.307.208.53.482.53zm2.324 0c.266 0 .49-.24.49-.54V6.47c0-.298-.224-.54-.49-.54s-.49.242-.49.54v8.168c0 .3.224.54.49.54z">
             </path>
           </svg>
         </el-tooltip>
@@ -176,38 +177,38 @@
           <div class="trash_item" style="display: flex; align-items: center; height: 30px">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="none" viewBox="0 0 24 24">
               <path fill="#2C2C2C" fill-rule="evenodd"
-                d="M18 3.2a2.8 2.8 0 012.795 2.63L20.8 6v12a2.8 2.8 0 01-2.63 2.795L18 20.8H6a2.8 2.8 0 01-2.795-2.63L3.2 18V6a2.8 2.8 0 012.63-2.795L6 3.2h12zm0 1.6H6a1.2 1.2 0 00-1.194 1.078L4.8 6v12a1.2 1.2 0 001.078 1.194L6 19.2h12a1.2 1.2 0 001.194-1.077L19.2 18V6a1.2 1.2 0 00-1.077-1.194L18 4.8z"
-                clip-rule="evenodd"></path>
+                    d="M18 3.2a2.8 2.8 0 012.795 2.63L20.8 6v12a2.8 2.8 0 01-2.63 2.795L18 20.8H6a2.8 2.8 0 01-2.795-2.63L3.2 18V6a2.8 2.8 0 012.63-2.795L6 3.2h12zm0 1.6H6a1.2 1.2 0 00-1.194 1.078L4.8 6v12a1.2 1.2 0 001.078 1.194L6 19.2h12a1.2 1.2 0 001.194-1.077L19.2 18V6a1.2 1.2 0 00-1.077-1.194L18 4.8z"
+                    clip-rule="evenodd"></path>
               <path fill="#2C2C2C" fill-rule="evenodd"
-                d="M16.627 14.841a.3.3 0 01-.3.3H7.21a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h9.116a.3.3 0 01.3.3v1.2zm-2.756-4.883a.3.3 0 01-.3.3h-6.36a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h6.36a.3.3 0 01.3.3v1.2z"
-                clip-rule="evenodd"></path>
+                    d="M16.627 14.841a.3.3 0 01-.3.3H7.21a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h9.116a.3.3 0 01.3.3v1.2zm-2.756-4.883a.3.3 0 01-.3.3h-6.36a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h6.36a.3.3 0 01.3.3v1.2z"
+                    clip-rule="evenodd"></path>
             </svg>
 
             <span style="font-weight: bold;margin-left: 10px;flex-grow: 1;color: rgb(76,76,76)">{{ item.notebook }}/{{
-              item.title
-            }}
+                item.title
+              }}
               <span style="margin-left: 15px;font-weight: normal;color: rgb(179,179,179);font-size: 10px">
-              {{item.deleteTime}}
+              {{ item.deleteTime }}
             </span>
               <span style="margin-left: 15px;font-weight: normal;color: rgb(179,179,179);font-size: 10px">
-              {{item.fileSize}}B
+              {{ item.fileSize }}B
             </span>
 
             </span>
-
 
 
             <div style="display: flex; align-items: center; justify-content: flex-end;">
-              <svg @click="recoverDelNote(item.id)" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="18"
-                height="18" viewBox="0 0 18 18">
+              <svg @click="recoverDelNote(item.id)" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg"
+                   width="18"
+                   height="18" viewBox="0 0 18 18">
                 <path fill="#9C9292"
-                  d="M8.736 17.565a6.958 6.958 0 006.973-6.981 6.93 6.93 0 00-6.964-6.956c-.424 0-.855.033-1.279.108L9.492 1.76a.756.756 0 00.182-.481c0-.39-.29-.698-.664-.698a.65.65 0 00-.49.208L5.291 4.068a.718.718 0 00-.215.506c0 .191.066.357.215.506l3.23 3.254a.654.654 0 00.49.191.66.66 0 00.663-.68.667.667 0 00-.19-.465L7.2 5.114a7.928 7.928 0 011.544-.133 5.567 5.567 0 015.594 5.603 5.587 5.587 0 01-5.603 5.611 5.585 5.585 0 01-5.595-5.611c0-.407-.265-.706-.664-.706a.68.68 0 00-.705.706 6.956 6.956 0 006.964 6.98z">
+                      d="M8.736 17.565a6.958 6.958 0 006.973-6.981 6.93 6.93 0 00-6.964-6.956c-.424 0-.855.033-1.279.108L9.492 1.76a.756.756 0 00.182-.481c0-.39-.29-.698-.664-.698a.65.65 0 00-.49.208L5.291 4.068a.718.718 0 00-.215.506c0 .191.066.357.215.506l3.23 3.254a.654.654 0 00.49.191.66.66 0 00.663-.68.667.667 0 00-.19-.465L7.2 5.114a7.928 7.928 0 011.544-.133 5.567 5.567 0 015.594 5.603 5.587 5.587 0 01-5.603 5.611 5.585 5.585 0 01-5.595-5.611c0-.407-.265-.706-.664-.706a.68.68 0 00-.705.706 6.956 6.956 0 006.964 6.98z">
                 </path>
               </svg>
               <svg @click="clearDelNote(item.id)" style="cursor: pointer;margin-left: 10px;margin-right: 10px"
-                xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                   xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                 <path fill="#9C9292"
-                  d="M12.603 17.775c1.153 0 1.909-.722 1.967-1.876l.54-11.389h.92a.627.627 0 000-1.253h-3.56V2.12c0-1.154-.78-1.901-2.034-1.901H7.547c-1.253 0-2.033.747-2.033 1.9v1.138H1.969a.627.627 0 000 1.253h.922l.54 11.397c.049 1.154.804 1.868 1.966 1.868h7.206zM11.15 3.257H6.842V2.195c0-.44.324-.756.797-.756h2.714c.473 0 .797.316.797.756v1.062zm1.311 13.265h-6.93c-.449 0-.781-.332-.806-.797L4.185 4.51h9.596l-.514 11.215c-.017.473-.34.797-.806.797zm-1.137-1.345c.266 0 .465-.224.482-.531l.232-8.177c.008-.298-.2-.54-.473-.54-.257 0-.473.242-.482.532l-.232 8.176c-.008.3.191.54.473.54zm-4.648 0c.274 0 .481-.24.473-.54l-.232-8.176c-.009-.29-.233-.531-.482-.531-.282 0-.481.232-.473.54l.232 8.176c.009.307.208.53.482.53zm2.324 0c.266 0 .49-.24.49-.54V6.47c0-.298-.224-.54-.49-.54s-.49.242-.49.54v8.168c0 .3.224.54.49.54z">
+                      d="M12.603 17.775c1.153 0 1.909-.722 1.967-1.876l.54-11.389h.92a.627.627 0 000-1.253h-3.56V2.12c0-1.154-.78-1.901-2.034-1.901H7.547c-1.253 0-2.033.747-2.033 1.9v1.138H1.969a.627.627 0 000 1.253h.922l.54 11.397c.049 1.154.804 1.868 1.966 1.868h7.206zM11.15 3.257H6.842V2.195c0-.44.324-.756.797-.756h2.714c.473 0 .797.316.797.756v1.062zm1.311 13.265h-6.93c-.449 0-.781-.332-.806-.797L4.185 4.51h9.596l-.514 11.215c-.017.473-.34.797-.806.797zm-1.137-1.345c.266 0 .465-.224.482-.531l.232-8.177c.008-.298-.2-.54-.473-.54-.257 0-.473.242-.482.532l-.232 8.176c-.008.3.191.54.473.54zm-4.648 0c.274 0 .481-.24.473-.54l-.232-8.176c-.009-.29-.233-.531-.482-.531-.282 0-.481.232-.473.54l.232 8.176c.009.307.208.53.482.53zm2.324 0c.266 0 .49-.24.49-.54V6.47c0-.298-.224-.54-.49-.54s-.49.242-.49.54v8.168c0 .3.224.54.49.54z">
                 </path>
               </svg>
             </div>
@@ -229,7 +230,7 @@
         <el-tab-pane label="笔记名搜索" name="noteNameSearch">
           <div style="display: flex;">
             <el-input v-model="searchnote_search_input" prefix-icon="el-icon-search"
-              placeholder="输入笔记名搜索，点击快速跳转"></el-input>
+                      placeholder="输入笔记名搜索，点击快速跳转"></el-input>
           </div>
           <el-divider></el-divider>
 
@@ -239,14 +240,14 @@
             </div>
             <div v-for="item of searchNoteList_show" :key="item.articleId" class="trash_content">
               <div class="trash_item" style="display: flex; align-items: center; height: 30px"
-                @click="openAnother(item.title, item.notebookName)">
+                   @click="openAnother(item.title, item.notebookName)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="none" viewBox="0 0 24 24">
                   <path fill="#2C2C2C" fill-rule="evenodd"
-                    d="M18 3.2a2.8 2.8 0 012.795 2.63L20.8 6v12a2.8 2.8 0 01-2.63 2.795L18 20.8H6a2.8 2.8 0 01-2.795-2.63L3.2 18V6a2.8 2.8 0 012.63-2.795L6 3.2h12zm0 1.6H6a1.2 1.2 0 00-1.194 1.078L4.8 6v12a1.2 1.2 0 001.078 1.194L6 19.2h12a1.2 1.2 0 001.194-1.077L19.2 18V6a1.2 1.2 0 00-1.077-1.194L18 4.8z"
-                    clip-rule="evenodd"></path>
+                        d="M18 3.2a2.8 2.8 0 012.795 2.63L20.8 6v12a2.8 2.8 0 01-2.63 2.795L18 20.8H6a2.8 2.8 0 01-2.795-2.63L3.2 18V6a2.8 2.8 0 012.63-2.795L6 3.2h12zm0 1.6H6a1.2 1.2 0 00-1.194 1.078L4.8 6v12a1.2 1.2 0 001.078 1.194L6 19.2h12a1.2 1.2 0 001.194-1.077L19.2 18V6a1.2 1.2 0 00-1.077-1.194L18 4.8z"
+                        clip-rule="evenodd"></path>
                   <path fill="#2C2C2C" fill-rule="evenodd"
-                    d="M16.627 14.841a.3.3 0 01-.3.3H7.21a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h9.116a.3.3 0 01.3.3v1.2zm-2.756-4.883a.3.3 0 01-.3.3h-6.36a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h6.36a.3.3 0 01.3.3v1.2z"
-                    clip-rule="evenodd"></path>
+                        d="M16.627 14.841a.3.3 0 01-.3.3H7.21a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h9.116a.3.3 0 01.3.3v1.2zm-2.756-4.883a.3.3 0 01-.3.3h-6.36a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h6.36a.3.3 0 01.3.3v1.2z"
+                        clip-rule="evenodd"></path>
                 </svg>
 
                 <span style="font-weight: bold;margin-left: 10px;flex-grow: 1;color: rgb(76,76,76)">
@@ -273,7 +274,7 @@
         <el-tab-pane label="笔记标签搜索" name="tagSearch">
           <div style="display: flex;">
             <el-input v-model="searchTag_search_input" prefix-icon="el-icon-search"
-              placeholder="输入笔记标签搜索，点击快速跳转"></el-input>
+                      placeholder="输入笔记标签搜索，点击快速跳转"></el-input>
           </div>
           <el-divider></el-divider>
 
@@ -283,15 +284,15 @@
             </div>
             <div v-for="item of searchNoteListTag_show" :key="item.articleId">
               <div class="trash_item" style="display:flex; align-items: center; height:30px"
-                @click="openAnother(item.title, item.notebookName)">
+                   @click="openAnother(item.title, item.notebookName)">
                 <svg xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;" width="20" height="24" fill="none"
-                  viewBox="0 0 24 24">
+                     viewBox="0 0 24 24">
                   <path fill="#2C2C2C" fill-rule="evenodd"
-                    d="M18 3.2a2.8 2.8 0 012.795 2.63L20.8 6v12a2.8 2.8 0 01-2.63 2.795L18 20.8H6a2.8 2.8 0 01-2.795-2.63L3.2 18V6a2.8 2.8 0 012.63-2.795L6 3.2h12zm0 1.6H6a1.2 1.2 0 00-1.194 1.078L4.8 6v12a1.2 1.2 0 001.078 1.194L6 19.2h12a1.2 1.2 0 001.194-1.077L19.2 18V6a1.2 1.2 0 00-1.077-1.194L18 4.8z"
-                    clip-rule="evenodd"></path>
+                        d="M18 3.2a2.8 2.8 0 012.795 2.63L20.8 6v12a2.8 2.8 0 01-2.63 2.795L18 20.8H6a2.8 2.8 0 01-2.795-2.63L3.2 18V6a2.8 2.8 0 012.63-2.795L6 3.2h12zm0 1.6H6a1.2 1.2 0 00-1.194 1.078L4.8 6v12a1.2 1.2 0 001.078 1.194L6 19.2h12a1.2 1.2 0 001.194-1.077L19.2 18V6a1.2 1.2 0 00-1.077-1.194L18 4.8z"
+                        clip-rule="evenodd"></path>
                   <path fill="#2C2C2C" fill-rule="evenodd"
-                    d="M16.627 14.841a.3.3 0 01-.3.3H7.21a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h9.116a.3.3 0 01.3.3v1.2zm-2.756-4.883a.3.3 0 01-.3.3h-6.36a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h6.36a.3.3 0 01.3.3v1.2z"
-                    clip-rule="evenodd"></path>
+                        d="M16.627 14.841a.3.3 0 01-.3.3H7.21a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h9.116a.3.3 0 01.3.3v1.2zm-2.756-4.883a.3.3 0 01-.3.3h-6.36a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h6.36a.3.3 0 01.3.3v1.2z"
+                        clip-rule="evenodd"></path>
                 </svg>
 
                 <span style="flex-grow: 1; flex-shrink:0;" class="search-item-line-style">
@@ -339,7 +340,7 @@
       <v-contextmenu-submenu title="移动至">
         <div v-for="otherNotebook of notebookList" :key="otherNotebook.notebookName">
           <v-contextmenu-item @click="handleMoveNote(otherNotebook.notebookName)"
-            v-if="curNotebook.notebookName !== otherNotebook.notebookName">
+                              v-if="curNotebook.notebookName !== otherNotebook.notebookName">
             📙 {{ otherNotebook.notebookName }}
           </v-contextmenu-item>
         </div>
@@ -347,7 +348,7 @@
       <v-contextmenu-submenu title="复制到">
         <div v-for="otherNotebook of notebookList" :key="otherNotebook.notebookName">
           <v-contextmenu-item @click="handleCopyNote(otherNotebook.notebookName)"
-            v-if="curNotebook.notebookName !== otherNotebook.notebookName">
+                              v-if="curNotebook.notebookName !== otherNotebook.notebookName">
             📙 {{ otherNotebook.notebookName }}
           </v-contextmenu-item>
         </div>
@@ -360,15 +361,22 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import global from "@/global";
 import Vue from "vue";
 
+import {
+  reqDelnoteDeletePurgeDelnotes, reqDelnoteDeleteWithdrawDelnote,
+  reqDelnoteGetDelnotes, reqDelnoteRecover, reqNoteCopy,
+  reqNoteDeleteNote, reqNoteDeleteNotebook,
+  reqNoteGetNotebookList, reqNoteGetNoteText, reqNoteMove,
+  reqNotePostSave,
+  reqNotePutNotebook, reqNoteUpload, reqRenameNote, reqRenameNotebook, reqUserPostLogout
+} from "@/api"
+
 export default {
   name: "navbar",
-  components: {
-
-  },
+  components: {},
 
   provide() {
     return {
@@ -489,7 +497,7 @@ export default {
       let ret = [];
       this.delNoteList.forEach((item) => {
         if (item.title.toLowerCase().indexOf(this.trash_search_input.toLowerCase()) !==
-          -1) ret.push(item);
+            -1) ret.push(item);
       });
       return ret;
     },
@@ -554,7 +562,8 @@ export default {
     },
     refreshNotebookList(notebookName) {
       // this.clearRenameInfo();
-      axios.get(global.HOST_URL + "/note", this.config).then(res => {
+      reqNoteGetNotebookList(this.config).then(res => {
+        //axios.get(global.HOST_URL + "/note", this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
           this.notebookList = res.data;
@@ -569,7 +578,8 @@ export default {
           this.updateCurNotebookInfo()
         }
       })
-      axios.get(global.HOST_URL + "/delnote", this.config).then(res => {
+      reqDelnoteGetDelnotes(this.config).then(res => {
+        // axios.get(global.HOST_URL + "/delnote", this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
           this.delNoteList = res.data;
@@ -633,12 +643,10 @@ export default {
             message: "笔记本的名字不能为空",
             duration: 1000,
           });
-        }
-        else {
+        } else {
           if (this.destNotebookName === this.toRenameNotebookName) {
             this.clearRenameNotebookName();
-          }
-          else {
+          } else {
             if (this.destNotebookName) {
               this.handleRenameNotebook();
             }
@@ -666,12 +674,10 @@ export default {
             message: "笔记本的名字不能为空",
             duration: 1000,
           });
-        }
-        else {
+        } else {
           if (this.destNotebookName === this.toRenameNotebookName) {
             this.clearRenameNotebookName();
-          }
-          else {
+          } else {
             this.handleRenameNotebook();
           }
         }
@@ -684,7 +690,7 @@ export default {
       this.$refs.menu.open(1);
 
       // 在笔记本列表的首部添加一个空的元素
-      this.notebookList.unshift({ notebookName: "", noteList: [] });
+      this.notebookList.unshift({notebookName: "", noteList: []});
 
       this.creatingNewNotebook = true;
 
@@ -696,7 +702,8 @@ export default {
     // 向后端发送一个请求，创建一个新的笔记本
     handleCreateNoteBook() {
       let url = global.HOST_URL + "/note/" + this.newNotebookName;
-      axios.put(url, {}, this.config).then((res) => {
+      reqNotePutNotebook(this.newNotebookName, {}, this.config).then((res) => {
+        // axios.put(url, {}, this.config).then((res) => {
         res = res.data;
         if (res.code === 0) {
           // 弹出笔记本列表首部的元素
@@ -754,12 +761,10 @@ export default {
             message: "笔记的名字不能为空",
             duration: 1000,
           });
-        }
-        else {
+        } else {
           if (this.destNoteName === this.toRenameNoteName) {
             this.clearRenameNoteName();
-          }
-          else {
+          } else {
             if (this.destNoteName) {
               this.handleRenameNote();
             }
@@ -802,12 +807,10 @@ export default {
             message: "笔记的名字不能为空",
             duration: 1000,
           });
-        }
-        else {
+        } else {
           if (this.destNoteName === this.toRenameNoteName) {
             this.clearRenameNoteName();
-          }
-          else {
+          } else {
             this.handleRenameNote();
           }
         }
@@ -821,7 +824,7 @@ export default {
       this.$refs.notebook_menu.open("1-" + notebookName);
 
       // 当前笔记本的笔记列表的首部添加一个空的元素
-      this.notebookList[index].noteList.unshift({ title: "" });
+      this.notebookList[index].noteList.unshift({title: ""});
 
       this.creatingNewNote = true;
 
@@ -837,7 +840,8 @@ export default {
       let request = {
         content: "",
       };
-      axios.post(url, request, this.config).then((res) => {
+      reqNotePostSave(notebookName, this.newNoteName, request, this.config).then((res) => {
+        // axios.post(url, request, this.config).then((res) => {
         res = res.data;
         if (res.code === 0) {
           // 弹出笔记列表首部的元素
@@ -893,7 +897,8 @@ export default {
       };
       // this.clearRenameNotebookName();
       // this.showHistory = false;
-      axios.put(url, request, this.config).then((res) => {
+      reqRenameNotebook(this.destNotebookName, request, this.config).then((res) => {
+        // axios.put(url, request, this.config).then((res) => {
         res = res.data;
         if (res.code === 0) {
           res = res.data;
@@ -907,6 +912,9 @@ export default {
             }
           });
           this.clearRenameNotebookName();
+
+          this.$message.success("重命名成功~")
+
         } else {
           this.$notify({
             type: "error",
@@ -951,11 +959,15 @@ export default {
         srcTitle: this.toRenameNoteName,
         move: true,
       };
-      axios.put(url, param, this.config).then((res) => {
+      reqRenameNote(this.noteRightMenuValues.notebookName, this.destNoteName, param, this.config).then((res) => {
+        // axios.put(url, param, this.config).then((res) => {
         res = res.data;
         if (res.code === 0) {
           this.refreshNotebookList();
           this.clearRenameNoteName()
+
+          this.$message.success("重命名成功~")
+
         } else {
           this.$notify({
             type: "warning",
@@ -982,15 +994,15 @@ export default {
           type: "warning",
           message: "目标笔记本存在同名的笔记",
         });
-      }
-      else {
+      } else {
         let url = global.HOST_URL + "/note/" + targetNotebookName + "/" + this.noteRightMenuValues.noteName;
         let param = {
           srcNotebook: this.noteRightMenuValues.notebookName,
           srcTitle: this.noteRightMenuValues.noteName,
           move: true,
         };
-        axios.put(url, param, this.config).then((res) => {
+        reqNoteMove(targetNotebookName, this.noteRightMenuValues.noteName, param, this.config).then((res) => {
+          // axios.put(url, param, this.config).then((res) => {
           res = res.data;
           if (res.code === 0) {
             this.refreshNotebookList();
@@ -1024,14 +1036,14 @@ export default {
           type: "warning",
           message: "目标笔记本存在同名的笔记",
         });
-      }
-      else {
+      } else {
         let url = global.HOST_URL + "/note/" + targetNotebookName + "/" + this.noteRightMenuValues.noteName;
         let param = {
           srcNotebook: this.noteRightMenuValues.notebookName,
           srcTitle: this.noteRightMenuValues.noteName,
         };
-        axios.put(url, param, this.config).then((res) => {
+        reqNoteCopy(targetNotebookName, this.noteRightMenuValues.noteName, param, this.config).then((res) => {
+          // axios.put(url, param, this.config).then((res) => {
           res = res.data;
           if (res.code === 0) {
             this.refreshNotebookList();
@@ -1104,8 +1116,8 @@ export default {
       const upfilename = file.name.lastIndexOf(".");
       let fileExtension = file.name.split('.').pop();
       if (fileExtension !== 'md') {
-          alert('Please upload a .md file');
-          return
+        alert('Please upload a .md file');
+        return
       }
       console.log("test1:" + "file");
       console.log(upfilename);
@@ -1114,15 +1126,23 @@ export default {
       formData.append("directory", this.notebookRightMenuValues.notebookName);
       let url = global.HOST_URL + "/note/upload";
       console.log(formData)
-      axios.post(url, formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            token: this.config.headers.token,
-            username: this.config.headers.username
-          },
-        }
-      ).then((res) => {
+      reqNoteUpload(formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              token: this.config.headers.token,
+              username: this.config.headers.username
+            },
+          }).then((res) => {
+        // axios.post(url, formData,
+        //   {
+        //     headers: {
+        //       'Content-Type': 'multipart/form-data',
+        //       token: this.config.headers.token,
+        //       username: this.config.headers.username
+        //     },
+        //   }
+        // ).then((res) => {
         res = res.data;
         if (res.code === 0) {
           this.refreshNotebookList();
@@ -1196,7 +1216,8 @@ export default {
     },
     doSwitchNote(noteTitle, notebookName) {
       let url = global.HOST_URL + "/note/" + notebookName + "/" + noteTitle;
-      axios.get(url, this.config).then(res => {
+      reqNoteGetNoteText(notebookName, noteTitle, this.config).then(res => {
+        // axios.get(url, this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
           //this.showHistory = false;
@@ -1236,7 +1257,8 @@ export default {
         content: content
       }
       let url = global.HOST_URL + "/note/" + this.curNote.notebookName + "/" + this.curNote.noteTitle;
-      axios.post(url, request, this.config).then(res => {
+      reqNotePostSave(this.curNote.notebookName, this.curNote.noteTitle, request, this.config).then(res => {
+        // axios.post(url, request, this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
           this.curNote.content = content;
@@ -1251,7 +1273,8 @@ export default {
         content: content
       }
       let url = global.HOST_URL + "/note/" + this.curNote.notebookName + "/" + this.curNote.noteTitle;
-      axios.post(url, request, this.config).then(res => {
+      reqNotePostSave(this.curNote.notebookName, this.curNote.noteTitle, request, this.config).then(res => {
+        // axios.post(url, request, this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
           this.doSwitchNote(targetNoteTitle, targetNotebookName);
@@ -1261,13 +1284,15 @@ export default {
 
       })
     },
+
     // 注销登录
     handleLogout() {
 
       console.log('想要退出登录')
 
       let url = global.HOST_URL + "/user/logout";
-      axios.post(url, null, this.config);
+      reqUserPostLogout(null, this.config);
+      // axios.post(url, null, this.config);
       this.$store.commit('setLocalInfo', {});
 
       this.$notify({
@@ -1282,7 +1307,8 @@ export default {
 
     handleDelNotebook() {
       let url = global.HOST_URL + "/note/" + this.notebookRightMenuValues.notebookName;
-      axios.delete(url, this.config).then(res => {
+      reqNoteDeleteNotebook(this.notebookRightMenuValues.notebookName, this.config).then(res => {
+        // axios.delete(url, this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
           //this.clearCurNotebookInfo();
@@ -1315,8 +1341,15 @@ export default {
 
     handleDelNote() {
       let url = global.HOST_URL + "/note/" + this.noteRightMenuValues.notebookName + "/" + this.noteRightMenuValues.noteName;
-      axios.delete(url, this.config).then(res => {
+
+      console.log("test test")
+
+      reqNoteDeleteNote(this.noteRightMenuValues.notebookName, this.noteRightMenuValues.noteName, this.config).then(res => {
+        // axios.delete(url, this.config).then(res => {
         res = res.data;
+
+        console.log("res = ", res)
+
         if (res.code === 0) {
           this.$message.success('笔记删除成功~')
           this.refreshNotebookList(this.noteRightMenuValues.notebookName);
@@ -1326,6 +1359,9 @@ export default {
           // }
         }
       })
+          .catch((err) => {
+            console.log("in reqSaveStructure error:", err);
+          })
 
     },
 
@@ -1349,13 +1385,14 @@ export default {
         type: 'warning'
       }).then(() => {
         let url = global.HOST_URL + "/delnote";
-        axios.delete(url, this.config).then(
-          res => {
-            res = res.data;
-            if (res.code === 0) {
-              this.delNoteList = [];
+        reqDelnoteDeletePurgeDelnotes(this.config).then(res => {
+              // axios.delete(url, this.config).then(
+              // res => {
+              res = res.data;
+              if (res.code === 0) {
+                this.delNoteList = [];
+              }
             }
-          }
         )
       }).catch(() => {
 
@@ -1369,22 +1406,24 @@ export default {
         type: 'warning'
       }).then(() => {
         let url = global.HOST_URL + "/delnote/" + id;
-        axios.delete(url, this.config).then(
-          res => {
-            res = res.data;
-            if (res.code !== 0) {
-              this.refreshNotebookList();
-              this.$message.error(res.msg)
-              return;
-            }
-            axios.get(global.HOST_URL + "/delnote", this.config).then(res => {
+        reqDelnoteDeleteWithdrawDelnote(id, this.config).then(res => {
+              // axios.delete(url, this.config).then(
+              //   res => {
               res = res.data;
-              if (res.code === 0) {
-                this.delNoteList = res.data;
+              if (res.code !== 0) {
+                this.refreshNotebookList();
+                this.$message.error(res.msg)
+                return;
               }
-            })
-            this.$message.success('笔记删除成功~')
-          }
+              reqDelnoteGetDelnotes(this.config).then(res => {
+                // axios.get(global.HOST_URL + "/delnote", this.config).then(res => {
+                res = res.data;
+                if (res.code === 0) {
+                  this.delNoteList = res.data;
+                }
+              })
+              this.$message.success('笔记删除成功~')
+            }
         )
       }).catch(() => {
 
@@ -1399,17 +1438,18 @@ export default {
         type: 'warning'
       }).then(() => {
         let url = global.HOST_URL + "/delnote/" + id + "?recover=true";
-        axios.delete(url, this.config).then(
-          res => {
-            res = res.data;
-            if (res.code !== 0) {
+        reqDelnoteRecover(id, this.config).then(res => {
+              // axios.delete(url, this.config).then(
+              //   res => {
+              res = res.data;
+              if (res.code !== 0) {
+                this.refreshNotebookList();
+                this.$message.error(res.msg)
+                return;
+              }
               this.refreshNotebookList();
-              this.$message.error(res.msg)
-              return;
+              this.$message.success('笔记恢复成功~')
             }
-            this.refreshNotebookList();
-            this.$message.success('笔记恢复成功~')
-          }
         )
       }).catch(() => {
 
@@ -1425,7 +1465,8 @@ export default {
     openTrash() {
       this.trashVisible = true
       this.trashLoading = true
-      axios.get(global.HOST_URL + "/delnote", this.config).then(res => {
+      reqDelnoteGetDelnotes(this.config).then(res => {
+        // axios.get(global.HOST_URL + "/delnote", this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
           this.trashLoading = false
@@ -1472,7 +1513,8 @@ export default {
         content: content
       }
       let url = global.HOST_URL + "/note/" + notebookName + "/" + noteTitle;
-      axios.post(url, request, this.config).then(res => {
+      reqNotePostSave(notebookName, noteTitle, request, this.config).then(res => {
+        // axios.post(url, request, this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
           this.curNote.content = content;
@@ -1534,14 +1576,14 @@ export default {
 }
 
 /* 菜单关闭 */
-.el-submenu>.el-submenu__title .el-submenu__icon-arrow {
+.el-submenu > .el-submenu__title .el-submenu__icon-arrow {
   -webkit-transform: rotateZ(-90deg);
   -ms-transform: rotate(-90deg);
   transform: rotateZ(-90deg);
 }
 
 /* 菜单展开 */
-.el-submenu.is-opened>.el-submenu__title .el-submenu__icon-arrow {
+.el-submenu.is-opened > .el-submenu__title .el-submenu__icon-arrow {
   -webkit-transform: rotateZ(0deg);
   -ms-transform: rotate(0deg);
   transform: rotateZ(0deg);
