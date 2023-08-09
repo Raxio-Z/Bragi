@@ -14,7 +14,7 @@
               {{ item.tagName }}
             </el-tag>
           </el-popover>
-          <el-breadcrumb separator-class="el-icon-arrow-right" style="line-height: 40px; font-size: 15px;">
+          <el-breadcrumb separator-class="el-icon-arrow-right" style="line-height: 40px; font-size: 15px; float:left;">
             <el-breadcrumb-item>{{ notebookName }}</el-breadcrumb-item>
             <el-breadcrumb-item>{{ title }}</el-breadcrumb-item>
           </el-breadcrumb>

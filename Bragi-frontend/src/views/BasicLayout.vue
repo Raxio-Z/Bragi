@@ -9,18 +9,12 @@
           </div>
 
           <div class="search-icon" @click="openSearch">
-            <svg viewBox="0 0 14 14" class="sidebarSearch"
-                 style="margin-left: 15px; width: 14px; height: 100%; display: block; fill: rgba(55, 53, 47, 0.45); flex-shrink: 0; backface-visibility: hidden;">
-              <path
-                  d="M5.92239093,0.540000021 C2.94055203,0.540000021 0.5,2.98052217 0.5,5.96238099 C0.5,8.9442199 2.94055203,11.384762 5.92239093,11.384762 C7.02329179,11.384762 8.05258749,11.0564678 8.91032559,10.4866744 L12.1460745,13.6802311 C12.5695899,14.1037465 13.2589477,14.1037465 13.6823635,13.6802311 C14.1058788,13.2567158 14.1058788,12.5730353 13.6823635,12.1495199 L10.4410368,8.95033558 C11.0107904,8.09259747 11.3447619,7.06329182 11.3447619,5.96238099 C11.3447619,2.98052217 8.90420992,0.540000021 5.92239093,0.540000021 Z M5.92239093,2.70895241 C7.7320027,2.70895241 9.17580956,4.15272939 9.17580956,5.96238099 C9.17580956,7.77201268 7.7320027,9.21581954 5.92239093,9.21581954 C4.11275925,9.21581954 2.66895239,7.77201268 2.66895239,5.96238099 C2.66895239,4.15272939 4.11275925,2.70895241 5.92239093,2.70895241 Z">
-              </path>
-            </svg>
+            <i class="el-icon-search" style="margin-left: 15px; font-size: 15px;"></i>
 
             <div
                 style="flex: 1 1 auto; white-space: nowrap; min-width: 0px; overflow: hidden; text-overflow: ellipsis;margin-left: 10px;color: rgb(48,49,51)">
               Search
             </div>
-
           </div>
 
           <el-menu default-active="2" ref="menu" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
@@ -102,11 +96,6 @@
             </el-submenu>
             <el-menu-item index="3" style="height: 40px;line-height: 40px" @click="mind">
               <div>
-                <!--                <i style="margin-top: auto;margin-bottom: auto;">-->
-                <!--                  <svg t="1685107869347" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2770" style="width: 20px;margin-right: 9px">-->
-                <!--                    <path d="M861.859 418.165c-16.48 0-31.989 4.155-45.54 11.471L689.413 314.492c9.381-17.799 14.699-38.073 14.699-59.591 0-70.692-57.308-128-128-128s-128 57.308-128 128c0 45.071 23.298 84.696 58.504 107.502l-81.771 245.745a129.121 129.121 0 0 0-8.765-0.306c-26.925 0-51.929 8.364-72.567 22.619l-94.502-82.047c4.296-10.897 6.655-22.769 6.655-35.191 0-53.019-42.981-96-96-96s-96 42.981-96 96 42.981 96 96 96c17.23 0 33.397-4.543 47.376-12.49l94.49 82.037c-8.601 17.193-13.452 36.576-13.452 57.073 0 70.579 57.42 128 128 128s128-57.421 128-128c0-44.984-23.329-84.618-58.52-107.452l81.787-245.795c2.897 0.196 5.818 0.305 8.764 0.305 25.961 0 50.112-7.736 70.287-21.019l126.91 115.148c-4.796 11.424-7.449 23.969-7.449 37.135 0 53.019 42.981 96 96 96s96-42.981 96-96-42.981-96-96-96zM416.081 799.843c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.711 64-64 64z" fill="#707070" p-id="2771"></path>-->
-                <!--                  </svg>-->
-                <!--                </i>-->
                 <i class="el-icon-connection"></i>
                 <span style="margin-top: auto;margin-bottom: auto;" slot="title">引用关系</span>
               </div>
@@ -131,20 +120,7 @@
 
       <div class="bottom_two" @click="openTrash">
         <div class="trash_div">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="none" viewBox="0 0 24 24"
-               data-area="page-trash">
-            <path fill="#2C2C2C" fill-rule="evenodd" d="M3.2 5.5a.8.8 0 01.8-.8h16a.8.8 0 010 1.6H4a.8.8 0 01-.8-.8z"
-                  clip-rule="evenodd"></path>
-            <path fill="#2C2C2C" fill-rule="evenodd"
-                  d="M7.2 3.5A1.8 1.8 0 019 1.7h6a1.8 1.8 0 011.8 1.8v2.8H7.2V3.5zM9 3.3a.2.2 0 00-.2.2v1.2h6.4V3.5a.2.2 0 00-.2-.2H9z"
-                  clip-rule="evenodd"></path>
-            <path fill="#2C2C2C" fill-rule="evenodd"
-                  d="M4.173 4.7h15.654l-.463 13.893a2.8 2.8 0 01-2.798 2.707H7.435a2.8 2.8 0 01-2.799-2.707L4.173 4.7zm1.654 1.6l.408 12.24a1.2 1.2 0 001.2 1.16h9.13a1.2 1.2 0 001.2-1.16l.408-12.24H5.827z"
-                  clip-rule="evenodd"></path>
-            <path fill="#2C2C2C" fill-rule="evenodd"
-                  d="M10 9.2a.8.8 0 01.8.8v5.5a.8.8 0 01-1.6 0V10a.8.8 0 01.8-.8zm4 0a.8.8 0 01.8.8v5.5a.8.8 0 01-1.6 0V10a.8.8 0 01.8-.8z"
-                  clip-rule="evenodd"></path>
-          </svg>
+          <i class="el-icon-delete"></i>
           <span style="font-size: 14px;margin-left: 4px;">垃圾桶</span>
         </div>
       </div>
@@ -162,12 +138,7 @@
       <div style="display: flex;">
         <el-input v-model="trash_search_input" prefix-icon="el-icon-search" placeholder="搜索被删除的页面"></el-input>
         <el-tooltip class="item" effect="dark" content="清空垃圾桶" placement="right">
-          <svg @click="clearAllDelNotes" style="alignment: right;width: 20px;height: auto;margin-left: 10px"
-               xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
-            <path fill="#9C9292"
-                  d="M12.603 17.775c1.153 0 1.909-.722 1.967-1.876l.54-11.389h.92a.627.627 0 000-1.253h-3.56V2.12c0-1.154-.78-1.901-2.034-1.901H7.547c-1.253 0-2.033.747-2.033 1.9v1.138H1.969a.627.627 0 000 1.253h.922l.54 11.397c.049 1.154.804 1.868 1.966 1.868h7.206zM11.15 3.257H6.842V2.195c0-.44.324-.756.797-.756h2.714c.473 0 .797.316.797.756v1.062zm1.311 13.265h-6.93c-.449 0-.781-.332-.806-.797L4.185 4.51h9.596l-.514 11.215c-.017.473-.34.797-.806.797zm-1.137-1.345c.266 0 .465-.224.482-.531l.232-8.177c.008-.298-.2-.54-.473-.54-.257 0-.473.242-.482.532l-.232 8.176c-.008.3.191.54.473.54zm-4.648 0c.274 0 .481-.24.473-.54l-.232-8.176c-.009-.29-.233-.531-.482-.531-.282 0-.481.232-.473.54l.232 8.176c.009.307.208.53.482.53zm2.324 0c.266 0 .49-.24.49-.54V6.47c0-.298-.224-.54-.49-.54s-.49.242-.49.54v8.168c0 .3.224.54.49.54z">
-            </path>
-          </svg>
+          <i @click="clearAllDelNotes" class="el-icon-delete" style="alignment: right; font-size:20px; line-height:40px; margin-left: 10px; cursor: pointer;"></i>
         </el-tooltip>
       </div>
       <el-divider></el-divider>
@@ -175,14 +146,7 @@
       <div v-loading="trashLoading" style="height: 350px;overflow-y: scroll;">
         <div v-for="item of delNoteList_show" :key="item.id" class="trash_content">
           <div class="trash_item" style="display: flex; align-items: center; height: 30px">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="none" viewBox="0 0 24 24">
-              <path fill="#2C2C2C" fill-rule="evenodd"
-                    d="M18 3.2a2.8 2.8 0 012.795 2.63L20.8 6v12a2.8 2.8 0 01-2.63 2.795L18 20.8H6a2.8 2.8 0 01-2.795-2.63L3.2 18V6a2.8 2.8 0 012.63-2.795L6 3.2h12zm0 1.6H6a1.2 1.2 0 00-1.194 1.078L4.8 6v12a1.2 1.2 0 001.078 1.194L6 19.2h12a1.2 1.2 0 001.194-1.077L19.2 18V6a1.2 1.2 0 00-1.077-1.194L18 4.8z"
-                    clip-rule="evenodd"></path>
-              <path fill="#2C2C2C" fill-rule="evenodd"
-                    d="M16.627 14.841a.3.3 0 01-.3.3H7.21a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h9.116a.3.3 0 01.3.3v1.2zm-2.756-4.883a.3.3 0 01-.3.3h-6.36a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h6.36a.3.3 0 01.3.3v1.2z"
-                    clip-rule="evenodd"></path>
-            </svg>
+            <i class="el-icon-document" style="display: flex; align-items: center; font-size:18px;"></i>
 
             <span style="font-weight: bold;margin-left: 10px;flex-grow: 1;color: rgb(76,76,76)">{{ item.notebook }}/{{
                 item.title
@@ -198,19 +162,8 @@
 
 
             <div style="display: flex; align-items: center; justify-content: flex-end;">
-              <svg @click="recoverDelNote(item.id)" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg"
-                   width="18"
-                   height="18" viewBox="0 0 18 18">
-                <path fill="#9C9292"
-                      d="M8.736 17.565a6.958 6.958 0 006.973-6.981 6.93 6.93 0 00-6.964-6.956c-.424 0-.855.033-1.279.108L9.492 1.76a.756.756 0 00.182-.481c0-.39-.29-.698-.664-.698a.65.65 0 00-.49.208L5.291 4.068a.718.718 0 00-.215.506c0 .191.066.357.215.506l3.23 3.254a.654.654 0 00.49.191.66.66 0 00.663-.68.667.667 0 00-.19-.465L7.2 5.114a7.928 7.928 0 011.544-.133 5.567 5.567 0 015.594 5.603 5.587 5.587 0 01-5.603 5.611 5.585 5.585 0 01-5.595-5.611c0-.407-.265-.706-.664-.706a.68.68 0 00-.705.706 6.956 6.956 0 006.964 6.98z">
-                </path>
-              </svg>
-              <svg @click="clearDelNote(item.id)" style="cursor: pointer;margin-left: 10px;margin-right: 10px"
-                   xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                <path fill="#9C9292"
-                      d="M12.603 17.775c1.153 0 1.909-.722 1.967-1.876l.54-11.389h.92a.627.627 0 000-1.253h-3.56V2.12c0-1.154-.78-1.901-2.034-1.901H7.547c-1.253 0-2.033.747-2.033 1.9v1.138H1.969a.627.627 0 000 1.253h.922l.54 11.397c.049 1.154.804 1.868 1.966 1.868h7.206zM11.15 3.257H6.842V2.195c0-.44.324-.756.797-.756h2.714c.473 0 .797.316.797.756v1.062zm1.311 13.265h-6.93c-.449 0-.781-.332-.806-.797L4.185 4.51h9.596l-.514 11.215c-.017.473-.34.797-.806.797zm-1.137-1.345c.266 0 .465-.224.482-.531l.232-8.177c.008-.298-.2-.54-.473-.54-.257 0-.473.242-.482.532l-.232 8.176c-.008.3.191.54.473.54zm-4.648 0c.274 0 .481-.24.473-.54l-.232-8.176c-.009-.29-.233-.531-.482-.531-.282 0-.481.232-.473.54l.232 8.176c.009.307.208.53.482.53zm2.324 0c.266 0 .49-.24.49-.54V6.47c0-.298-.224-.54-.49-.54s-.49.242-.49.54v8.168c0 .3.224.54.49.54z">
-                </path>
-              </svg>
+              <i @click="recoverDelNote(item.id)" class="el-icon-refresh-left" style="font-size: 18px; margin-right:10px; cursor: pointer;"></i>
+              <i @click="clearDelNote(item.id)" class="el-icon-delete" style="font-size: 18px; margin-right:10px; cursor: pointer;"></i>
             </div>
 
           </div>
@@ -241,27 +194,11 @@
             <div v-for="item of searchNoteList_show" :key="item.articleId" class="trash_content">
               <div class="trash_item" style="display: flex; align-items: center; height: 30px"
                    @click="openAnother(item.title, item.notebookName)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="none" viewBox="0 0 24 24">
-                  <path fill="#2C2C2C" fill-rule="evenodd"
-                        d="M18 3.2a2.8 2.8 0 012.795 2.63L20.8 6v12a2.8 2.8 0 01-2.63 2.795L18 20.8H6a2.8 2.8 0 01-2.795-2.63L3.2 18V6a2.8 2.8 0 012.63-2.795L6 3.2h12zm0 1.6H6a1.2 1.2 0 00-1.194 1.078L4.8 6v12a1.2 1.2 0 001.078 1.194L6 19.2h12a1.2 1.2 0 001.194-1.077L19.2 18V6a1.2 1.2 0 00-1.077-1.194L18 4.8z"
-                        clip-rule="evenodd"></path>
-                  <path fill="#2C2C2C" fill-rule="evenodd"
-                        d="M16.627 14.841a.3.3 0 01-.3.3H7.21a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h9.116a.3.3 0 01.3.3v1.2zm-2.756-4.883a.3.3 0 01-.3.3h-6.36a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h6.36a.3.3 0 01.3.3v1.2z"
-                        clip-rule="evenodd"></path>
-                </svg>
+                <i class="el-icon-document" style="font-size:18px;"></i>
 
                 <span style="font-weight: bold;margin-left: 10px;flex-grow: 1;color: rgb(76,76,76)">
                   {{ item.notebookName }}/{{ item.title }}
                 </span>
-
-                <!-- <div style="display: flex; align-items: center; justify-content: flex-end;">
-                  <svg viewBox="0 0 16 16" class="enter"
-                    style="width: 14px; height: 14px; display: block; fill: rgba(55, 53, 47, 0.45); flex-shrink: 0; backface-visibility: hidden; opacity: 1;">
-                    <path
-                      d="M5.38965 14.1667C5.81812 14.1667 6.10156 13.8767 6.10156 13.468C6.10156 13.2571 6.01587 13.0989 5.89062 12.967L4.18994 11.3125L3.02979 10.3369L4.55908 10.4028H12.7922C14.4402 10.4028 15.1389 9.65796 15.1389 8.04297V4.13403C15.1389 2.48608 14.4402 1.78735 12.7922 1.78735H9.13379C8.70532 1.78735 8.4021 2.11035 8.4021 2.50586C8.4021 2.90137 8.69873 3.22437 9.13379 3.22437H12.7593C13.4316 3.22437 13.7151 3.50781 13.7151 4.17358V7.99683C13.7151 8.67578 13.425 8.95923 12.7593 8.95923H4.55908L3.02979 9.03174L4.18994 8.04956L5.89062 6.39502C6.01587 6.26978 6.10156 6.11157 6.10156 5.89404C6.10156 5.48535 5.81812 5.19531 5.38965 5.19531C5.21167 5.19531 5.01392 5.27441 4.8689 5.41943L1.08521 9.1438C0.933594 9.28882 0.854492 9.48657 0.854492 9.68433C0.854492 9.87549 0.933594 10.0732 1.08521 10.2183L4.8689 13.9492C5.01392 14.0876 5.21167 14.1667 5.38965 14.1667Z">
-                    </path>
-                  </svg>
-                </div> -->
 
               </div>
 
@@ -285,15 +222,7 @@
             <div v-for="item of searchNoteListTag_show" :key="item.articleId">
               <div class="trash_item" style="display:flex; align-items: center; height:30px"
                    @click="openAnother(item.title, item.notebookName)">
-                <svg xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;" width="20" height="24" fill="none"
-                     viewBox="0 0 24 24">
-                  <path fill="#2C2C2C" fill-rule="evenodd"
-                        d="M18 3.2a2.8 2.8 0 012.795 2.63L20.8 6v12a2.8 2.8 0 01-2.63 2.795L18 20.8H6a2.8 2.8 0 01-2.795-2.63L3.2 18V6a2.8 2.8 0 012.63-2.795L6 3.2h12zm0 1.6H6a1.2 1.2 0 00-1.194 1.078L4.8 6v12a1.2 1.2 0 001.078 1.194L6 19.2h12a1.2 1.2 0 001.194-1.077L19.2 18V6a1.2 1.2 0 00-1.077-1.194L18 4.8z"
-                        clip-rule="evenodd"></path>
-                  <path fill="#2C2C2C" fill-rule="evenodd"
-                        d="M16.627 14.841a.3.3 0 01-.3.3H7.21a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h9.116a.3.3 0 01.3.3v1.2zm-2.756-4.883a.3.3 0 01-.3.3h-6.36a.3.3 0 01-.3-.3v-1.2a.3.3 0 01.3-.3h6.36a.3.3 0 01.3.3v1.2z"
-                        clip-rule="evenodd"></path>
-                </svg>
+                <i class="el-icon-document" style="font-size:18px;"></i>
 
                 <span style="flex-grow: 1; flex-shrink:0;" class="search-item-line-style">
                   {{ item.notebookName }}/{{ item.title }}
