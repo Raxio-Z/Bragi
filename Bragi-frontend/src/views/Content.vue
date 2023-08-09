@@ -3,18 +3,21 @@
     <el-container>
 
       <el-header class="header-style">
-        <div class="note-path">
+        <div>
           <el-popover placement="right" width="50" title="笔记标签" trigger="click">
             <i class="iconfont icon-a-yijianfankuijibiji path-icon" slot="reference"></i>
             <div v-if="this.curNoteTag.length === 0">
               当前笔记还未添加标签
             </div>
-            <div v-for="(item, index) in this.curNoteTag" :key="index" class="tag-style" v-contextmenu:tagRightMenu
-                 @contextmenu.prevent="setTagRightMenu(item.tagName)" v-click-outside="hideTagRightMenu">
+            <el-tag v-for="(item, index) in this.curNoteTag" :key="index" class="tag-style" v-contextmenu:tagRightMenu
+              @contextmenu.native.prevent="setTagRightMenu(item.tagName)" v-click-outside="hideTagRightMenu">
               {{ item.tagName }}
-            </div>
+            </el-tag>
           </el-popover>
-          {{ notebookName }} <i class="iconfont icon-youjiantou path-divider"></i> {{ title }}
+          <el-breadcrumb separator-class="el-icon-arrow-right" style="line-height: 40px; font-size: 15px;">
+            <el-breadcrumb-item>{{ notebookName }}</el-breadcrumb-item>
+            <el-breadcrumb-item>{{ title }}</el-breadcrumb-item>
+          </el-breadcrumb>
         </div>
         <div class="icon-area">
 
@@ -26,16 +29,16 @@
 
             <i @click="handleShowMindMap">
               <svg t="1683895875499" style="width: 20px;height: 30px" viewBox="0 0 1024 1024" version="1.1"
-                   xmlns="http://www.w3.org/2000/svg" p-id="1810">
+                xmlns="http://www.w3.org/2000/svg" p-id="1810">
                 <path
-                    d="M341.333 456.533a55.467 55.467 0 0 1 0 110.934H170.667a55.467 55.467 0 1 1 0-110.934h170.666zM170.667 384a128 128 0 0 0 0 256h170.666a128 128 0 1 0 0-256H170.667z m618.666-140.8a34.133 34.133 0 0 1 0 68.267h-128a34.133 34.133 0 0 1 0-68.267h128z m-128-72.533a106.667 106.667 0 0 0 0 213.333h128a106.667 106.667 0 0 0 0-213.333h-128z"
-                    fill="#333333" p-id="1811"></path>
+                  d="M341.333 456.533a55.467 55.467 0 0 1 0 110.934H170.667a55.467 55.467 0 1 1 0-110.934h170.666zM170.667 384a128 128 0 0 0 0 256h170.666a128 128 0 1 0 0-256H170.667z m618.666-140.8a34.133 34.133 0 0 1 0 68.267h-128a34.133 34.133 0 0 1 0-68.267h128z m-128-72.533a106.667 106.667 0 0 0 0 213.333h128a106.667 106.667 0 0 0 0-213.333h-128z"
+                  fill="#333333" p-id="1811"></path>
                 <path
-                    d="M554.667 277.333c0-17.45 4.181-33.92 11.605-48.426-77.44 12.416-147.456 37.077-203.947 70.997-38.613 23.083-72.106 51.499-96.981 84.096h75.99c7.978 0 15.786 0.725 23.338 2.133 10.496-8.32 22.187-16.384 34.987-24.064 43.093-25.898 97.194-46.165 158.378-58.026a106.667 106.667 0 0 1-3.37-26.71zM364.672 637.867A127.657 127.657 0 0 1 341.333 640h-75.946c24.789 32.597 58.325 60.97 96.938 84.139 56.491 33.877 126.507 58.538 203.947 70.997a106.24 106.24 0 0 1-8.235-75.093c-61.184-11.947-115.242-32.214-158.421-58.112-12.8-7.68-24.448-15.702-34.987-24.064z"
-                    fill="#333333" p-id="1812"></path>
+                  d="M554.667 277.333c0-17.45 4.181-33.92 11.605-48.426-77.44 12.416-147.456 37.077-203.947 70.997-38.613 23.083-72.106 51.499-96.981 84.096h75.99c7.978 0 15.786 0.725 23.338 2.133 10.496-8.32 22.187-16.384 34.987-24.064 43.093-25.898 97.194-46.165 158.378-58.026a106.667 106.667 0 0 1-3.37-26.71zM364.672 637.867A127.657 127.657 0 0 1 341.333 640h-75.946c24.789 32.597 58.325 60.97 96.938 84.139 56.491 33.877 126.507 58.538 203.947 70.997a106.24 106.24 0 0 1-8.235-75.093c-61.184-11.947-115.242-32.214-158.421-58.112-12.8-7.68-24.448-15.702-34.987-24.064z"
+                  fill="#333333" p-id="1812"></path>
                 <path
-                    d="M789.333 712.533a34.133 34.133 0 0 1 0 68.267h-128a34.133 34.133 0 1 1 0-68.267h128z m-128-72.533a106.667 106.667 0 0 0 0 213.333h128a106.667 106.667 0 0 0 0-213.333h-128z"
-                    fill="#333333" p-id="1813"></path>
+                  d="M789.333 712.533a34.133 34.133 0 0 1 0 68.267h-128a34.133 34.133 0 1 1 0-68.267h128z m-128-72.533a106.667 106.667 0 0 0 0 213.333h128a106.667 106.667 0 0 0 0-213.333h-128z"
+                  fill="#333333" p-id="1813"></path>
               </svg>
             </i>
 
@@ -53,7 +56,7 @@
 
       <el-main class="editor" style="overflow: unset">
         <Editor ref="editor" @saveContent="ch_handleSaveContent" @renameTitle="doHandleRenameTitle"
-                @jumpSelect="ch_doSwitchNote"/>
+          @jumpSelect="ch_doSwitchNote" />
       </el-main>
 
       <!-- 添加笔记tag弹窗 -->
@@ -89,10 +92,10 @@
           <div v-for="version of curNoteVersion" :key="version.ref">
             <span style="font-size:13px;margin-right:5px">{{ version.date }}</span>
             <el-button v-show="version.ref !== curRef" size="mini" type="text" style="font-size:13px"
-                       @click="handleRecover(version.ref)">恢复
+              @click="handleRecover(version.ref)">恢复
             </el-button>
             <el-button v-show="version.ref !== curRef" size="mini" type="text" style="font-size:13px;"
-                       @click="handlePreviewHistory(version.ref)">预览
+              @click="handlePreviewHistory(version.ref)">预览
             </el-button>
           </div>
         </div>
@@ -110,7 +113,7 @@
 import Editor from '@/components/Editor.vue'
 import HistoryPreview from '@/components/HistoryPreview.vue'
 import global from "@/global";
-// import axios from "axios";
+import axios from "axios";
 import Mindmap from "@/components/Mindmap.vue";
 import {
   reqHistoryPostQuery,
@@ -182,8 +185,8 @@ export default {
   methods: {
     handleShowSetting() {
       this.$router.push({
-            name: "setting"
-          }
+        name: "setting"
+      }
       )
     },
     doHandleRenameTitle(newTitle) {
@@ -319,8 +322,8 @@ export default {
           noteName: this.title,
           tagName: this.addTagName
         };
-        reqNoteAddTag(request,this.config).then((res) => {
-        // axios.post(url, request, this.config).then((res) => {
+        reqNoteAddTag(request, this.config).then((res) => {
+          // axios.post(url, request, this.config).then((res) => {
           res = res.data;
           if (res.code === 0) {
             this.$message.success("笔记标签添加成功");
@@ -346,8 +349,8 @@ export default {
     // 获取笔记的所有tag
     getNoteTag() {
       let url = global.HOST_URL + "/note/tag";
-      reqNoteGetTag(this.notebookName,this.title,this.config)((res) => {
-      // axios.get(url + "?notebookName=" + this.notebookName + "&noteName=" + this.title, this.config).then((res) => {
+      // reqNoteGetTag(this.notebookName,this.title,this.config)((res) => {
+      axios.get(url + "?notebookName=" + this.notebookName + "&noteName=" + this.title, this.config).then((res) => {
         res = res.data;
         if (res.code === 0) {
           this.curNoteTag = res.data;
@@ -367,8 +370,8 @@ export default {
     // 删除当前笔记的某个tag
     handleDelTag() {
       let url = global.HOST_URL + "/note/tag";
-      reqNoteDelTag(this.notebookName,this.title,this.tagToDelete,this.config).then((res) => {
-      // axios.delete(url + "?notebookName=" + this.notebookName + "&noteName=" + this.title + "&tagName=" + this.tagToDelete, this.config).then((res) => {
+      reqNoteDelTag(this.notebookName, this.title, this.tagToDelete, this.config).then((res) => {
+        // axios.delete(url + "?notebookName=" + this.notebookName + "&noteName=" + this.title + "&tagName=" + this.tagToDelete, this.config).then((res) => {
         res = res.data;
         if (res.code === 0) {
           this.$message.success("标签删除成功");
@@ -410,8 +413,8 @@ export default {
 
     console.log('预备！')
 
-    reqNoteGetNoteText(this.$route.params.notebookName,this.$route.params.noteTitle,this.config).then(res => {
-    // axios.get(url, this.config).then(res => {
+    reqNoteGetNoteText(this.$route.params.notebookName, this.$route.params.noteTitle, this.config).then(res => {
+      // axios.get(url, this.config).then(res => {
       res = res.data;
       if (res.code === 0) {
 
@@ -431,7 +434,7 @@ export default {
   },
   beforeRouteUpdate(to, from, next) {
     // 获取新的路由参数
-    const {notebookName, noteTitle} = to.params
+    const { notebookName, noteTitle } = to.params
     // 如果新的参数与原来的不同，更新页面内容
     if (notebookName !== this.notebookName || noteTitle !== this.noteTitle) {
       this.notebookName = notebookName;
@@ -449,8 +452,8 @@ export default {
       let url = global.HOST_URL + "/note/" + notebookName + "/" + noteTitle;
 
       console.log('预备！')
-      reqNoteGetNoteText(notebookName,noteTitle,this.config).then(res => {
-      // axios.get(url, this.config).then(res => {
+      reqNoteGetNoteText(notebookName, noteTitle, this.config).then(res => {
+        // axios.get(url, this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
 
@@ -507,12 +510,6 @@ export default {
 
 .history-aside::-webkit-scrollbar-thumb:hover {
   background: rgb(180, 180, 180);
-}
-
-.note-path {
-  float: left;
-  font-size: 15px;
-  font-weight: 400;
 }
 
 /* 标题栏右侧图标区域 */
@@ -601,6 +598,7 @@ export default {
 }
 
 .tag-style {
+  display: block;
   background-color: rgb(200, 200, 200);
   height: 25px;
   line-height: 25px;
