@@ -471,13 +471,13 @@ export default {
   },
   mounted() {
     this.refreshNotebookList()
-    this.compute_temp(this.notebookList)
+    this.computeTemp(this.notebookList)
   },
   watch: {
 
     notebookList: {
       handler(newValue) {
-        this.compute_temp(newValue)
+        this.computeTemp(newValue)
       },
       deep: true,
     },
@@ -1146,24 +1146,19 @@ export default {
     doSwitchNote(noteTitle, notebookName) {
       let url = global.HOST_URL + "/note/" + notebookName + "/" + noteTitle;
       reqNoteGetNoteText(notebookName, noteTitle, this.config).then(res => {
-        // axios.get(url, this.config).then(res => {
         res = res.data;
         if (res.code === 0) {
-          //this.showHistory = false;
           let newCurNote = {
             noteTitle: noteTitle,
             content: res.data,
             notebookName: notebookName
-          }
+          };
           this.curNoteVersion = [];
-          this.curRef = null
+          this.curRef = null;
           this.curNote = newCurNote;
 
-          console.log('1', this.curNote)
-
-          const notebookName_temp = this.curNote.notebookName
-          const noteTitle_temp = this.curNote.noteTitle
-          // const content_temp = this.curNote.content
+          const notebookName_temp = this.curNote.notebookName;
+          const noteTitle_temp = this.curNote.noteTitle;
 
           // 展开文件菜单的下拉菜单
           this.$refs.menu.open(1);
@@ -1409,19 +1404,13 @@ export default {
     openSearch() {
       this.searchVisible = true
     },
-    compute_temp(value) {
-      //console.log('this.notebookList',value)
+    computeTemp(value) {
       this.searchNoteList_show_temp = [];
-
-      for (var i = 0; i < value.length; i++) {
-        for (var j = 0; j < value[i].noteList.length; j++) {
-          //  console.log('j',value[0].noteList[j])
+      for (let i = 0; i < value.length; i++) {
+        for (let j = 0; j < value[i].noteList.length; j++) {
           this.searchNoteList_show_temp.push(value[i].noteList[j]);
         }
       }
-
-      // console.log('this.searchNoteList_show_temp',this.searchNoteList_show_temp)
-
     },
     openAnother(noteTitle, notebookName) {
       this.selectNote(noteTitle, notebookName)
