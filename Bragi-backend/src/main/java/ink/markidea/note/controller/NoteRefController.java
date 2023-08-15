@@ -6,6 +6,8 @@ import ink.markidea.note.entity.vo.NotebookVo;
 import ink.markidea.note.service.INoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ink.markidea.note.service.INoteRefService;
+
 
 import java.util.List;
 import java.util.Map;
