@@ -2,7 +2,7 @@
     <div>
         <div class="top-area">
             <div class="logo-img">
-                <img src="../assets/logo.png" />
+                <img src="../assets/logo.png"/>
             </div>
             <div class="title">Bragi</div>
         </div>
@@ -10,7 +10,7 @@
             <el-row :gutter="30">
                 <el-col :span="12">
                     <div class="box-left-img">
-                        <img src="../assets/homepage_picture.jpg" />
+                        <img src="../assets/homepage_picture.jpg"/>
                     </div>
                 </el-col>
 
@@ -21,21 +21,24 @@
 
                     <el-form ref="Form" :model="formData" @keyup.enter.native="handleLogin" :rules="formRules">
                         <el-form-item prop="password" :rules="formRules.password">
-                            <el-input class="box-input" type="password" v-model="formData.password" placeholder="新密码" />
+                            <el-input class="box-input" type="password" v-model="formData.password"
+                                      placeholder="新密码"/>
                         </el-form-item>
                         <el-form-item prop="confirm_password" :rules="formRules.confirm_password">
                             <el-input class="box-input" type="password" v-model="formData.confirm_password"
-                                placeholder="确认密码" />
+                                      placeholder="确认密码"/>
                         </el-form-item>
                         <el-form-item ref="emailnumber" prop="emailnumber" :rules="formRules.emailnumber">
-                            <el-input maxlength="30" class="box-input" v-model="formData.emailnumber" placeholder="邮箱" />
+                            <el-input maxlength="30" class="box-input" v-model="formData.emailnumber"
+                                      placeholder="邮箱"/>
                         </el-form-item>
                         <div class="find-pwd-verify-area">
                             <el-form-item prop="code" :rules="formRules.codenumber" style="width:70%; margin-top:2px;">
-                                <el-input v-model="formData.code" maxlength="6" placeholder="请输入邮箱验证码" />
+                                <el-input v-model="formData.code" maxlength="6" placeholder="请输入邮箱验证码"/>
                             </el-form-item>
-                            <el-button class="find-pwd-email-btn" :loading="codeLoading" :disabled="isDisable" size="small"
-                                round @click="sendMsg()">邮箱验证
+                            <el-button class="find-pwd-email-btn" :loading="codeLoading" :disabled="isDisable"
+                                       size="small"
+                                       round @click="sendMsg()">邮箱验证
                             </el-button>
                         </div>
                         <div>
@@ -43,7 +46,8 @@
                         </div>
                         <div class="box-btn">
                             <el-button @click="handleRetrieve" type="primary" round
-                                class="find-pwd-confirm-btn">确认</el-button>
+                                       class="find-pwd-confirm-btn">确认
+                            </el-button>
                         </div>
 
                         <div class="find-pwd-back-login-prompt-text">
@@ -56,8 +60,9 @@
     </div>
 </template>
 <script>
-import axios from "axios";
+// import axios from "axios";
 import global from "../global";
+import {reqUserRetrieve, reqUserRetrievePwd} from "@/api";
 
 export default {
     name: "retrievepwd",
@@ -99,7 +104,7 @@ export default {
                     trigger: 'blur'
                 }],
                 codenumber: [
-                    { required: true, message: "请输验证码" }
+                    {required: true, message: "请输验证码"}
                 ],
                 emailnumber: [
                     {
@@ -114,7 +119,7 @@ export default {
                     }
                 ],
                 password: [
-                    { required: true, message: "不能为空" },
+                    {required: true, message: "不能为空"},
                     // { pattern: /^[A-Za-z0-9!@#$^]+$/, message: "参数非法" },
                     {
                         pattern:
@@ -144,16 +149,14 @@ export default {
                     duration: 1000,
                 });
                 Pass = false;
-            }
-            else if (!this.pwdsame) {
+            } else if (!this.pwdsame) {
                 this.$notify({
                     type: "warning",
                     message: "两次输入密码不同",
                     duration: 1000,
                 });
                 Pass = false;
-            }
-            else if (!emailapattern.test(this.formData.emailnumber)) {
+            } else if (!emailapattern.test(this.formData.emailnumber)) {
                 this.$notify({
                     type: "warning",
                     message: "请输入正确的邮箱",
@@ -168,14 +171,15 @@ export default {
                     code: this.formData.code,
                 };
                 let url = global.HOST_URL + "/user/confirm_retrieve";
-                axios.post(url, user).then((res) => {
+                reqUserRetrieve(user).then((res) => {
+                    // axios.post(url, user).then((res) => {
                     res = res.data;
                     if (res.code === 0) {
                         this.$notify({
                             type: "success",
                             message: "修改密码成功",
                         });
-                        this.$router.push({ name: "login" });
+                        this.$router.push({name: "login"});
                     } else {
                         this.$notify({
                             type: "warning",
@@ -187,7 +191,7 @@ export default {
             }
         },
         toSignin() {
-            this.$router.push({ name: "login" });
+            this.$router.push({name: "login"});
         },
 
         sendMsg() {
@@ -212,43 +216,44 @@ export default {
                 this.codeLoading = true;
                 this.statusMsg = "验证码发送中...";
                 let url = global.HOST_URL + "/user/retrievepwd";
-                let params = { emailNo: this.formData.emailnumber };
+                let params = {emailNo: this.formData.emailnumber};
                 console.log(params);
-                axios
-                    .post(url, params)
-                    .then((res) => {
-                        res = res.data;
-                        if (res.code === 0) {
-                            this.$message({
-                                showClose: true,
-                                message: "发送成功，验证码有效期5分钟",
-                                type: "success",
-                            });
-                            let count = 60;
-                            this.formData.code = "";
-                            this.isDisable = true;
-                            this.codeLoading = false
-                            this.statusMsg = "验证码已发送,60秒后重新发送";
-                            timeRid = setInterval(() => {
-                                count -= 1;
-                                this.statusMsg = "验证码已发送," + count + "秒后重新发送";
-                                if (count <= 0) {
-                                    clearInterval(timeRid);
-                                    this.isDisable = false;
-                                    this.statusMsg = "";
-                                }
-                            }, 1000);
-                        } else {
-                            this.$message({
-                                showClose: true,
-                                message: res.msg,
-                                type: "warning",
-                            });
-                            this.isDisable = false;
-                            this.statusMsg = "";
-                            this.codeLoading = false;
-                        }
-                    })
+                reqUserRetrievePwd(params).then((res) => {
+                    // axios
+                    //     .post(url, params)
+                    //     .then((res) => {
+                    res = res.data;
+                    if (res.code === 0) {
+                        this.$message({
+                            showClose: true,
+                            message: "发送成功，验证码有效期5分钟",
+                            type: "success",
+                        });
+                        let count = 60;
+                        this.formData.code = "";
+                        this.isDisable = true;
+                        this.codeLoading = false
+                        this.statusMsg = "验证码已发送,60秒后重新发送";
+                        timeRid = setInterval(() => {
+                            count -= 1;
+                            this.statusMsg = "验证码已发送," + count + "秒后重新发送";
+                            if (count <= 0) {
+                                clearInterval(timeRid);
+                                this.isDisable = false;
+                                this.statusMsg = "";
+                            }
+                        }, 1000);
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: res.msg,
+                            type: "warning",
+                        });
+                        this.isDisable = false;
+                        this.statusMsg = "";
+                        this.codeLoading = false;
+                    }
+                })
                     .catch((err) => {
                         console.log(err);
                         this.isDisable = false;

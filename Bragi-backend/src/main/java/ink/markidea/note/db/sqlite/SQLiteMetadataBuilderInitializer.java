@@ -34,7 +34,7 @@ public class SQLiteMetadataBuilderInitializer implements MetadataBuilderInitiali
 
         @Override
         public Dialect resolveDialect(DialectResolutionInfo info) {
-            if ("SQLite".equalsIgnoreCase(info.getDatabaseName())){
+            if ("SQLite".equalsIgnoreCase(info.getDatabaseName())) {
                 return dialect;
             }
 

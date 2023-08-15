@@ -11,7 +11,9 @@ import ink.markidea.note.entity.vo.NoteVersionVo;
 import ink.markidea.note.entity.vo.NoteVo;
 import ink.markidea.note.entity.vo.NotebookVo;
 import ink.markidea.note.entity.vo.RefGraphVo;
+import ink.markidea.note.service.INoteRefService;
 import ink.markidea.note.service.INoteService;
+import ink.markidea.note.service.INoteTagService;
 import org.apache.catalina.Server;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,12 @@ public class NoteController {
 
     @Autowired
     private INoteService noteService;
+
+    @Autowired
+    private INoteTagService noteTagService;
+
+    @Autowired
+    private INoteRefService noteRefService;
 
     /**
      * save changes of note
@@ -183,7 +191,7 @@ public class NoteController {
         return noteService.deleteNote(notebookName, noteTitle);
     }
 
-    
+
     @PutMapping("/refinsert")
     public ServerResponse insertNoteRef(@RequestBody Map<String, Object> params) {
         String noteBookName = params.get("curNoteBookName").toString();
@@ -192,7 +200,7 @@ public class NoteController {
 
         Integer noteId = noteService.getNoteId(noteBookName, noteTitle).getData();
 
-        noteService.createNoteRef(noteId, refNoteId);
+        noteRefService.createNoteRef(noteId, refNoteId);
         return ServerResponse.buildSuccessResponse();
     }
 
@@ -203,7 +211,7 @@ public class NoteController {
 
         Integer noteId = noteService.getNoteId(noteBookName, noteTitle).getData();
 
-        List<NotebookVo> noteRefDos = noteService.getNoteRef(noteId).getData();
+        List<NotebookVo> noteRefDos = noteRefService.getNoteRef(noteId).getData();
         return ServerResponse.buildSuccessResponse(noteRefDos);
     }
 
@@ -213,16 +221,15 @@ public class NoteController {
         String noteTitle = params.get("noteTitle").toString();
         Integer delRefNoteId = Integer.valueOf(params.get("delRefNoteId").toString());
 
-        noteService.deleteNoteRef(noteBookName, noteTitle, delRefNoteId);
+        noteRefService.deleteNoteRef(noteBookName, noteTitle, delRefNoteId);
 
         return ServerResponse.buildSuccessResponse();
     }
 
 
     @GetMapping("/refgraph")
-    public ServerResponse<RefGraphVo> getRefGraph()
-    {
-        RefGraphVo refGraphVo = noteService.getRefGraph();
+    public ServerResponse<RefGraphVo> getRefGraph() {
+        RefGraphVo refGraphVo = noteRefService.getRefGraph();
         return ServerResponse.buildSuccessResponse(refGraphVo);
     }
 
@@ -231,27 +238,27 @@ public class NoteController {
      */
     @PostMapping("/tag")
     public ServerResponse addTag(@RequestBody NoteTagModifyRequest request) {
-        return noteService.addNoteTag(request.getNotebookName(), request.getNoteName(), request.getTagName());
+        return noteTagService.addNoteTag(request.getNotebookName(), request.getNoteName(), request.getTagName());
     }
 
     @GetMapping("/tag")
     public ServerResponse<List<NoteTagDo>> getTagsByNote(@RequestParam String notebookName, @RequestParam String noteName) {
-        return noteService.getTagsByNote(notebookName, noteName);
+        return noteTagService.getTagsByNote(notebookName, noteName);
     }
 
     @DeleteMapping("/tag")
     public ServerResponse deleteTag(@RequestParam String notebookName, @RequestParam String noteName, @RequestParam String tagName) {
-        return noteService.deleteNoteTag(notebookName, noteName, tagName);
+        return noteTagService.deleteNoteTag(notebookName, noteName, tagName);
     }
 
     @GetMapping("/tagsearch")
     public ServerResponse<List<NoteVo>> searchNoteByTag(@RequestBody String tagName) {
-        return noteService.searchNoteByTag(tagName);
+        return noteTagService.searchNoteByTag(tagName);
     }
 
     @GetMapping("/tags")
     public ServerResponse<List<String>> getTags() {
-        return noteService.getTags();
+        return noteTagService.getTags();
     }
-        
+
 }

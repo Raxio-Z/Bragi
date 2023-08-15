@@ -25,7 +25,9 @@ public interface ArticleRepository extends JpaRepository<ArticleDo, Integer> {
 
     Page<ArticleDo> findAllByUsername(String username, Pageable pageable);
 
-    /** Param username is used to ensure record deleted by owner */
+    /**
+     * Param username is used to ensure record deleted by owner
+     */
     @Transactional
     void deleteByIdAndUsername(Integer id, String username);
 

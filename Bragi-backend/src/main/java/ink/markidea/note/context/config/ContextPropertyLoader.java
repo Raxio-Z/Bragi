@@ -23,14 +23,14 @@ public class ContextPropertyLoader implements EnvironmentPostProcessor, Ordered 
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
-        ApplicationHome home =new ApplicationHome(getClass());
+        ApplicationHome home = new ApplicationHome(getClass());
 
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
 
-        String path ;
+        String path;
         path = home.getDir().getAbsolutePath();
         addPathAndInitDir(map, path);
-        PropertySource propertySource = new MapPropertySource("markidea-sys",map);
+        PropertySource propertySource = new MapPropertySource("markidea-sys", map);
         environment.getPropertySources().addLast(propertySource);
     }
 
@@ -39,8 +39,8 @@ public class ContextPropertyLoader implements EnvironmentPostProcessor, Ordered 
         return Ordered.HIGHEST_PRECEDENCE + 9;
     }
 
-    private void addPathAndInitDir(Map<String,Object> map, String basePath){
-        map.put("baseDir",basePath);
+    private void addPathAndInitDir(Map<String, Object> map, String basePath) {
+        map.put("baseDir", basePath);
 
         // dir store sqlite database
         File dbDir = new File(basePath, "db");
@@ -58,7 +58,7 @@ public class ContextPropertyLoader implements EnvironmentPostProcessor, Ordered 
         map.put("notesDir", notesDir.getAbsolutePath());
 
         // the directory store file
-        File staticDir = new File(basePath,"static");
+        File staticDir = new File(basePath, "static");
         checkAndCreateDirIfNecessary(staticDir);
         map.put("staticDir", staticDir.getAbsolutePath());
 
@@ -81,19 +81,20 @@ public class ContextPropertyLoader implements EnvironmentPostProcessor, Ordered 
 
         // load website config file
         File websiteConfigFile = new File(configDir, "website-config.json");
-        WebsiteConfigDto websiteConfig ;
+        WebsiteConfigDto websiteConfig;
         if (websiteConfigFile.exists()) {
             String jsonStr = FileUtil.readFileAsString(websiteConfigFile);
             websiteConfig = JsonUtil.stringToObj(jsonStr, WebsiteConfigDto.class);
             File indexHtmlFile = new File(frontDir, "index.html");
-            String indexHtmlStr  = FileUtil.readFileAsString(indexHtmlFile);
+            String indexHtmlStr = FileUtil.readFileAsString(indexHtmlFile);
             String newIndexHtml = indexHtmlStr.replace("<title>" + "MarkIdea" + "</title>", "<title>" + websiteConfig.getWebsiteTitle() + "</title>");
             FileUtil.writeStringToFile(newIndexHtml, indexHtmlFile);
         } else {
             websiteConfig = new WebsiteConfigDto();
         }
 
-        Map<String, String> configProperties = JsonUtil.stringToObj(JsonUtil.objToString(websiteConfig), new TypeReference<Map<String, String>>() {});
+        Map<String, String> configProperties = JsonUtil.stringToObj(JsonUtil.objToString(websiteConfig), new TypeReference<Map<String, String>>() {
+        });
         assert configProperties != null;
         map.putAll(configProperties);
 
@@ -101,11 +102,11 @@ public class ContextPropertyLoader implements EnvironmentPostProcessor, Ordered 
     }
 
     private void transferFrontResourceIfNecessary(ClassPathResource resource, File frontDir) {
-        if (frontDir.listFiles() != null && frontDir.listFiles().length > 0){
+        if (frontDir.listFiles() != null && frontDir.listFiles().length > 0) {
             FileUtil.deleteChildFiles(frontDir);
         }
-        if (!resource.exists()){
-            return ;
+        if (!resource.exists()) {
+            return;
         }
         try {
             FileUtil.unzip(resource.getInputStream(), frontDir.getAbsolutePath());
@@ -115,14 +116,14 @@ public class ContextPropertyLoader implements EnvironmentPostProcessor, Ordered 
     }
 
     private void checkAndCreateDirIfNecessary(File dir) {
-        if (dir.exists()){
-            if (dir.isDirectory()){
-                return ;
+        if (dir.exists()) {
+            if (dir.isDirectory()) {
+                return;
             }
             throw new IllegalStateException("not a directory");
         }
 
-        if (!dir.mkdir()){
+        if (!dir.mkdir()) {
             throw new IllegalStateException("create a directory failed");
 
         }

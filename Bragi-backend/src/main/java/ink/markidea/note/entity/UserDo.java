@@ -47,7 +47,9 @@ public class UserDo {
     private boolean push = false;
 
 
-    /** 编辑器配置 */
+    /**
+     * 编辑器配置
+     */
     @Column(name = "editor_config")
     private String editorConfig;
 }

@@ -20,28 +20,30 @@ public class DelNoteController {
      * get all delnotes
      */
     @GetMapping("")
-    public ServerResponse<List<DeletedNoteVo>> getDelNotes(){
+    public ServerResponse<List<DeletedNoteVo>> getDelNotes() {
         return noteService.listDelNotes();
     }
 
     /**
      * clear all delnotes
+     *
      * @return
      */
     @DeleteMapping("")
-    public ServerResponse clearAllDelNotes(){
+    public ServerResponse clearAllDelNotes() {
         return noteService.clearAllDelNotes();
     }
 
     /**
      * clear a single delnote
+     *
      * @param recover whether to recover the corresponding note , when the recordeis deleted.
      */
     @DeleteMapping("/{id}")
-    public ServerResponse clearDelNote(@PathVariable Integer id, Boolean recover){
-        if (recover != null && recover){
+    public ServerResponse clearDelNote(@PathVariable Integer id, Boolean recover) {
+        if (recover != null && recover) {
             return noteService.recoverNote(id);
-        }else{
+        } else {
             return noteService.clearDelNote(id);
         }
     }

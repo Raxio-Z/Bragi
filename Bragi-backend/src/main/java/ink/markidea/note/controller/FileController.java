@@ -28,18 +28,19 @@ public class FileController {
 
     /**
      * vditor上传文件定制接口
+     *
      * @param request
      * @return
      */
     @PostMapping("vditor")
-    public VditorFileUploadResponse upload(StandardMultipartHttpServletRequest request){
+    public VditorFileUploadResponse upload(StandardMultipartHttpServletRequest request) {
         List<MultipartFile> files = request.getMultiFileMap().get("file[]");
         Map<String, String> succFileMap = new HashMap<>();
         List<String> errorFileList = new ArrayList<>();
         files.forEach(file -> {
-            try{
+            try {
                 succFileMap.put(file.getOriginalFilename(), fileService.upload(file));
-            }catch (Exception e){
+            } catch (Exception e) {
                 errorFileList.add(file.getOriginalFilename());
             }
         });
@@ -52,12 +53,13 @@ public class FileController {
 
     /**
      * 获取用户所有文件列表
+     *
      * @param pageIndex 第几页
-     * @param pageSize 一页多少文件
+     * @param pageSize  一页多少文件
      * @return
      */
     @GetMapping("")
-    public ServerResponse<UserFileVo> listUserFiles(int pageIndex, int pageSize){
+    public ServerResponse<UserFileVo> listUserFiles(int pageIndex, int pageSize) {
 
         UserFileVo userFileVo = fileService.listUserFiles(pageIndex, pageSize);
         return ServerResponse.buildSuccessResponse(userFileVo);
@@ -67,7 +69,7 @@ public class FileController {
      * 批量删除接口
      */
     @PostMapping("delete/batch")
-    public ServerResponse<Void> batchDelete(@RequestBody BatchFileDeleteRequest request){
+    public ServerResponse<Void> batchDelete(@RequestBody BatchFileDeleteRequest request) {
         fileService.batchDelete(request.getFileNames());
         return ServerResponse.buildSuccessResponse();
     }

@@ -21,10 +21,10 @@ public class NoteDo {
     private String username;
 
     // 笔记本名
-    @Column(name = "notebook",nullable = false)
+    @Column(name = "notebook", nullable = false)
     private String notebookName;
 
     // 笔记名
-    @Column(name = "note_title",nullable = false)
+    @Column(name = "note_title", nullable = false)
     private String noteTitle;
 }

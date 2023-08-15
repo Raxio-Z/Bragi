@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface NoteRefRepository extends JpaRepository<NoteRefDo,Integer> {
+public interface NoteRefRepository extends JpaRepository<NoteRefDo, Integer> {
     List<NoteRefDo> findAllByUsernameAndNoteId(String username, Integer noteId);
 
     List<NoteRefDo> findAllByUsername(String username);
@@ -19,6 +19,7 @@ public interface NoteRefRepository extends JpaRepository<NoteRefDo,Integer> {
 
     @Transactional
     void deleteByUsernameAndNoteIdAndRefNoteId(String username, Integer noteId, Integer refNoteId);
+
     @Transactional
     void deleteById(Integer id);
 
