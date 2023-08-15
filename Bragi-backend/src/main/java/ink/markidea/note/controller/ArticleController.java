@@ -29,8 +29,8 @@ public class ArticleController {
     }
 
     @GetMapping("/{author}/{articleId}")
-    ServerResponse<ArticleVo>  getArticle(@PathVariable String author,
-                                          @PathVariable Integer articleId) {
+    ServerResponse<ArticleVo> getArticle(@PathVariable String author,
+                                         @PathVariable Integer articleId) {
         ArticleVo articleVo = articleService.findByArticleIdAndUsername(articleId, author);
         if (articleVo == null) {
             return ServerResponse.buildErrorResponse("未找到");

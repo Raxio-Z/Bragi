@@ -1,7 +1,7 @@
 import axios from "axios";
 // import nprogress from "nprogress";
 // import "nprogress/nprogress.css"
-import { Message } from 'element-ui';
+import {Message} from 'element-ui';
 import router from '../router'
 // import HOST_URL from '../global'
 
@@ -23,11 +23,9 @@ requests.interceptors.response.use((res) => {
     //console.log("error",error)
     // nprogress.done();
     if (error.response.status) {
-        if(error.response.data.fault){
+        if (error.response.data.fault) {
             Message.error(error.response.data.fault);
-        }
-        else if(error.response.data.msg)
-        {
+        } else if (error.response.data.msg) {
             Message.error(error.response.data.msg);
         }
         switch (error.response.status) {
@@ -47,8 +45,8 @@ requests.interceptors.response.use((res) => {
                 router.push("/login");
                 break;
             case 405:
-            //     Message.error("405未登录!");
-            //     router.push("/login");
+                //     Message.error("405未登录!");
+                //     router.push("/login");
                 break;
             case 409:
                 // Message.error("409冲突");

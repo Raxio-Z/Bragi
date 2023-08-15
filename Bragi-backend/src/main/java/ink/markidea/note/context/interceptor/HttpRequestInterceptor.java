@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 public class HttpRequestInterceptor implements HandlerInterceptor {
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)  {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String username = request.getHeader("username");
-        if (StringUtils.isBlank(username)){
+        if (StringUtils.isBlank(username)) {
 
         }
         ThreadLocalUtil.setUsername(username);

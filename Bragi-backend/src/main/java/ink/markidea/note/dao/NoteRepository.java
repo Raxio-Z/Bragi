@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface NoteRepository extends JpaRepository<NoteDo,Integer> {
+public interface NoteRepository extends JpaRepository<NoteDo, Integer> {
 //    @Transactional
 //    void deleteByUsernameAndNotebookNameAndNoteTitle(String username, String notebookName, String noteTitle);
 

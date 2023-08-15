@@ -22,7 +22,7 @@ public class AuthorityInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String token = request.getHeader("token");
         String username = request.getHeader("username");
-        if( token == null || !userService.validate(username, token).isSuccess()){
+        if (token == null || !userService.validate(username, token).isSuccess()) {
             throw new NoAuthorityException();
         }
         return true;

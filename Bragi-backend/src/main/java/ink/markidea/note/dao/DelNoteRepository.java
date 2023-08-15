@@ -11,12 +11,16 @@ import java.util.List;
 @Repository
 public interface DelNoteRepository extends JpaRepository<DelNoteDo, Integer> {
 
-    /** Param username is used to ensure record deleted by owner */
+    /**
+     * Param username is used to ensure record deleted by owner
+     */
     DelNoteDo findByIdAndUsername(Integer id, String username);
 
     List<DelNoteDo> findAllByUsername(String username);
 
-    /** Param username is used to ensure record deleted by owner */
+    /**
+     * Param username is used to ensure record deleted by owner
+     */
     @Transactional
     void deleteByIdAndUsername(Integer id, String username);
 

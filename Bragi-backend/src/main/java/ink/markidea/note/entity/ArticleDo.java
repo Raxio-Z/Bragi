@@ -18,14 +18,14 @@ public class ArticleDo {
     @GeneratedValue
     private Integer id;
 
-    @Column(name = "notebook",nullable = false)
+    @Column(name = "notebook", nullable = false)
     private String notebookName;
 
-    @Column(name = "article_title",nullable = true)
+    @Column(name = "article_title", nullable = true)
     @Deprecated
     private String articleTitle = "";
 
-    @Column(name = "note_title",nullable = false)
+    @Column(name = "note_title", nullable = false)
     private String noteTitle;
 
     @Column(nullable = false)

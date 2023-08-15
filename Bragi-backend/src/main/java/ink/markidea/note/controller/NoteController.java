@@ -191,7 +191,7 @@ public class NoteController {
         return noteService.deleteNote(notebookName, noteTitle);
     }
 
-    
+
     @PutMapping("/refinsert")
     public ServerResponse insertNoteRef(@RequestBody Map<String, Object> params) {
         String noteBookName = params.get("curNoteBookName").toString();
@@ -228,8 +228,7 @@ public class NoteController {
 
 
     @GetMapping("/refgraph")
-    public ServerResponse<RefGraphVo> getRefGraph()
-    {
+    public ServerResponse<RefGraphVo> getRefGraph() {
         RefGraphVo refGraphVo = noteRefService.getRefGraph();
         return ServerResponse.buildSuccessResponse(refGraphVo);
     }
@@ -261,5 +260,5 @@ public class NoteController {
     public ServerResponse<List<String>> getTags() {
         return noteTagService.getTags();
     }
-        
+
 }

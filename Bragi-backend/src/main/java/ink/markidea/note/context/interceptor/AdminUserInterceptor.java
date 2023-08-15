@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 @Slf4j
-public class AdminUserInterceptor  implements HandlerInterceptor {
+public class AdminUserInterceptor implements HandlerInterceptor {
 
     @Autowired
     private IUserService userService;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)  {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String token = request.getHeader("token");
         String username = request.getHeader("username");
         if (username == null || token == null || !userService.checkAdminUser(username, token)) {

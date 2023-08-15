@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Repository
@@ -31,5 +32,6 @@ public interface NoteTagRepository extends JpaRepository<NoteTagDo, Integer> {
 
     // auxiliaries
     List<NoteTagDo> findByNoteIdAndTagName(Integer noteId, String tagName);
+
     void deleteAllByNoteId(Integer noteId);
 }

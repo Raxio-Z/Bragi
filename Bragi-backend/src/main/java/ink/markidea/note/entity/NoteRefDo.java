@@ -20,9 +20,9 @@ public class NoteRefDo {
     @Column(nullable = false)
     private String username;
 
-    @Column(name="note_id",nullable = false)
+    @Column(name = "note_id", nullable = false)
     private Integer noteId;
 
-    @Column(name= "refnote_id",nullable = false)
+    @Column(name = "refnote_id", nullable = false)
     private Integer refNoteId;
 }

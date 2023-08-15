@@ -36,12 +36,12 @@ public class UserController {
     HashMap<String, String> validationCodeByEmail = new HashMap<>();
 
     @PostMapping("login")
-    public ServerResponse<UserVo> login(@RequestBody UserRequest request){
+    public ServerResponse<UserVo> login(@RequestBody UserRequest request) {
         return userService.login(request.getUsername(), request.getPassword(), request.getFlag());
     }
 
     @PostMapping("validate")
-    public ServerResponse validate(){
+    public ServerResponse validate() {
         // Validated by interceptor
         return ServerResponse.buildSuccessResponse();
     }
@@ -52,7 +52,7 @@ public class UserController {
         //        后端暂存的注册的验证码
         String code1 = validationCodeByEmail.getOrDefault(req.getEmailnumber(), "");
         ServerResponse resp = userService.register(req.getUsername(), req.getPassword(), req.getEmailnumber(), req.getCode(), code1);
-        if (resp.getCode() == 0){
+        if (resp.getCode() == 0) {
             validationCodeByEmail.remove(req.getEmailnumber());
         }
         return resp;
@@ -76,82 +76,80 @@ public class UserController {
     @PostMapping("/retrievepwd")
     public ServerResponse<String> retrievepwd(@RequestBody UserEmailSignupRequest req) throws Exception {
         ServerResponse<String> response = userService.sendOutEmailRetreievePwd(req.getEmailNo());
-        if(response.isSuccess()){//如果成功就返回验证码在前端存储
+        if (response.isSuccess()) {//如果成功就返回验证码在前端存储
             String code2 = response.getData();
 //            存入map
             validationCodeByEmail.put(req.getEmailNo(), code2);
             return response;
-        }
-        else{
+        } else {
             return response;
         }
     }
 
-//    点击确认找回按钮
+    //    点击确认找回按钮
     @PostMapping("/confirm_retrieve")
     public ServerResponse<String> confirm_retrieve(@RequestBody UserRequest req) throws Exception {
         //比对code，如果一样改密码
         String codeInput = req.getCode();
-        if(codeInput==null){
+        if (codeInput == null) {
             return ServerResponse.buildErrorResponse("验证码不能为空！");
         }
 //        后端暂存的找回密码的验证码
         String code2 = validationCodeByEmail.getOrDefault(req.getEmailnumber(), "");
 
-        if(codeInput.equals(code2)){
+        if (codeInput.equals(code2)) {
             validationCodeByEmail.remove(req.getEmailnumber());
             //修改密码
             userService.updatePassword(req.getEmailnumber(), req.getPassword());
             return ServerResponse.buildSuccessResponse("修改成功");
-        }
-        else{
+        } else {
             return ServerResponse.buildErrorResponse("修改失败");
         }
     }
 
     @PostMapping("/changePass")
-    public ServerResponse changePassword(@RequestBody UserRequest request){
+    public ServerResponse changePassword(@RequestBody UserRequest request) {
         return userService.changePassword(request.getPassword(), request.getNewPassword());
     }
 
     @PostMapping("/logout")
-    public ServerResponse logout(){
+    public ServerResponse logout() {
         System.out.println("退出登录");
         return userService.logout();
     }
 
     @PutMapping("remote")
-    public ServerResponse setRemoteRepoUrl(@RequestBody RemoteRepoRequest request){
+    public ServerResponse setRemoteRepoUrl(@RequestBody RemoteRepoRequest request) {
         return adminService.setRemoteRepoUrl(request.getRemoteRepoUrl());
     }
 
     @GetMapping("remote")
-    public ServerResponse getRemoteRepoUrl(){
+    public ServerResponse getRemoteRepoUrl() {
         return adminService.getRemoteRepoUrl();
     }
 
     @PostMapping("sshkey")
-    public ServerResponse<String> genSshKeys(){
+    public ServerResponse<String> genSshKeys() {
         return adminService.generateSshKey();
     }
 
     @DeleteMapping("push")
-    public ServerResponse stopPushToRemote(){
+    public ServerResponse stopPushToRemote() {
         return adminService.stopPushToRemoteRepo();
     }
 
     @GetMapping("push")
-    public ServerResponse checkPushStatus(){
+    public ServerResponse checkPushStatus() {
         return adminService.checkPushTaskStatus();
     }
 
     @PostMapping("push")
-    public ServerResponse startPushToRemote(){
+    public ServerResponse startPushToRemote() {
         return adminService.startPushToRemoteRepo();
     }
 
     @PostMapping("pull")
-    public ServerResponse pullFromRemote(){
+    public ServerResponse pullFromRemote() {
         return adminService.pullFromRemote();
     }
 

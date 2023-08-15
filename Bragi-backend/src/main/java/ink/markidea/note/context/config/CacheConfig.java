@@ -46,9 +46,9 @@ public class CacheConfig implements EnvironmentAware {
     private String notesDir;
 
     @Bean
-    public Cache<String, UserVo> userCache(){
+    public Cache<String, UserVo> userCache() {
         return Caffeine.newBuilder()
-                        .maximumSize(500)
+                .maximumSize(500)
                 .expireAfter(new Expiry<String, UserVo>() {
                     @Override
                     public long expireAfterCreate(@NonNull String key, @NonNull UserVo value, long currentTime) {
@@ -68,7 +68,7 @@ public class CacheConfig implements EnvironmentAware {
     }
 
     @Bean("userNoteCache")
-    public LoadingCache<UserNoteKey, String> userNoteCache(){
+    public LoadingCache<UserNoteKey, String> userNoteCache() {
         return Caffeine.newBuilder()
                 .maximumWeight(125 * 1024 * 1024)
                 .weigher(new Weigher<UserNoteKey, String>() {
@@ -83,13 +83,13 @@ public class CacheConfig implements EnvironmentAware {
 
 
     @Bean("userNotePreviewCache")
-    public LoadingCache<UserNoteKey, NotePreviewInfo> userNotePreviewCache(){
+    public LoadingCache<UserNoteKey, NotePreviewInfo> userNotePreviewCache() {
         return Caffeine.newBuilder()
                 .maximumWeight(10 * 1024 * 1024)
                 .weigher(new Weigher<UserNoteKey, NotePreviewInfo>() {
                     @Override
                     public @NonNegative int weigh(@NonNull UserNoteKey key, @NonNull NotePreviewInfo value) {
-                        return value.getPreviewContent() == null ? 0:value.getPreviewContent().length();
+                        return value.getPreviewContent() == null ? 0 : value.getPreviewContent().length();
                     }
                 })
                 .expireAfterWrite(12, TimeUnit.HOURS)
@@ -97,19 +97,19 @@ public class CacheConfig implements EnvironmentAware {
     }
 
     private String loadNote(String username, String notebookName, String noteTitle) {
-        String relativeFileName = getRelativeFileName(notebookName,noteTitle);
+        String relativeFileName = getRelativeFileName(notebookName, noteTitle);
         File noteFile = new File(getOrCreateUserNotebookDir(username), relativeFileName);
         if (!noteFile.exists()) {
-            return  null;
+            return null;
         }
         String content = fileService.getContentFromFile(noteFile);
         return content;
     }
 
-    private NotePreviewInfo loadPreview(UserNoteKey key){
+    private NotePreviewInfo loadPreview(UserNoteKey key) {
         String content = userNoteCache.get(key);
         if (content == null) {
-            return  null;
+            return null;
         }
         NotePreviewInfo previewInfo = new NotePreviewInfo().setPreviewContent(content.substring(0, Math.min(60, content.length())));
         ArticleDo articleDo = articleService.findByNotebookAndNoteTitle(key.getNotebookName(), key.getNoteTitle());
@@ -120,9 +120,9 @@ public class CacheConfig implements EnvironmentAware {
     }
 
 
-    private File getOrCreateUserNotebookDir(String username){
+    private File getOrCreateUserNotebookDir(String username) {
         File dir = new File(notesDir, username);
-        if (dir.exists()){
+        if (dir.exists()) {
             return dir;
         }
         dir.mkdir();
@@ -131,7 +131,7 @@ public class CacheConfig implements EnvironmentAware {
 
     private String getRelativeFileName(String notebookName, String noteTitle) {
 
-        return notebookName + "/" + noteTitle+".md";
+        return notebookName + "/" + noteTitle + ".md";
     }
 
     public static void setTokenExpireTimeInHour(int tokenExpireTimeInHour) {

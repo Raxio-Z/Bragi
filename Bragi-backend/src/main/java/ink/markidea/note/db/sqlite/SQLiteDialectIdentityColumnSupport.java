@@ -11,7 +11,7 @@ public class SQLiteDialectIdentityColumnSupport extends IdentityColumnSupportImp
     }
 
   /*
-	public boolean supportsInsertSelectIdentity() {
+    public boolean supportsInsertSelectIdentity() {
     return true; // As specified in NHibernate dialect
   }
   */
@@ -24,7 +24,7 @@ public class SQLiteDialectIdentityColumnSupport extends IdentityColumnSupportImp
     }
 
   /*
-	public String appendIdentitySelectToInsert(String insertString) {
+    public String appendIdentitySelectToInsert(String insertString) {
     return new StringBuffer(insertString.length()+30). // As specified in NHibernate dialect
       append(insertString).
       append("; ").append(getIdentitySelectString()).

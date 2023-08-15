@@ -3,7 +3,8 @@
         <el-container style="max-width: 1300px; margin:auto">
             <el-header class="header noselect" @contextmenu.prevent.native>
                 <strong @click="showAllArticles = !showAllArticles"> 📕 {{ author }} - {{ title }}</strong>
-                <el-button class="pull-right" style="margin-top: 15px; " @click="showOutline = !showOutline" size="small">大纲
+                <el-button class="pull-right" style="margin-top: 15px; " @click="showOutline = !showOutline"
+                           size="small">大纲
                 </el-button>
             </el-header>
             <el-container>

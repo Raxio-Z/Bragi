@@ -29,7 +29,7 @@ public class AdminController {
     private IUserService userService;
 
     @GetMapping("websiteConfig")
-    public ServerResponse<WebsiteConfigDto> pullWebsiteConfig(){
+    public ServerResponse<WebsiteConfigDto> pullWebsiteConfig() {
         return ServerResponse.buildSuccessResponse(adminService.getWebsiteConfig());
     }
 

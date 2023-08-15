@@ -22,18 +22,18 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authorityInterceptor)
-                .addPathPatterns("/api/note/**", "/api/note", "/api/user/**","/api/file", "/api/file/**")
+                .addPathPatterns("/api/note/**", "/api/note", "/api/user/**", "/api/file", "/api/file/**")
                 .addPathPatterns("/api/delnote/**", "/api/delnote")
                 .addPathPatterns("/api/article", "/api/article/batchDel")
                 .addPathPatterns("/api/admin/**")
-                .excludePathPatterns("/api/user/login","/api/user/register","/api/user/emailsignup"
-                ,"/api/user/retrievepwd","/api/user/confirm_retrieve");
+                .excludePathPatterns("/api/user/login", "/api/user/register", "/api/user/emailsignup"
+                        , "/api/user/retrievepwd", "/api/user/confirm_retrieve");
 
 
         registry.addInterceptor(httpRequestInterceptor)
-                .addPathPatterns("/api/note/**","/api/note", "/api/admin/**")
+                .addPathPatterns("/api/note/**", "/api/note", "/api/admin/**")
                 .addPathPatterns("/api/delnote/**", "/api/delnote")
-                .addPathPatterns( "/api/file", "/api/file/**")
+                .addPathPatterns("/api/file", "/api/file/**")
                 .addPathPatterns("/api/user/**")
                 .addPathPatterns("/api/**/**");
 

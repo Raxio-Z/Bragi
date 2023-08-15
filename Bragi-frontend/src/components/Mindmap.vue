@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <svg id="svg_id" style="width: 100%;height: 90%" className="flex-1" ref="svgRef"/>
     <div>
-      <el-button type="primary" @click="exportToSvg">导出为SVG</el-button>
-      <el-button type="primary" @click="exportToHTML">导出为可交互HTML</el-button>
-    </div>
+        <svg id="svg_id" style="width: 100%;height: 90%" className="flex-1" ref="svgRef"/>
+        <div>
+            <el-button type="primary" @click="exportToSvg">导出为SVG</el-button>
+            <el-button type="primary" @click="exportToHTML">导出为可交互HTML</el-button>
+        </div>
 
-  </div>
+    </div>
 </template>
 
 <script>
@@ -19,35 +19,35 @@ import FileSaver from 'file-saver'
 
 const transformer = new Transformer();
 export default {
-  name: 'Mindmap',
-  data() {
-    return {
-      root: Object,
-    };
-  },
-  props: {
-    mindValue: {
-      type: String,
-      require: true,
-    }
-  },
-  watch: {
-    mindValue: 'update',
-  },
-  methods: {
-    update() {
-      const {root} = transformer.transform(this.mindValue);
-
-      console.log("root", root)
-      this.root = root
-
-      this.mm.setData(root);
-      this.mm.fit();
+    name: 'Mindmap',
+    data() {
+        return {
+            root: Object,
+        };
     },
+    props: {
+        mindValue: {
+            type: String,
+            require: true,
+        }
+    },
+    watch: {
+        mindValue: 'update',
+    },
+    methods: {
+        update() {
+            const {root} = transformer.transform(this.mindValue);
 
-    exportToSvg() {
-      let contentHtml = document.getElementById("svg_id").innerHTML
-      let content = `<svg xmlns="http://www.w3.org/2000/svg" class="w-screen h-screen leading-none markmap mm-ojrsbz-1" style="">
+            console.log("root", root)
+            this.root = root
+
+            this.mm.setData(root);
+            this.mm.fit();
+        },
+
+        exportToSvg() {
+            let contentHtml = document.getElementById("svg_id").innerHTML
+            let content = `<svg xmlns="http://www.w3.org/2000/svg" class="w-screen h-screen leading-none markmap mm-ojrsbz-1" style="">
     <style>.markmap{font:300 16px/20px sans-serif}.markmap-link{fill:none}.markmap-node&gt;circle{cursor:pointer}.markmap-foreign{display:inline-block}.markmap-foreign
         a{color:#0097e6}.markmap-foreign a:hover{color:#00a8ff}.markmap-foreign
         code{background-color:#f0f0f0;border-radius:2px;color:#555;font-size:calc(1em - 2px)}.markmap-foreign :not(pre)&gt;code{padding:.2em
@@ -57,14 +57,14 @@ export default {
     </style>
 ${contentHtml}
 </svg>`;
-      const blob = new Blob([content])		// fileStream 是文件流，一般从后台获取
-      FileSaver.saveAs(blob, 'Mindmap.svg')					// fileName 保存文件的名称，需要带后缀
+            const blob = new Blob([content])		// fileStream 是文件流，一般从后台获取
+            FileSaver.saveAs(blob, 'Mindmap.svg')					// fileName 保存文件的名称，需要带后缀
 
-    },
+        },
 
-    exportToHTML() {
-      let contentHtml = JSON.stringify(this.root)
-      let front = `<!DOCTYPE html>
+        exportToHTML() {
+            let contentHtml = JSON.stringify(this.root)
+            let front = `<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -114,21 +114,21 @@ ${contentHtml}
   window.mm = I.Markmap.create("svg#mindmap", (S || I.deriveOptions)(_), M)
 })(() => window.markmap, null,`;
 
-      let end = `, {"colorFreezeLevel": 2})<\/script>
+            let end = `, {"colorFreezeLevel": 2})<\/script>
 </body>
 </html>`
 
-      let content = front + contentHtml + end
+            let content = front + contentHtml + end
 
-      const blob = new Blob([content])		// fileStream 是文件流，一般从后台获取
-      FileSaver.saveAs(blob, 'Mindmap.html')					// fileName 保存文件的名称，需要带后缀
+            const blob = new Blob([content])		// fileStream 是文件流，一般从后台获取
+            FileSaver.saveAs(blob, 'Mindmap.html')					// fileName 保存文件的名称，需要带后缀
+
+        },
 
     },
-
-  },
-  mounted() {
-    this.mm = Markmap.create(this.$refs.svgRef);
-    this.update();
-  },
+    mounted() {
+        this.mm = Markmap.create(this.$refs.svgRef);
+        this.update();
+    },
 };
 </script>

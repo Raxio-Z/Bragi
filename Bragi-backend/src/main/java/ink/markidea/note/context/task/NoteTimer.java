@@ -41,14 +41,14 @@ public class NoteTimer implements ApplicationListener<ContextRefreshedEvent> {
     private volatile List<PushToRemoteTask> pushToRemoteTaskList = new ArrayList<>();
 
     @Scheduled(fixedRate = 60 * 1000, initialDelay = 3 * 60 * 1000)
-    public void pushLocalChangesToRemote(){
-        try{
-            if (isPushing){
-                return ;
+    public void pushLocalChangesToRemote() {
+        try {
+            if (isPushing) {
+                return;
             }
             isPushing = true;
             pushToRemoteTaskList.forEach(Runnable::run);
-        }finally {
+        } finally {
             isPushing = false;
         }
 
@@ -65,21 +65,21 @@ public class NoteTimer implements ApplicationListener<ContextRefreshedEvent> {
         userRepository.findAll().stream()
                 .filter(userDO -> userDO.isPush() && StringUtils.isNotBlank(userDO.getRemoteRepository()))
                 .forEach(
-                userDO -> {
-                    PushToRemoteTask task = new PushToRemoteTask().setUsername(userDO.getUsername())
-                            .setLocalRepoPath(new File(notesDir, userDO.getUsername()).getAbsolutePath())
-                            .setRemoteRepoUrl(userDO.getRemoteRepository())
-                            .setPrivateKeyPath(new File(sshKeysDir, userDO.getUsername() + ".prv").getAbsolutePath());
-                    newTaskList.add(task);
-                }
-            );
+                        userDO -> {
+                            PushToRemoteTask task = new PushToRemoteTask().setUsername(userDO.getUsername())
+                                    .setLocalRepoPath(new File(notesDir, userDO.getUsername()).getAbsolutePath())
+                                    .setRemoteRepoUrl(userDO.getRemoteRepository())
+                                    .setPrivateKeyPath(new File(sshKeysDir, userDO.getUsername() + ".prv").getAbsolutePath());
+                            newTaskList.add(task);
+                        }
+                );
         this.pushToRemoteTaskList = newTaskList;
     }
 
-    public Boolean checkPushTaskStatus(String username){
+    public Boolean checkPushTaskStatus(String username) {
 
-        for (PushToRemoteTask task : pushToRemoteTaskList){
-            if (task.getUsername().equals(username)){
+        for (PushToRemoteTask task : pushToRemoteTaskList) {
+            if (task.getUsername().equals(username)) {
                 return task.getStatus();
             }
         }
@@ -93,22 +93,22 @@ public class NoteTimer implements ApplicationListener<ContextRefreshedEvent> {
 
         private String username;
 
-        private String privateKeyPath ;
+        private String privateKeyPath;
 
-        private String remoteRepoUrl ;
+        private String remoteRepoUrl;
 
-        private String localRepoPath ;
+        private String localRepoPath;
 
         private volatile Boolean status = true;
 
         @Override
         public void run() {
-            try{
+            try {
                 Git git = GitUtil.getOrInitGit(localRepoPath);
                 GitUtil.setRemoteRepositoryAndBranch(git, remoteRepoUrl);
                 GitUtil.pushToRemoteViaSsh(git, privateKeyPath);
                 status = true;
-            }catch (Exception e){
+            } catch (Exception e) {
                 log.error("push local changes to remote: {} failed", remoteRepoUrl, e);
                 status = false;
             }
